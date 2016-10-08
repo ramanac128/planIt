@@ -1,6 +1,6 @@
 .DS_Store
 *.xcworkspace
-!default.xcworkspace
+!PlanIt.xcworkspace
 profile
 
 # Xcode
