@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A108A2661DA8930200A7F3D4 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D16BC31DA60B25000AE6B3 /* CalendarViewController.swift */; };
+		A108A2671DA8930600A7F3D4 /* CalendarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1D16BC41DA60B25000AE6B3 /* CalendarViewController.xib */; };
+		A18A001F1DA8ADA800933337 /* CalendarDayCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A18A001E1DA8ADA800933337 /* CalendarDayCell.xib */; };
+		A18A00211DA8AE2000933337 /* CalendarDayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18A00201DA8AE2000933337 /* CalendarDayCell.swift */; };
 		A1FF3B551DA5E0B20013B428 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1FF3B541DA5E0B20013B428 /* Assets.xcassets */; };
 		A1FF3B5C1DA5E0B20013B428 /* MessagesExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = A1FF3B5B1DA5E0B20013B428 /* MessagesExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		A1FF3B611DA5E0B20013B428 /* Messages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FF3B601DA5E0B20013B428 /* Messages.framework */; };
@@ -41,6 +45,11 @@
 
 /* Begin PBXFileReference section */
 		13CD11FD2FE492B21E4B4C44 /* Pods-PlanIt.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlanIt.release.xcconfig"; path = "Pods/Target Support Files/Pods-PlanIt/Pods-PlanIt.release.xcconfig"; sourceTree = "<group>"; };
+		8278480FCB25AD365EDFB370 /* Pods-MessagesExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MessagesExtension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MessagesExtension/Pods-MessagesExtension.debug.xcconfig"; sourceTree = "<group>"; };
+		A18A001E1DA8ADA800933337 /* CalendarDayCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CalendarDayCell.xib; sourceTree = "<group>"; };
+		A18A00201DA8AE2000933337 /* CalendarDayCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarDayCell.swift; sourceTree = "<group>"; };
+		A1D16BC31DA60B25000AE6B3 /* CalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
+		A1D16BC41DA60B25000AE6B3 /* CalendarViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CalendarViewController.xib; sourceTree = "<group>"; };
 		A1FF3B511DA5E0B20013B428 /* PlanIt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlanIt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1FF3B541DA5E0B20013B428 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A1FF3B561DA5E0B20013B428 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -50,6 +59,7 @@
 		A1FF3B661DA5E0B20013B428 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		A1FF3B681DA5E0B20013B428 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A1FF3B6A1DA5E0B20013B428 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CDD6A5967D9F9E8A5E7D2DA6 /* Pods-MessagesExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MessagesExtension.release.xcconfig"; path = "Pods/Target Support Files/Pods-MessagesExtension/Pods-MessagesExtension.release.xcconfig"; sourceTree = "<group>"; };
 		E82AF141C85181CFDF03474B /* Pods-PlanIt.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlanIt.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PlanIt/Pods-PlanIt.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -77,6 +87,8 @@
 			children = (
 				E82AF141C85181CFDF03474B /* Pods-PlanIt.debug.xcconfig */,
 				13CD11FD2FE492B21E4B4C44 /* Pods-PlanIt.release.xcconfig */,
+				8278480FCB25AD365EDFB370 /* Pods-MessagesExtension.debug.xcconfig */,
+				CDD6A5967D9F9E8A5E7D2DA6 /* Pods-MessagesExtension.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -84,6 +96,10 @@
 		A158C74E1DA5FA0C00E1694C /* Calendar */ = {
 			isa = PBXGroup;
 			children = (
+				A1D16BC31DA60B25000AE6B3 /* CalendarViewController.swift */,
+				A1D16BC41DA60B25000AE6B3 /* CalendarViewController.xib */,
+				A18A001E1DA8ADA800933337 /* CalendarDayCell.xib */,
+				A18A00201DA8AE2000933337 /* CalendarDayCell.swift */,
 			);
 			name = Calendar;
 			sourceTree = "<group>";
@@ -164,9 +180,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A1FF3B6D1DA5E0B20013B428 /* Build configuration list for PBXNativeTarget "MessagesExtension" */;
 			buildPhases = (
+				3662B1BC8A898C7B34415791 /* [CP] Check Pods Manifest.lock */,
 				A1FF3B571DA5E0B20013B428 /* Sources */,
 				A1FF3B581DA5E0B20013B428 /* Frameworks */,
 				A1FF3B591DA5E0B20013B428 /* Resources */,
+				445815F4CB1EA9C8960F25C6 /* [CP] Embed Pods Frameworks */,
+				60F0F4092A2B8F4B9922BC2F /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -189,6 +208,7 @@
 				TargetAttributes = {
 					A1FF3B501DA5E0B20013B428 = {
 						CreatedOnToolsVersion = 8.0;
+						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 					};
 					A1FF3B5A1DA5E0B20013B428 = {
@@ -229,14 +249,61 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A18A001F1DA8ADA800933337 /* CalendarDayCell.xib in Resources */,
 				A1FF3B691DA5E0B20013B428 /* Assets.xcassets in Resources */,
 				A1FF3B671DA5E0B20013B428 /* MainInterface.storyboard in Resources */,
+				A108A2671DA8930600A7F3D4 /* CalendarViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		3662B1BC8A898C7B34415791 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		445815F4CB1EA9C8960F25C6 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MessagesExtension/Pods-MessagesExtension-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		60F0F4092A2B8F4B9922BC2F /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MessagesExtension/Pods-MessagesExtension-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		C92315A9111A224DDA4FA749 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -274,7 +341,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A108A2661DA8930200A7F3D4 /* CalendarViewController.swift in Sources */,
 				A1FF3B641DA5E0B20013B428 /* MessagesViewController.swift in Sources */,
+				A18A00211DA8AE2000933337 /* CalendarDayCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -393,6 +462,7 @@
 		};
 		A1FF3B6E1DA5E0B20013B428 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8278480FCB25AD365EDFB370 /* Pods-MessagesExtension.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
 				INFOPLIST_FILE = MessagesExtension/Info.plist;
@@ -406,6 +476,7 @@
 		};
 		A1FF3B6F1DA5E0B20013B428 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CDD6A5967D9F9E8A5E7D2DA6 /* Pods-MessagesExtension.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
 				INFOPLIST_FILE = MessagesExtension/Info.plist;
@@ -423,9 +494,13 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = PlanIt/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = edu.umich.engin.onetwo.PlanIt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "PlanIt/PlanIt-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -437,9 +512,12 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = PlanIt/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = edu.umich.engin.onetwo.PlanIt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "PlanIt/PlanIt-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
