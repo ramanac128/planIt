@@ -18,7 +18,7 @@
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" red="1" green="0.81356791390000005" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="HAd-Wd-cde" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="E0q-4E-dnf"/>
                 <constraint firstItem="HAd-Wd-cde" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="hjD-3Q-tiA"/>

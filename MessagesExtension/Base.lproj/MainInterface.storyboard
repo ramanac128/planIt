@@ -21,18 +21,25 @@
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="er2-ng-H5m">
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="294" id="m0a-Hw-7IR"/>
+                                    <constraint firstAttribute="height" constant="221" id="m0a-Hw-7IR"/>
                                     <constraint firstAttribute="width" constant="320" id="zqI-Zu-c2k"/>
                                 </constraints>
                                 <connections>
                                     <segue destination="kvd-pW-iKh" kind="embed" id="jwr-uw-QV9"/>
                                 </connections>
                             </containerView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="85p-jp-XYh" customClass="TimeMatrixScrollView" customModule="MessagesExtension" customModuleProvider="target">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstAttribute="leadingMargin" secondItem="85p-jp-XYh" secondAttribute="leading" id="2nN-ns-bIx"/>
                             <constraint firstAttribute="trailingMargin" secondItem="er2-ng-H5m" secondAttribute="trailing" constant="-16" id="EWz-Cm-HL9"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="85p-jp-XYh" secondAttribute="trailing" id="IQD-Od-Cq8"/>
+                            <constraint firstItem="85p-jp-XYh" firstAttribute="top" secondItem="er2-ng-H5m" secondAttribute="bottom" constant="8" id="LB0-yV-z5r"/>
                             <constraint firstItem="er2-ng-H5m" firstAttribute="top" secondItem="qkL-Od-lgU" secondAttribute="bottom" id="dZW-8X-cV3"/>
+                            <constraint firstItem="n38-gi-rB5" firstAttribute="top" secondItem="85p-jp-XYh" secondAttribute="bottom" constant="20" id="jsM-CR-bf6"/>
                             <constraint firstItem="er2-ng-H5m" firstAttribute="leading" secondItem="zMn-AG-sqS" secondAttribute="leadingMargin" constant="-16" id="wGb-YM-ioG"/>
                         </constraints>
                     </view>

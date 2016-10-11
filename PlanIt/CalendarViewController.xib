@@ -6,7 +6,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CalendarViewController" customModule="MessagesExtension">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CalendarViewController" customModule="MessagesExtension" customModuleProvider="target">
             <connections>
                 <outlet property="calendarView" destination="gW0-sc-gk5" id="Reu-tq-3cp"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -23,16 +23,16 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="gW0-sc-gk5" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="7u9-uW-QKc"/>
-                <constraint firstAttribute="trailing" secondItem="gW0-sc-gk5" secondAttribute="trailing" constant="16" id="Pj5-6n-KA4"/>
-                <constraint firstItem="gW0-sc-gk5" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="Tyi-ps-Mh4"/>
-                <constraint firstAttribute="bottom" secondItem="gW0-sc-gk5" secondAttribute="bottom" constant="20" id="kxj-O2-6jV"/>
+                <constraint firstItem="gW0-sc-gk5" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="7u9-uW-QKc"/>
+                <constraint firstAttribute="trailing" secondItem="gW0-sc-gk5" secondAttribute="trailing" id="Pj5-6n-KA4"/>
+                <constraint firstItem="gW0-sc-gk5" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Tyi-ps-Mh4"/>
+                <constraint firstAttribute="bottom" secondItem="gW0-sc-gk5" secondAttribute="bottom" id="kxj-O2-6jV"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="26.5" y="-94.5"/>
+            <point key="canvasLocation" x="26.5" y="-240.5"/>
         </view>
     </objects>
 </document>

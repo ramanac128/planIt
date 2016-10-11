@@ -19,6 +19,10 @@ class CalendarViewController: UIViewController {
         self.calendarView.dataSource = self
         self.calendarView.delegate = self
         self.calendarView.registerCellViewXib(fileName: "CalendarDayCell")
+        
+        self.calendarView.cellInset = CGPoint()
+//        self.calendarView.reloadData()
+//        self.calendarView.scrollToDate(Date(), triggerScrollToDateDelegate: false, animateScroll: false, preferredScrollPosition: .top, completionHandler: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -45,7 +49,7 @@ extension CalendarViewController: JTAppleCalendarViewDataSource, JTAppleCalendar
         
         let aCalendar = Calendar.current // Properly configure your calendar to your time zone here
         let firstDate = Date()
-        let secondDate = aCalendar.date(byAdding: .year, value: 1, to: firstDate, wrappingComponents: true)
+        let secondDate = aCalendar.date(byAdding: .year, value: 1, to: firstDate, wrappingComponents: false)
         let numberOfRows = 6
         
         return (startDate: firstDate, endDate: secondDate!, numberOfRows: numberOfRows, calendar: aCalendar)

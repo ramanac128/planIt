@@ -2,7 +2,9 @@
 # platform :ios, '9.0'
 
 target 'PlanIt' do
-  use_frameworks!
+    use_frameworks!
+    
+    pod 'JTAppleCalendar'
 end
 
 target 'MessagesExtension' do

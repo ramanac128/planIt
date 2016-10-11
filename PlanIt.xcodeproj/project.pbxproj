@@ -7,8 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7C1E3EB67175B58EB040A565 /* Pods_MessagesExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 51803BE5F60E5220A13690AA /* Pods_MessagesExtension.framework */; };
+		9A23AE9265C57D426E88506B /* Pods_PlanIt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 405E55FED25351856ED177B1 /* Pods_PlanIt.framework */; };
 		A108A2661DA8930200A7F3D4 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D16BC31DA60B25000AE6B3 /* CalendarViewController.swift */; };
 		A108A2671DA8930600A7F3D4 /* CalendarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1D16BC41DA60B25000AE6B3 /* CalendarViewController.xib */; };
+		A12CA4931DAC4F1E00570213 /* TimeMatrixScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12CA4921DAC4F1E00570213 /* TimeMatrixScrollView.swift */; };
+		A144E4761DAC0F5100A7EA77 /* TimeMatrixSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A144E4751DAC0F5100A7EA77 /* TimeMatrixSelectionView.swift */; };
+		A17688521DAB5DFB00A9E4A3 /* TimeMatrixSelectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17688511DAB5DFB00A9E4A3 /* TimeMatrixSelectionCell.swift */; };
+		A17688541DAB5E0C00A9E4A3 /* TimeMatrixLabelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17688531DAB5E0C00A9E4A3 /* TimeMatrixLabelCell.swift */; };
+		A176885A1DAB831300A9E4A3 /* TimeMatrixModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17688591DAB831300A9E4A3 /* TimeMatrixModel.swift */; };
+		A176885E1DAB849300A9E4A3 /* TimeMatrixDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = A176885D1DAB849300A9E4A3 /* TimeMatrixDay.swift */; };
+		A17688621DAB8B4700A9E4A3 /* TimeMatrixCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17688611DAB8B4700A9E4A3 /* TimeMatrixCellModel.swift */; };
+		A17688641DAB977600A9E4A3 /* TimeMatrixSelectionStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17688631DAB977600A9E4A3 /* TimeMatrixSelectionStack.swift */; };
 		A18A001F1DA8ADA800933337 /* CalendarDayCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A18A001E1DA8ADA800933337 /* CalendarDayCell.xib */; };
 		A18A00211DA8AE2000933337 /* CalendarDayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18A00201DA8AE2000933337 /* CalendarDayCell.swift */; };
 		A1FF3B551DA5E0B20013B428 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1FF3B541DA5E0B20013B428 /* Assets.xcassets */; };
@@ -45,7 +55,17 @@
 
 /* Begin PBXFileReference section */
 		13CD11FD2FE492B21E4B4C44 /* Pods-PlanIt.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlanIt.release.xcconfig"; path = "Pods/Target Support Files/Pods-PlanIt/Pods-PlanIt.release.xcconfig"; sourceTree = "<group>"; };
+		405E55FED25351856ED177B1 /* Pods_PlanIt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PlanIt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		51803BE5F60E5220A13690AA /* Pods_MessagesExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MessagesExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8278480FCB25AD365EDFB370 /* Pods-MessagesExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MessagesExtension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MessagesExtension/Pods-MessagesExtension.debug.xcconfig"; sourceTree = "<group>"; };
+		A12CA4921DAC4F1E00570213 /* TimeMatrixScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeMatrixScrollView.swift; sourceTree = "<group>"; };
+		A144E4751DAC0F5100A7EA77 /* TimeMatrixSelectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeMatrixSelectionView.swift; sourceTree = "<group>"; };
+		A17688511DAB5DFB00A9E4A3 /* TimeMatrixSelectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeMatrixSelectionCell.swift; sourceTree = "<group>"; };
+		A17688531DAB5E0C00A9E4A3 /* TimeMatrixLabelCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeMatrixLabelCell.swift; sourceTree = "<group>"; };
+		A17688591DAB831300A9E4A3 /* TimeMatrixModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeMatrixModel.swift; sourceTree = "<group>"; };
+		A176885D1DAB849300A9E4A3 /* TimeMatrixDay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeMatrixDay.swift; sourceTree = "<group>"; };
+		A17688611DAB8B4700A9E4A3 /* TimeMatrixCellModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeMatrixCellModel.swift; sourceTree = "<group>"; };
+		A17688631DAB977600A9E4A3 /* TimeMatrixSelectionStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeMatrixSelectionStack.swift; sourceTree = "<group>"; };
 		A18A001E1DA8ADA800933337 /* CalendarDayCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CalendarDayCell.xib; sourceTree = "<group>"; };
 		A18A00201DA8AE2000933337 /* CalendarDayCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarDayCell.swift; sourceTree = "<group>"; };
 		A1D16BC31DA60B25000AE6B3 /* CalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
@@ -68,6 +88,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9A23AE9265C57D426E88506B /* Pods_PlanIt.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,6 +97,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A1FF3B611DA5E0B20013B428 /* Messages.framework in Frameworks */,
+				7C1E3EB67175B58EB040A565 /* Pods_MessagesExtension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -104,6 +126,21 @@
 			name = Calendar;
 			sourceTree = "<group>";
 		};
+		A17688361DAB3EF700A9E4A3 /* TimeMatrix */ = {
+			isa = PBXGroup;
+			children = (
+				A12CA4921DAC4F1E00570213 /* TimeMatrixScrollView.swift */,
+				A144E4751DAC0F5100A7EA77 /* TimeMatrixSelectionView.swift */,
+				A17688631DAB977600A9E4A3 /* TimeMatrixSelectionStack.swift */,
+				A17688511DAB5DFB00A9E4A3 /* TimeMatrixSelectionCell.swift */,
+				A17688531DAB5E0C00A9E4A3 /* TimeMatrixLabelCell.swift */,
+				A17688591DAB831300A9E4A3 /* TimeMatrixModel.swift */,
+				A17688611DAB8B4700A9E4A3 /* TimeMatrixCellModel.swift */,
+				A176885D1DAB849300A9E4A3 /* TimeMatrixDay.swift */,
+			);
+			name = TimeMatrix;
+			sourceTree = "<group>";
+		};
 		A1FF3B4A1DA5E0B20013B428 = {
 			isa = PBXGroup;
 			children = (
@@ -127,6 +164,7 @@
 		A1FF3B531DA5E0B20013B428 /* PlanIt */ = {
 			isa = PBXGroup;
 			children = (
+				A17688361DAB3EF700A9E4A3 /* TimeMatrix */,
 				A158C74E1DA5FA0C00E1694C /* Calendar */,
 				A1FF3B541DA5E0B20013B428 /* Assets.xcassets */,
 				A1FF3B561DA5E0B20013B428 /* Info.plist */,
@@ -138,6 +176,8 @@
 			isa = PBXGroup;
 			children = (
 				A1FF3B601DA5E0B20013B428 /* Messages.framework */,
+				51803BE5F60E5220A13690AA /* Pods_MessagesExtension.framework */,
+				405E55FED25351856ED177B1 /* Pods_PlanIt.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -208,11 +248,13 @@
 				TargetAttributes = {
 					A1FF3B501DA5E0B20013B428 = {
 						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = 59F9E4LZNZ;
 						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 					};
 					A1FF3B5A1DA5E0B20013B428 = {
 						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = 59F9E4LZNZ;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -341,9 +383,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A176885E1DAB849300A9E4A3 /* TimeMatrixDay.swift in Sources */,
+				A17688621DAB8B4700A9E4A3 /* TimeMatrixCellModel.swift in Sources */,
 				A108A2661DA8930200A7F3D4 /* CalendarViewController.swift in Sources */,
+				A17688641DAB977600A9E4A3 /* TimeMatrixSelectionStack.swift in Sources */,
+				A17688521DAB5DFB00A9E4A3 /* TimeMatrixSelectionCell.swift in Sources */,
 				A1FF3B641DA5E0B20013B428 /* MessagesViewController.swift in Sources */,
+				A17688541DAB5E0C00A9E4A3 /* TimeMatrixLabelCell.swift in Sources */,
 				A18A00211DA8AE2000933337 /* CalendarDayCell.swift in Sources */,
+				A144E4761DAC0F5100A7EA77 /* TimeMatrixSelectionView.swift in Sources */,
+				A12CA4931DAC4F1E00570213 /* TimeMatrixScrollView.swift in Sources */,
+				A176885A1DAB831300A9E4A3 /* TimeMatrixModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -387,6 +437,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -436,6 +487,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -464,7 +516,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8278480FCB25AD365EDFB370 /* Pods-MessagesExtension.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
+				DEVELOPMENT_TEAM = 59F9E4LZNZ;
 				INFOPLIST_FILE = MessagesExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = edu.umich.engin.onetwo.PlanIt.MessagesExtension;
@@ -478,7 +532,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = CDD6A5967D9F9E8A5E7D2DA6 /* Pods-MessagesExtension.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
+				DEVELOPMENT_TEAM = 59F9E4LZNZ;
 				INFOPLIST_FILE = MessagesExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = edu.umich.engin.onetwo.PlanIt.MessagesExtension;
@@ -495,6 +551,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				DEVELOPMENT_TEAM = 59F9E4LZNZ;
 				INFOPLIST_FILE = PlanIt/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = edu.umich.engin.onetwo.PlanIt;
@@ -513,6 +570,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				DEVELOPMENT_TEAM = 59F9E4LZNZ;
 				INFOPLIST_FILE = PlanIt/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = edu.umich.engin.onetwo.PlanIt;
