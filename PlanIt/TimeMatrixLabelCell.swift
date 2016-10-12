@@ -8,12 +8,10 @@
 
 import UIKit
 
-class TimeMatrixLabelCell: UIView {
+class TimeMatrixLabelCell: UILabel {
     
     static let cellHeight = CGFloat(35)
     static let fontSize = CGFloat(16)
-    
-    var timeLabel = UILabel()
     
     private var timeSlot = 0
     
@@ -39,24 +37,20 @@ class TimeMatrixLabelCell: UIView {
     }
     
     private func setup() {
-        self.timeLabel.font = UIFont.systemFont(ofSize: TimeMatrixLabelCell.fontSize)
-        self.timeLabel.adjustsFontSizeToFitWidth = true
-        self.timeLabel.textAlignment = .center
-        self.timeLabel.baselineAdjustment = .alignCenters
-        self.addSubview(self.timeLabel)
+        self.font = UIFont.systemFont(ofSize: TimeMatrixLabelCell.fontSize)
+        self.adjustsFontSizeToFitWidth = true
+        self.textAlignment = .center
+        self.baselineAdjustment = .alignCenters
         
-        let horizontal = NSLayoutConstraint(item: self.timeLabel, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant: 0)
-        let vertical = NSLayoutConstraint(item: self.timeLabel, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant: 0)
         let height = NSLayoutConstraint(item: self, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: TimeMatrixLabelCell.cellHeight)
         
-        NSLayoutConstraint.activate([horizontal, vertical, height])
-        
+        NSLayoutConstraint.activate([height])
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        self.timeLabel.frame = CGRect(x: 0, y: 0, width: self.bounds.width * CGFloat(0.9), height: self.bounds.height)
-    }
+//    override func layoutSubviews() {
+//        super.layoutSubviews()
+//        self.timeLabel.frame = CGRect(x: 0, y: 0, width: self.bounds.width * CGFloat(0.9), height: self.bounds.height)
+//    }
     
     func setLabel(timeSlot: Int, isMilitaryTime: Bool = false) {
         self.timeSlot = timeSlot
@@ -68,7 +62,7 @@ class TimeMatrixLabelCell: UIView {
         let minute = Int((hoursFromMidnight - Double(hour)) * 60)
         
         if isMilitaryTime {
-            self.timeLabel.text = String(format: "%02d:%02d", hour, minute)
+            self.text = String(format: "%02d:%02d", hour, minute)
         }
         else {
             var dayPart: String
@@ -80,7 +74,7 @@ class TimeMatrixLabelCell: UIView {
                 hour -= 12
             }
             hour = (hour == 0 ? 12 : hour)
-            self.timeLabel.text = String(format: "%d:%02d%@", hour, minute, dayPart)
+            self.text = String(format: "%d:%02d%@", hour, minute, dayPart)
         }
     }
 }
