@@ -19,6 +19,8 @@ class TimeMatrixSelectionView: UIView {
             oldValue?.remove(dayListener: self)
             self.clearDays()
             
+            self.fillLabelCellRowStack()
+            
             self.model!.add(dayListener: self)
             for (day, cells) in self.model!.cells {
                 self.onAdded(day: day, cellModels: cells)
@@ -68,18 +70,14 @@ class TimeMatrixSelectionView: UIView {
     }
     
     private func fillLabelCellRowStack() {
-        for dayPart in ["am","pm"] {
-            for hour in ["12", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"] {
-                for minute in ["00","30"] {
-                    //                    let cell = TimeMatrixLabelCell()
-                    //                    cell.timeLabel.text = "\(hour):\(minute)\(dayPart)"
-                    let cell = UILabel()
-                    cell.text = "\(hour):\(minute)\(dayPart)"
-                    cell.textAlignment = .center
-                    labelCellRowStack.addArrangedSubview(cell)
-                }
-            }
-            
+        for view in self.labelCellRowStack.arrangedSubviews {
+            self.labelCellRowStack.removeArrangedSubview(view)
+        }
+        
+        let numLabelCells = TimeMatrixModel.resolution * 24 / 2
+        for index in 0..<numLabelCells {
+            let cell = TimeMatrixLabelCell(timeSlot: index)
+            self.labelCellRowStack.addArrangedSubview(cell)
         }
     }
     

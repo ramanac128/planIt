@@ -118,6 +118,7 @@ class TimeMatrixScrollView: UIScrollView {
                     self.panEndCell = cellModel
                     self.panStartDayView = dayView
                     self.panEndDayView = dayView
+                    self.selectedCells = [cellModel]
                     
                     let state = self.selectionState(from: cellModel.currentState)
                     self.panSelectionState = state

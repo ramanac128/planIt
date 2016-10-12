@@ -10,9 +10,9 @@ import UIKit
 
 class TimeMatrixSelectionDayView: UIView {
     
-    let bgUnavailable = UIColor.red.cgColor
-    let bgAvailable = UIColor.yellow.cgColor
-    let bgPreferred = UIColor.green.cgColor
+    static let bgUnavailable = UIColor.red.cgColor
+    static let bgAvailable = UIColor.yellow.cgColor
+    static let bgPreferred = UIColor.green.cgColor
 
     var day: TimeMatrixDay
     
@@ -48,7 +48,7 @@ class TimeMatrixSelectionDayView: UIView {
     }
     
     private func setup() {
-        self.backgroundColor = UIColor(cgColor: bgUnavailable)
+        self.backgroundColor = UIColor(cgColor: TimeMatrixSelectionDayView.bgUnavailable)
     }
     
     func timeSlot(from: CGPoint) -> Int? {
@@ -73,11 +73,11 @@ class TimeMatrixSelectionDayView: UIView {
     func fillColor(from: TimeMatrixCellModel.State) -> CGColor {
         switch (from) {
         case .available:
-            return bgAvailable
+            return TimeMatrixSelectionDayView.bgAvailable
         case .preferred:
-            return bgPreferred
+            return TimeMatrixSelectionDayView.bgPreferred
         case .unavailable:
-            return bgUnavailable
+            return TimeMatrixSelectionDayView.bgUnavailable
         }
     }
     

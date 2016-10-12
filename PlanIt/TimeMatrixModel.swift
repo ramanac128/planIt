@@ -14,11 +14,11 @@ protocol TimeMatrixModelDayListener: class {
 }
 
 class TimeMatrixModel {
-    let resolution = 4
+    static let resolution = 4
     
     var cellsPerDay: Int {
         get {
-            return resolution * 24
+            return TimeMatrixModel.resolution * 24
         }
     }
     
