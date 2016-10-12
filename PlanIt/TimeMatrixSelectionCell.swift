@@ -31,17 +31,6 @@ class TimeMatrixSelectionCell: UIView {
         }
     }
     
-    var daySlot: Int? {
-        get {
-            if let stackView = self.superview {
-                if let index = stackView.superview?.subviews.index(of: stackView) {
-                    return index - 1
-                }
-            }
-            return nil
-        }
-    }
-    
     override init(frame: CGRect) {
         super.init(frame:frame)
         self.setup()

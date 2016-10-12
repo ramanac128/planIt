@@ -19,7 +19,7 @@ class TimeMatrixScrollView: UIScrollView {
     var panStartCell: TimeMatrixSelectionCell?
     var panEndCell: TimeMatrixSelectionCell?
     
-    var panUpdateAction: TimeMatrixCellModel.State?
+    var panSelectionState: TimeMatrixCellModel.State?
     
     var selectedCells = Set<TimeMatrixCellModel>()
     
@@ -55,10 +55,13 @@ class TimeMatrixScrollView: UIScrollView {
         self.addGestureRecognizer(tapRecognizer)
         
         // TODO: delete this
-        self.model = TimeMatrixModel()
+        let model = TimeMatrixModel()
         let calendar = Calendar.current
-        self.model!.add(day: TimeMatrixDay(date: Date()))
-        self.model!.add(day: TimeMatrixDay(date: calendar.date(byAdding: .day, value: 1, to: Date())!))
+        model.add(day: TimeMatrixDay(date: Date()))
+        model.add(day: TimeMatrixDay(date: calendar.date(byAdding: .day, value: 1, to: Date())!))
+        model.add(day: TimeMatrixDay(date: calendar.date(byAdding: .day, value: 2, to: Date())!))
+        model.add(day: TimeMatrixDay(date: calendar.date(byAdding: .day, value: 4, to: Date())!))
+        self.model = model
     }
     
     private func makeLayout() {
@@ -88,7 +91,7 @@ class TimeMatrixScrollView: UIScrollView {
         NSLayoutConstraint.activate([leading, trailing, width])
     }
     
-    func panUpdateAction(from: TimeMatrixSelectionCell) -> TimeMatrixCellModel.State {
+    func selectionState(from: TimeMatrixSelectionCell) -> TimeMatrixCellModel.State {
         if let startState = self.model?.cells[from.day!]?[from.timeSlot!].currentState {
             switch startState {
             case .available, .preferred:
@@ -105,7 +108,7 @@ class TimeMatrixScrollView: UIScrollView {
         let currentCell = self.hitTest(position, with: nil)
         
         if let selectionCell = currentCell as? TimeMatrixSelectionCell {
-            let state = self.panUpdateAction(from: selectionCell)
+            let state = self.selectionState(from: selectionCell)
             self.selectCell(selectionCell, state: state)
         }
     }
@@ -124,8 +127,8 @@ class TimeMatrixScrollView: UIScrollView {
                 self.panEndCell = selectionCell
                 self.panStartPoint = position
                 self.panEndPoint = position
-                self.panUpdateAction = self.panUpdateAction(from: selectionCell)
-                self.selectCell(selectionCell, state: self.panUpdateAction!)
+                self.panSelectionState = self.selectionState(from: selectionCell)
+                self.selectCell(selectionCell, state: self.panSelectionState!)
                 
             case .changed:
                 if self.panEndCell != selectionCell {
@@ -162,7 +165,7 @@ class TimeMatrixScrollView: UIScrollView {
     }
     
     func updatePanCellSelections() {
-        if self.model == nil || self.panStartPoint == nil || self.panEndPoint == nil || self.panUpdateAction == nil {
+        if self.model == nil || self.panStartPoint == nil || self.panEndPoint == nil || self.panSelectionState == nil {
             print("ERROR updatePanCellSelections: something is nil")
             return
         }
@@ -187,7 +190,7 @@ class TimeMatrixScrollView: UIScrollView {
             rightCell = self.panStartCell
         }
         
-        if let firstDay = leftCell?.daySlot, let secondDay = rightCell?.daySlot,
+        if let firstDay = leftCell?.day?.toString, let secondDay = rightCell?.day?.toString,
             let firstTime = topCell?.timeSlot, let secondTime = bottomCell?.timeSlot {
             
             var slots: [Int]
@@ -198,12 +201,23 @@ class TimeMatrixScrollView: UIScrollView {
                 slots = Array(firstTime..<self.model!.cellsPerDay) + Array(0...secondTime)
             }
             
+            var days = [TimeMatrixDay]()
+            for day in self.model!.activeDays {
+                let dayString = day.toString
+                if dayString >= firstDay {
+                    if dayString > secondDay {
+                        break
+                    }
+                    days.append(day)
+                }
+            }
+            
             var newSelectedCells = Set<TimeMatrixCellModel>()
             
-            for dayIndex in firstDay...secondDay {
-                let day = self.model!.activeDays[dayIndex]
+            for day in days {
                 for index in slots {
                     if let cell = self.model?.cells[day]?[index] {
+                        cell.selectedState = self.panSelectionState!
                         newSelectedCells.insert(cell)
                     }
                 }
@@ -211,10 +225,6 @@ class TimeMatrixScrollView: UIScrollView {
             
             for cell in self.selectedCells.subtracting(newSelectedCells) {
                 cell.cancelSelection()
-            }
-            
-            for cell in newSelectedCells {
-                cell.selectedState = self.panUpdateAction!
             }
             
             self.selectedCells = newSelectedCells
@@ -233,6 +243,7 @@ class TimeMatrixScrollView: UIScrollView {
 extension TimeMatrixScrollView: UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        print("DID SCROLL BEGIN")
         let yPos = scrollView.contentOffset.y
         let selectionViewHeight = scrollView.contentSize.height / 3
         
@@ -243,6 +254,7 @@ extension TimeMatrixScrollView: UIScrollViewDelegate {
         else if yPos > selectionViewHeight * 2 {
             scrollView.setContentOffset(CGPoint(x: 0, y: yPos - selectionViewHeight), animated: false)
         }
+        print("DID SCROLL END")
     }
     
     func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
