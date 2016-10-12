@@ -8,62 +8,40 @@
 
 import Foundation
 
-protocol TimeMatrixCellStateListener: class {
-    func onStateChange(_ state: TimeMatrixCellModel.State, isSelected: Bool)
-}
-
 class TimeMatrixCellModel: Hashable {
     enum State {
         case available, unavailable, preferred
     }
     
-    private var stateListeners = [TimeMatrixCellStateListener]()
+    var timeSlot: Int
     
-    var currentState: State = .unavailable {
-        didSet {
-            if oldValue != self.currentState {
-                self.informOnStateChange(self.currentState, isSelected: false)
-            }
-        }
-    }
+    var isSelected = false
+    
+    var currentState: State = .unavailable
     
     var selectedState: State = .unavailable {
         didSet {
-            self.informOnStateChange(self.selectedState, isSelected: true)
+            self.isSelected = true
         }
     }
     
-    func cancelSelection() {
-        if self.selectedState != self.currentState {
-            self.informOnStateChange(self.currentState, isSelected: false)
+    var displayState: State {
+        get {
+            return isSelected ? self.selectedState : self.currentState
         }
+    }
+    
+    init(timeSlot: Int) {
+        self.timeSlot = timeSlot
+    }
+    
+    func cancelSelection() {
+        self.isSelected = false
     }
     
     func confirmSelection() {
         self.currentState = self.selectedState
-    }
-    
-    func add(stateListener: TimeMatrixCellStateListener) {
-        if !self.stateListeners.contains(where: {(l) -> Bool in
-            l === stateListener
-        }) {
-            stateListener.onStateChange(self.currentState, isSelected: false)
-            self.stateListeners.append(stateListener)
-        }
-    }
-    
-    func remove(stateListener: TimeMatrixCellStateListener) {
-        if let index = self.stateListeners.index(where: {(l) -> Bool in
-            l === stateListener
-        }) {
-            self.stateListeners.remove(at: index)
-        }
-    }
-    
-    private func informOnStateChange(_ state: TimeMatrixCellModel.State, isSelected: Bool) {
-        for listener in self.stateListeners {
-            listener.onStateChange(state, isSelected: isSelected)
-        }
+        self.isSelected = false
     }
     
     var hashValue: Int {

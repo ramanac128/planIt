@@ -12,7 +12,7 @@ class TimeMatrixSelectionView: UIView {
     var columnStack = UIStackView()
     var labelCellRowStack = UIStackView()
     
-    var selectionStacks = [TimeMatrixSelectionStack]()
+    var selectionDayViews = [TimeMatrixSelectionDayView]()
     
     var model: TimeMatrixModel? {
         didSet {
@@ -84,7 +84,7 @@ class TimeMatrixSelectionView: UIView {
     }
     
     private func clearDays() {
-        self.selectionStacks.removeAll()
+        self.selectionDayViews.removeAll()
         for index in 1..<self.columnStack.arrangedSubviews.count {
             self.columnStack.removeArrangedSubview(self.columnStack.arrangedSubviews[index])
         }
@@ -102,21 +102,20 @@ extension TimeMatrixSelectionView: TimeMatrixModelDayListener {
     
     func onAdded(day: TimeMatrixDay, cellModels: [TimeMatrixCellModel]) {
         var index = 0
-        while index < selectionStacks.count && selectionStacks[index].day!.toString < day.toString {
+        while index < self.selectionDayViews.count && self.selectionDayViews[index].day < day {
             index += 1
         }
-        let stack = TimeMatrixSelectionStack()
-        stack.from(cellModels: cellModels, forDay: day)
-        self.selectionStacks.insert(stack, at: index)
-        self.columnStack.insertArrangedSubview(stack, at: index + 1)
+        let dayView = TimeMatrixSelectionDayView(day: day, cellModels: cellModels)
+        self.selectionDayViews.insert(dayView, at: index)
+        self.columnStack.insertArrangedSubview(dayView, at: index + 1)
     }
     
     func onRemoved(day: TimeMatrixDay) {
-        for index in 0..<self.selectionStacks.count {
-            if self.selectionStacks[index].day == day {
-                let stack = selectionStacks.remove(at: index)
-                self.columnStack.removeArrangedSubview(stack)
-                break
+        for index in 0..<self.selectionDayViews.count {
+            if self.selectionDayViews[index].day == day {
+                let dayView = self.selectionDayViews.remove(at: index)
+                self.columnStack.removeArrangedSubview(dayView)
+                return
             }
         }
     }

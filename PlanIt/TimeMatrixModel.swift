@@ -13,7 +13,7 @@ protocol TimeMatrixModelDayListener: class {
     func onRemoved(day: TimeMatrixDay)
 }
 
-class TimeMatrixModel: NSObject {
+class TimeMatrixModel {
     let resolution = 4
     
     var cellsPerDay: Int {
@@ -24,9 +24,9 @@ class TimeMatrixModel: NSObject {
     
     var activeDays: [TimeMatrixDay] {
         get {
-            let arr = Array(days)
+            let arr = Array(self.days)
             return arr.sorted(by: { (lhs, rhs) -> Bool in
-                return lhs.toString < rhs.toString
+                return lhs < rhs
             })
         }
     }
@@ -37,18 +37,19 @@ class TimeMatrixModel: NSObject {
     var cells = [TimeMatrixDay: [TimeMatrixCellModel]]()
     
     func add(day: TimeMatrixDay) {
-        var cells = self.cells[day]
-        if cells == nil {
-            cells = [TimeMatrixCellModel]()
-            cells!.reserveCapacity(self.cellsPerDay)
-            for _ in 1...self.cellsPerDay {
-                cells!.append(TimeMatrixCellModel())
+        var dayCells = self.cells[day]
+        if dayCells == nil {
+            dayCells = [TimeMatrixCellModel]()
+            dayCells!.reserveCapacity(self.cellsPerDay)
+            for index in 0..<self.cellsPerDay {
+                let cell = TimeMatrixCellModel(timeSlot: index)
+                dayCells!.append(cell)
             }
-            self.cells[day] = cells
+            self.cells[day] = dayCells
         }
         
         if days.insert(day).inserted {
-            self.informOnAdded(day: day, cellModels: cells!)
+            self.informOnAdded(day: day, cellModels: dayCells!)
         }
     }
 
