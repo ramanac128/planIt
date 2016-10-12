@@ -9,10 +9,18 @@
 import UIKit
 
 class TimeMatrixSelectionDayView: UIView {
-    
-    static let bgUnavailable = UIColor.red.cgColor
+    static let bgUnavailable = UIColor.red.cgColor //UIColor(red: 1, green: 150/255, blue: 150/255, alpha: 1).cgColor
     static let bgAvailable = UIColor.yellow.cgColor
     static let bgPreferred = UIColor.green.cgColor
+    
+    static let minorTicksPerMajorTick = 1
+    static let strokeWidthMajorTick = CGFloat(1.0)
+    static let strokeWidthMinorTick = CGFloat(0.5)
+    static let strokeColorMajorTick = UIColor.black.cgColor
+    static let strokeColorMinorTick = UIColor.gray.cgColor
+    
+    static let strokeWidthDayBorder = CGFloat(4.0)
+    static let strokeColorDayBorder = UIColor.white.cgColor
 
     var day: TimeMatrixDay
     
@@ -95,10 +103,15 @@ class TimeMatrixSelectionDayView: UIView {
         let numCells = CGFloat(self.cellModels.count)
         let cellHeight = self.bounds.height / numCells
         
-        var index = Int(rect.origin.y / self.bounds.height * numCells)
-        let end = index + Int(ceil(rect.height / self.bounds.height * numCells))
+        let first = Int(rect.origin.y / self.bounds.height * numCells)
+        let end = first + Int(ceil(rect.height / self.bounds.height * numCells))
         
-        while index < end {
+        self.drawBlocks(from: first, to: end, cellHeight: cellHeight, context: context)
+        self.drawBorders(from: first, to: end, cellHeight: cellHeight, context: context)
+    }
+    
+    private func drawBlocks(from start: Int, to end: Int, cellHeight: CGFloat, context: CGContext) {
+        for var index in start..<end {
             let state = self.cellModels[index].displayState
             if state == .unavailable {
                 index += 1
@@ -114,13 +127,41 @@ class TimeMatrixSelectionDayView: UIView {
         }
     }
     
-    func drawBlock(from: Int, to: Int, cellHeight: CGFloat, state: TimeMatrixCellModel.State, context: CGContext) {
-        let top = cellHeight * CGFloat(from)
-        let height = cellHeight * CGFloat(to - from)
+    private func drawBlock(from start: Int, to end: Int, cellHeight: CGFloat, state: TimeMatrixCellModel.State, context: CGContext) {
+        let top = cellHeight * CGFloat(start)
+        let height = cellHeight * CGFloat(end - start)
         let rectangle = CGRect(x: 0, y: top, width: self.bounds.width, height: height)
         
         context.setFillColor(self.fillColor(from: state))
         context.addRect(rectangle)
         context.drawPath(using: .fill)
+    }
+    
+    private func drawBorders(from start: Int, to end: Int, cellHeight: CGFloat, context: CGContext) {
+        let mod = TimeMatrixSelectionDayView.minorTicksPerMajorTick + 1
+        
+        for index in start...end {
+            let yPos = CGFloat(index) * cellHeight
+            context.move(to: CGPoint(x: 0, y: yPos))
+            context.addLine(to: CGPoint(x: self.bounds.width, y: yPos))
+            if index % mod == 0 {
+                context.setStrokeColor(TimeMatrixSelectionDayView.strokeColorMajorTick)
+                context.setLineWidth(TimeMatrixSelectionDayView.strokeWidthMajorTick)
+            }
+            else {
+                context.setStrokeColor(TimeMatrixSelectionDayView.strokeColorMinorTick)
+                context.setLineWidth(TimeMatrixSelectionDayView.strokeWidthMinorTick)
+            }
+            context.drawPath(using: .stroke)
+        }
+        
+        let top = CGFloat(start) * cellHeight
+        let bottom = CGFloat(end) * cellHeight
+        
+        context.move(to: CGPoint(x: 0, y: top))
+        context.addLine(to: CGPoint(x: 0, y: bottom))
+        context.setStrokeColor(TimeMatrixSelectionDayView.strokeColorDayBorder)
+        context.setLineWidth(TimeMatrixSelectionDayView.strokeWidthDayBorder)
+        context.drawPath(using: .stroke)
     }
 }
