@@ -8,34 +8,33 @@
 
 import Foundation
 
-class TimeMatrixDay: NSObject {
+struct TimeMatrixDay: Hashable, CustomStringConvertible {
     var year = 2016
     var month = 1
     var day = 1
     
     init(date: Date) {
-        super.init()
         self.from(date: date)
     }
     
-    override var hashValue: Int {
+    var hashValue: Int {
         get {
             return self.description.hashValue
         }
     }
     
-    override var description: String {
+    var description: String {
         get {
             return String(format: "%d-%02d-%02d", self.year, self.month, self.day)
         }
     }
     
-    func from(date: Date) {
+    mutating func from(date: Date) {
         let calendar = Calendar.current
         let components = calendar.dateComponents([.year, .month, .day], from: date)
-        year = components.year!
-        month = components.month!
-        day = components.day!
+        self.year = components.year!
+        self.month = components.month!
+        self.day = components.day!
     }
     
     func toDate() -> Date {

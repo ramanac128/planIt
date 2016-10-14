@@ -13,13 +13,17 @@
 		A108A2671DA8930600A7F3D4 /* CalendarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1D16BC41DA60B25000AE6B3 /* CalendarViewController.xib */; };
 		A12CA4931DAC4F1E00570213 /* TimeMatrixScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12CA4921DAC4F1E00570213 /* TimeMatrixScrollView.swift */; };
 		A144E4761DAC0F5100A7EA77 /* TimeMatrixSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A144E4751DAC0F5100A7EA77 /* TimeMatrixSelectionView.swift */; };
-		A17688541DAB5E0C00A9E4A3 /* TimeMatrixLabelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17688531DAB5E0C00A9E4A3 /* TimeMatrixLabelCell.swift */; };
+		A149BB361DB0AA6C00E5AAE9 /* WeakSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A149BB351DB0A9A400E5AAE9 /* WeakSet.swift */; };
 		A176885A1DAB831300A9E4A3 /* TimeMatrixModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17688591DAB831300A9E4A3 /* TimeMatrixModel.swift */; };
 		A176885E1DAB849300A9E4A3 /* TimeMatrixDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = A176885D1DAB849300A9E4A3 /* TimeMatrixDay.swift */; };
 		A17688621DAB8B4700A9E4A3 /* TimeMatrixCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17688611DAB8B4700A9E4A3 /* TimeMatrixCellModel.swift */; };
 		A17993041DADD6F1008CB8EC /* TimeMatrixSelectionDayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17993031DADD6F1008CB8EC /* TimeMatrixSelectionDayView.swift */; };
 		A18A001F1DA8ADA800933337 /* CalendarDayCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A18A001E1DA8ADA800933337 /* CalendarDayCell.xib */; };
 		A18A00211DA8AE2000933337 /* CalendarDayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18A00201DA8AE2000933337 /* CalendarDayCell.swift */; };
+		A192E5361DAEEE91009D7F92 /* TimeMatrixTimeLabelColumn.swift in Sources */ = {isa = PBXBuildFile; fileRef = A192E5351DAEEE91009D7F92 /* TimeMatrixTimeLabelColumn.swift */; };
+		A192E5391DAEF2E2009D7F92 /* TimeMatrixTimeLabelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A192E5381DAEF299009D7F92 /* TimeMatrixTimeLabelCell.swift */; };
+		A192E53B1DAFC10E009D7F92 /* TimeMatrixDisplayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A192E53A1DAFC10E009D7F92 /* TimeMatrixDisplayManager.swift */; };
+		A192E5421DAFD0A7009D7F92 /* Delay.swift in Sources */ = {isa = PBXBuildFile; fileRef = A192E5411DAFD0A7009D7F92 /* Delay.swift */; };
 		A1D7D66A1DAE0B90003B8A82 /* TimeMatrixPanGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D7D6691DAE0B90003B8A82 /* TimeMatrixPanGestureRecognizer.swift */; };
 		A1FF3B551DA5E0B20013B428 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1FF3B541DA5E0B20013B428 /* Assets.xcassets */; };
 		A1FF3B5C1DA5E0B20013B428 /* MessagesExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = A1FF3B5B1DA5E0B20013B428 /* MessagesExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -60,13 +64,17 @@
 		8278480FCB25AD365EDFB370 /* Pods-MessagesExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MessagesExtension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MessagesExtension/Pods-MessagesExtension.debug.xcconfig"; sourceTree = "<group>"; };
 		A12CA4921DAC4F1E00570213 /* TimeMatrixScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeMatrixScrollView.swift; sourceTree = "<group>"; };
 		A144E4751DAC0F5100A7EA77 /* TimeMatrixSelectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeMatrixSelectionView.swift; sourceTree = "<group>"; };
-		A17688531DAB5E0C00A9E4A3 /* TimeMatrixLabelCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeMatrixLabelCell.swift; sourceTree = "<group>"; };
+		A149BB351DB0A9A400E5AAE9 /* WeakSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeakSet.swift; sourceTree = "<group>"; };
 		A17688591DAB831300A9E4A3 /* TimeMatrixModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeMatrixModel.swift; sourceTree = "<group>"; };
 		A176885D1DAB849300A9E4A3 /* TimeMatrixDay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeMatrixDay.swift; sourceTree = "<group>"; };
 		A17688611DAB8B4700A9E4A3 /* TimeMatrixCellModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeMatrixCellModel.swift; sourceTree = "<group>"; };
 		A17993031DADD6F1008CB8EC /* TimeMatrixSelectionDayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeMatrixSelectionDayView.swift; sourceTree = "<group>"; };
 		A18A001E1DA8ADA800933337 /* CalendarDayCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CalendarDayCell.xib; sourceTree = "<group>"; };
 		A18A00201DA8AE2000933337 /* CalendarDayCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarDayCell.swift; sourceTree = "<group>"; };
+		A192E5351DAEEE91009D7F92 /* TimeMatrixTimeLabelColumn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeMatrixTimeLabelColumn.swift; sourceTree = "<group>"; };
+		A192E5381DAEF299009D7F92 /* TimeMatrixTimeLabelCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeMatrixTimeLabelCell.swift; sourceTree = "<group>"; };
+		A192E53A1DAFC10E009D7F92 /* TimeMatrixDisplayManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeMatrixDisplayManager.swift; sourceTree = "<group>"; };
+		A192E5411DAFD0A7009D7F92 /* Delay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Delay.swift; sourceTree = "<group>"; };
 		A1D16BC31DA60B25000AE6B3 /* CalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		A1D16BC41DA60B25000AE6B3 /* CalendarViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CalendarViewController.xib; sourceTree = "<group>"; };
 		A1D7D6691DAE0B90003B8A82 /* TimeMatrixPanGestureRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeMatrixPanGestureRecognizer.swift; sourceTree = "<group>"; };
@@ -120,8 +128,8 @@
 			children = (
 				A1D16BC31DA60B25000AE6B3 /* CalendarViewController.swift */,
 				A1D16BC41DA60B25000AE6B3 /* CalendarViewController.xib */,
-				A18A001E1DA8ADA800933337 /* CalendarDayCell.xib */,
 				A18A00201DA8AE2000933337 /* CalendarDayCell.swift */,
+				A18A001E1DA8ADA800933337 /* CalendarDayCell.xib */,
 			);
 			name = Calendar;
 			sourceTree = "<group>";
@@ -129,16 +137,27 @@
 		A17688361DAB3EF700A9E4A3 /* TimeMatrix */ = {
 			isa = PBXGroup;
 			children = (
+				A192E53A1DAFC10E009D7F92 /* TimeMatrixDisplayManager.swift */,
 				A12CA4921DAC4F1E00570213 /* TimeMatrixScrollView.swift */,
 				A144E4751DAC0F5100A7EA77 /* TimeMatrixSelectionView.swift */,
 				A17993031DADD6F1008CB8EC /* TimeMatrixSelectionDayView.swift */,
-				A17688531DAB5E0C00A9E4A3 /* TimeMatrixLabelCell.swift */,
+				A192E5351DAEEE91009D7F92 /* TimeMatrixTimeLabelColumn.swift */,
+				A192E5381DAEF299009D7F92 /* TimeMatrixTimeLabelCell.swift */,
 				A17688591DAB831300A9E4A3 /* TimeMatrixModel.swift */,
 				A17688611DAB8B4700A9E4A3 /* TimeMatrixCellModel.swift */,
 				A176885D1DAB849300A9E4A3 /* TimeMatrixDay.swift */,
 				A1D7D6691DAE0B90003B8A82 /* TimeMatrixPanGestureRecognizer.swift */,
 			);
 			name = TimeMatrix;
+			sourceTree = "<group>";
+		};
+		A192E53C1DAFC304009D7F92 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				A149BB351DB0A9A400E5AAE9 /* WeakSet.swift */,
+				A192E5411DAFD0A7009D7F92 /* Delay.swift */,
+			);
+			name = Utility;
 			sourceTree = "<group>";
 		};
 		A1FF3B4A1DA5E0B20013B428 = {
@@ -164,6 +183,7 @@
 		A1FF3B531DA5E0B20013B428 /* PlanIt */ = {
 			isa = PBXGroup;
 			children = (
+				A192E53C1DAFC304009D7F92 /* Utility */,
 				A17688361DAB3EF700A9E4A3 /* TimeMatrix */,
 				A158C74E1DA5FA0C00E1694C /* Calendar */,
 				A1FF3B541DA5E0B20013B428 /* Assets.xcassets */,
@@ -383,17 +403,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A192E53B1DAFC10E009D7F92 /* TimeMatrixDisplayManager.swift in Sources */,
 				A17993041DADD6F1008CB8EC /* TimeMatrixSelectionDayView.swift in Sources */,
 				A176885E1DAB849300A9E4A3 /* TimeMatrixDay.swift in Sources */,
 				A17688621DAB8B4700A9E4A3 /* TimeMatrixCellModel.swift in Sources */,
 				A108A2661DA8930200A7F3D4 /* CalendarViewController.swift in Sources */,
 				A1FF3B641DA5E0B20013B428 /* MessagesViewController.swift in Sources */,
+				A149BB361DB0AA6C00E5AAE9 /* WeakSet.swift in Sources */,
 				A1D7D66A1DAE0B90003B8A82 /* TimeMatrixPanGestureRecognizer.swift in Sources */,
-				A17688541DAB5E0C00A9E4A3 /* TimeMatrixLabelCell.swift in Sources */,
 				A18A00211DA8AE2000933337 /* CalendarDayCell.swift in Sources */,
+				A192E5421DAFD0A7009D7F92 /* Delay.swift in Sources */,
+				A192E5391DAEF2E2009D7F92 /* TimeMatrixTimeLabelCell.swift in Sources */,
 				A144E4761DAC0F5100A7EA77 /* TimeMatrixSelectionView.swift in Sources */,
 				A12CA4931DAC4F1E00570213 /* TimeMatrixScrollView.swift in Sources */,
 				A176885A1DAB831300A9E4A3 /* TimeMatrixModel.swift in Sources */,
+				A192E5361DAEEE91009D7F92 /* TimeMatrixTimeLabelColumn.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

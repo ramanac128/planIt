@@ -8,77 +8,78 @@
 
 import UIKit
 
-class TimeMatrixSelectionView: UIView {
-    var columnStack = UIStackView()
-    var labelCellRowStack = UIStackView()
+class TimeMatrixSelectionView: UIView, TimeMatrixResolutionListener {
     
-    var selectionDayViews = [TimeMatrixSelectionDayView]()
-    
-    var model: TimeMatrixModel? {
+    var model: TimeMatrixModel {
         didSet {
-            oldValue?.remove(dayListener: self)
-            self.clearDays()
-            
-            self.fillLabelCellRowStack()
-            
-            self.model!.add(dayListener: self)
-            for (day, cells) in self.model!.cells {
-                self.onAdded(day: day, cellModels: cells)
+            if oldValue !== model {
+                for dayView in self.selectionDayViews.values {
+                    self.columnStack.removeArrangedSubview(dayView)
+                    dayView.removeFromSuperview()
+                }
+                self.selectionDayViews.removeAll()
+                self.attachToModel()
+                self.setNeedsLayout()
             }
         }
     }
     
+    var columnStack = UIStackView()
+    var timeLabelColumn = TimeMatrixTimeLabelColumn()
+    var selectionDayViews = [TimeMatrixDay: TimeMatrixSelectionDayView]()
+    
     override init(frame: CGRect) {
-        super.init(frame:frame)
-        self.setup()
+        fatalError("init(frame:) has not been implemented, use init(frame:model:)")
     }
     
     required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+        fatalError("init(coder:) has not been implemented, use init(model:)")
+    }
+    
+    init(frame: CGRect, model: TimeMatrixModel) {
+        self.model = model
+        super.init(frame: frame)
         self.setup()
     }
     
-    private func setup() {
-        self.makeSubviews()
-        self.makeLayout()
+    convenience init(model: TimeMatrixModel) {
+        self.init(frame: CGRect(), model: model)
     }
     
-    private func makeSubviews() {
+    private func setup() {
         self.columnStack.alignment = .fill
         self.columnStack.distribution = .fillEqually
         self.columnStack.spacing = 0
         self.columnStack.axis = .horizontal
         self.columnStack.translatesAutoresizingMaskIntoConstraints = false
         
-        self.labelCellRowStack.alignment = .fill
-        self.labelCellRowStack.distribution = .fillEqually
-        self.labelCellRowStack.spacing = 0
-        self.labelCellRowStack.axis = .vertical
-        self.fillLabelCellRowStack()
-        
-        self.columnStack.addArrangedSubview(self.labelCellRowStack)
+        self.makeTimeLabelColumnStack(resolution: TimeMatrixDisplayManager.instance.resolution)
         self.addSubview(self.columnStack)
-    }
-    
-    private func makeLayout() {
+        
         let leading = NSLayoutConstraint(item: self.columnStack, attribute: .leading, relatedBy: .equal, toItem: self, attribute: .leading, multiplier: 1, constant: 0)
         let trailing = NSLayoutConstraint(item: self.columnStack, attribute: .trailing, relatedBy: .equal, toItem: self, attribute: .trailing, multiplier: 1, constant: 0)
         let top = NSLayoutConstraint(item: self.columnStack, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1, constant: 0)
         let bottom = NSLayoutConstraint(item: self.columnStack, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1, constant: 0)
-        
         NSLayoutConstraint.activate([leading, trailing, top, bottom])
+        
+        self.attachToModel()
+        TimeMatrixDisplayManager.instance.resolutionListeners.insert(self)
     }
     
-    private func fillLabelCellRowStack() {
-        for view in self.labelCellRowStack.arrangedSubviews {
-            self.labelCellRowStack.removeArrangedSubview(view)
+    private func attachToModel() {
+        for day in self.model.activeDays {
+            if let cellModels = self.model.cells[day] {
+                self.onAdded(day: day, cellModels: cellModels)
+            }
         }
-        
-        let numLabelCells = TimeMatrixModel.resolution * 24 / 2
-        for index in 0..<numLabelCells {
-            let cell = TimeMatrixLabelCell(timeSlot: index)
-            self.labelCellRowStack.addArrangedSubview(cell)
-        }
+        self.model.dayListeners.insert(self)
+    }
+    
+    private func makeTimeLabelColumnStack(resolution: TimeMatrixDisplayManager.Resolution) {
+        self.columnStack.removeArrangedSubview(self.timeLabelColumn)
+        self.timeLabelColumn.removeFromSuperview()
+        self.timeLabelColumn = TimeMatrixTimeLabelColumn()
+        self.columnStack.insertArrangedSubview(self.timeLabelColumn, at: 0)
     }
     
     private func clearDays() {
@@ -88,33 +89,44 @@ class TimeMatrixSelectionView: UIView {
         }
     }
     
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+    func onChange(resolution: TimeMatrixDisplayManager.Resolution) {
+        self.makeTimeLabelColumnStack(resolution: resolution)
+        self.setNeedsDisplay()
     }
-    */}
+    
+    override func setNeedsDisplay() {
+        for dayView in self.selectionDayViews.values {
+            dayView.setNeedsDisplay()
+        }
+        super.setNeedsDisplay()
+    }
+}
 
 extension TimeMatrixSelectionView: TimeMatrixModelDayListener {
     
     func onAdded(day: TimeMatrixDay, cellModels: [TimeMatrixCellModel]) {
-        var index = 0
-        while index < self.selectionDayViews.count && self.selectionDayViews[index].day < day {
-            index += 1
+        if let oldDayView = self.selectionDayViews[day] {
+            self.columnStack.removeArrangedSubview(oldDayView)
+            oldDayView.removeFromSuperview()
         }
+        
+        var columnStackIndex = 1
+        for activeDay in self.model.activeDays {
+            if activeDay >= day {
+                break
+            }
+            columnStackIndex += 1
+        }
+        
         let dayView = TimeMatrixSelectionDayView(day: day, cellModels: cellModels)
-        self.selectionDayViews.insert(dayView, at: index)
-        self.columnStack.insertArrangedSubview(dayView, at: index + 1)
+        self.selectionDayViews[day] = dayView
+        self.columnStack.insertArrangedSubview(dayView, at: columnStackIndex)
     }
     
     func onRemoved(day: TimeMatrixDay) {
-        for index in 0..<self.selectionDayViews.count {
-            if self.selectionDayViews[index].day == day {
-                let dayView = self.selectionDayViews.remove(at: index)
-                self.columnStack.removeArrangedSubview(dayView)
-                return
-            }
+        if let dayView = self.selectionDayViews.removeValue(forKey: day) {
+            self.columnStack.removeArrangedSubview(dayView)
+            dayView.removeFromSuperview()
         }
     }
 }

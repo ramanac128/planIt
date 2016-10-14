@@ -17,17 +17,12 @@ class TimeMatrixCellModel: Hashable {
     
     var isSelected = false
     
-    var currentState: State = .unavailable
+    private var currentState_ = State.unavailable
+    private var previousState = State.unavailable
     
-    var selectedState: State = .unavailable {
-        didSet {
-            self.isSelected = true
-        }
-    }
-    
-    var displayState: State {
+    var currentState: State {
         get {
-            return isSelected ? self.selectedState : self.currentState
+            return self.currentState_
         }
     }
     
@@ -35,12 +30,22 @@ class TimeMatrixCellModel: Hashable {
         self.timeSlot = timeSlot
     }
     
+    func select(state: State) {
+        if !self.isSelected {
+            self.previousState = self.currentState
+            self.currentState_ = state
+            self.isSelected = true
+        }
+    }
+    
     func cancelSelection() {
-        self.isSelected = false
+        if self.isSelected {
+            self.currentState_ = self.previousState
+            self.isSelected = false
+        }
     }
     
     func confirmSelection() {
-        self.currentState = self.selectedState
         self.isSelected = false
     }
     

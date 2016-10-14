@@ -14,13 +14,7 @@ protocol TimeMatrixModelDayListener: class {
 }
 
 class TimeMatrixModel {
-    static let resolution = 4
-    
-    var cellsPerDay: Int {
-        get {
-            return TimeMatrixModel.resolution * 24
-        }
-    }
+    static let cellsPerDay = 24 * 4
     
     var activeDays: [TimeMatrixDay] {
         get {
@@ -31,7 +25,7 @@ class TimeMatrixModel {
         }
     }
     
-    private var dayListeners = [TimeMatrixModelDayListener]()
+    var dayListeners = WeakSet<TimeMatrixModelDayListener>()
     
     private var days = Set<TimeMatrixDay>()
     var cells = [TimeMatrixDay: [TimeMatrixCellModel]]()
@@ -40,8 +34,8 @@ class TimeMatrixModel {
         var dayCells = self.cells[day]
         if dayCells == nil {
             dayCells = [TimeMatrixCellModel]()
-            dayCells!.reserveCapacity(self.cellsPerDay)
-            for index in 0..<self.cellsPerDay {
+            dayCells!.reserveCapacity(TimeMatrixModel.cellsPerDay)
+            for index in 0..<TimeMatrixModel.cellsPerDay {
                 let cell = TimeMatrixCellModel(timeSlot: index)
                 dayCells!.append(cell)
             }
@@ -53,27 +47,9 @@ class TimeMatrixModel {
         }
     }
 
-    func remove(day: TimeMatrixDay) -> Bool {
+    func remove(day: TimeMatrixDay) {
         if days.remove(day) != nil {
             self.informOnRemoved(day: day)
-            return true;
-        }
-        return false
-    }
-    
-    func add(dayListener: TimeMatrixModelDayListener) {
-        if !self.dayListeners.contains(where: {(l) -> Bool in
-            l === dayListener
-        }) {
-            self.dayListeners.append(dayListener)
-        }
-    }
-    
-    func remove(dayListener: TimeMatrixModelDayListener) {
-        if let index = self.dayListeners.index(where: {(l) -> Bool in
-            l === dayListener
-        }) {
-            self.dayListeners.remove(at: index)
         }
     }
     

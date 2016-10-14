@@ -10,10 +10,37 @@ import UIKit
 import Messages
 
 class MessagesViewController: MSMessagesAppViewController {
+    @IBOutlet weak var timeMatrixScrollView: TimeMatrixScrollView!
+    
+    let model1 = TimeMatrixModel()
+    let model2 = TimeMatrixModel()
+    var currentModel: TimeMatrixModel!
+    
+    var days = [TimeMatrixDay]()
+    var daySelections = [Bool]()
     
     override func viewDidLoad() {
+        self.currentModel = self.model1
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        let calendar = Calendar.current
+        let today = Date()
+        for index in 0...4 {
+            let date = calendar.date(byAdding: .day, value: index, to: today)
+            days.append(TimeMatrixDay(date: date!))
+            daySelections.append(false)
+        }
+        
+        
+        // TODO: delete this
+//        let model = TimeMatrixModel()
+//        let calendar = Calendar.current
+//        model.add(day: TimeMatrixDay(date: Date()))
+//        model.add(day: TimeMatrixDay(date: calendar.date(byAdding: .day, value: 1, to: Date())!))
+//        model.add(day: TimeMatrixDay(date: calendar.date(byAdding: .day, value: 2, to: Date())!))
+//        model.add(day: TimeMatrixDay(date: calendar.date(byAdding: .day, value: 4, to: Date())!))
+//        self.timeMatrixScrollView.model = model
+
     }
     
     override func didReceiveMemoryWarning() {
@@ -68,5 +95,70 @@ class MessagesViewController: MSMessagesAppViewController {
     
         // Use this method to finalize any behaviors associated with the change in presentation style.
     }
+    
+    func onDay(_ n: Int) {
+        let index = n - 1
+        let day = self.days[index]
+        if self.daySelections[index] {
+            let _ = self.currentModel.remove(day: day)
+        }
+        else {
+            self.currentModel.add(day: day)
+        }
+        self.daySelections[index] = !self.daySelections[index]
+    }
 
+    @IBAction func onModel1(_ sender: AnyObject) {
+        self.currentModel = self.model1
+        self.timeMatrixScrollView.model = self.currentModel
+    }
+    
+    @IBAction func onModel2(_ sender: AnyObject) {
+        self.currentModel = self.model2
+        self.timeMatrixScrollView.model = self.currentModel
+    }
+    
+    @IBAction func onDay1(_ sender: AnyObject) {
+        self.onDay(1)
+    }
+    
+    @IBAction func onDay2(_ sender: AnyObject) {
+        self.onDay(2)
+    }
+    
+    @IBAction func onDay3(_ sender: AnyObject) {
+        self.onDay(3)
+    }
+    
+    @IBAction func onDay4(_ sender: AnyObject) {
+        self.onDay(4)
+    }
+    
+    @IBAction func onDay5(_ sender: AnyObject) {
+        self.onDay(5)
+    }
+    
+    @IBAction func onStandardTime(_ sender: AnyObject) {
+        TimeMatrixDisplayManager.instance.timeFormat = .standard
+    }
+    
+    @IBAction func onMilitaryTime(_ sender: AnyObject) {
+        TimeMatrixDisplayManager.instance.timeFormat = .military
+    }
+    
+    @IBAction func on15min(_ sender: AnyObject) {
+        TimeMatrixDisplayManager.instance.resolution = .fifteenMinutes
+    }
+    
+    @IBAction func on30min(_ sender: AnyObject) {
+        TimeMatrixDisplayManager.instance.resolution = .thirtyMinutes
+    }
+    
+    @IBAction func on1hr(_ sender: AnyObject) {
+        TimeMatrixDisplayManager.instance.resolution = .oneHour
+    }
+    
+    @IBAction func on2hr(_ sender: AnyObject) {
+        TimeMatrixDisplayManager.instance.resolution = .twoHours
+    }
 }
