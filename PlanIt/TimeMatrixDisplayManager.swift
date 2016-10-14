@@ -19,8 +19,40 @@ protocol TimeMatrixTimeFormatListener: class {
 class TimeMatrixDisplayManager {
     static let instance = TimeMatrixDisplayManager()
     
-    static let minimumCellHeight = CGFloat(30)
+    static let defaultResolution = Resolution.thirtyMinutes
+    static let defaultTimeFormat = TimeFormat.standard
+    
+    
+    // MARK: - Display constants
+    
+    // day and time labels
+    
+    static let dayLabelDayOfWeekFontSize = CGFloat(20)
+    static let dayLabelMonthAndDayFontSize = CGFloat(12)
+    
+    static let timeLabelColorOnHour = UIColor.black
+    static let timeLabelColorOn30Min = UIColor(white: 0.25, alpha: 1)
+    static let timeLabelColorOn15Min = UIColor(white: 0.45, alpha: 1)
+    
+    // selection cells
+    
+    static let cellHeightMinimum = CGFloat(30)
     static let cellHeightIncrement = CGFloat(5)
+    
+    static let cellBackgroundColorUnavailable = UIColor.red.cgColor
+    static let cellBackgroundColorAvailable = UIColor.yellow.cgColor
+    static let cellBackgroundColorPreferred = UIColor.green.cgColor
+    
+    static let cellStrokeWidthMajorTick = CGFloat(2)
+    static let cellStrokeWidthMinorTick = CGFloat(1)
+    static let cellStrokeColorMajorTick = UIColor(white: 0.85, alpha: 1).cgColor
+    static let cellStrokeColorMinorTick = UIColor(white: 0.75, alpha: 1).cgColor
+    
+    static let cellStrokeWidthDayBorder = CGFloat(8)
+    static let cellStrokeColorDayBorder = UIColor.white.cgColor
+
+    
+    // MARK: - Enumerations
     
     enum Resolution: Double {
         case fifteenMinutes = 0.25
@@ -35,6 +67,9 @@ class TimeMatrixDisplayManager {
         case standard, military
     }
     
+    
+    // MARK: - Properties
+    
     var resolution: Resolution {
         didSet {
             if oldValue != self.resolution {
@@ -44,8 +79,6 @@ class TimeMatrixDisplayManager {
             }
         }
     }
-    
-    var selectionCellsPerTimeLabel: Int
     
     var timeFormat: TimeFormat {
         didSet {
@@ -57,13 +90,18 @@ class TimeMatrixDisplayManager {
         }
     }
     
+    
+    // MARK: - Variables
+    
     let resolutionListeners = WeakSet<TimeMatrixResolutionListener>()
     let timeFormatListeners = WeakSet<TimeMatrixTimeFormatListener>()
     
+    
+    // MARK: - Initialization
+    
     private init() {
-        self.resolution = .oneHour
-        self.timeFormat = .military
-        self.selectionCellsPerTimeLabel = 1
+        self.resolution = TimeMatrixDisplayManager.defaultResolution
+        self.timeFormat = TimeMatrixDisplayManager.defaultTimeFormat
     }
     
 }

@@ -27,20 +27,15 @@ class TimeMatrixTimeLabelColumn: UIStackView {
         self.axis = .vertical
         
         let resolution = TimeMatrixDisplayManager.instance.resolution
-        let labelSkips = TimeMatrixDisplayManager.instance.selectionCellsPerTimeLabel
-        let resolutionInt = resolution.rawValue * 4
-        let cellHeight = TimeMatrixDisplayManager.minimumCellHeight + (CGFloat(resolutionInt - 1) * TimeMatrixDisplayManager.cellHeightIncrement)
+        let skip = Int(resolution.rawValue * 4)
+        let cellHeightIncrement = TimeMatrixDisplayManager.cellHeightIncrement * CGFloat(skip - 1)
+        let cellHeight = TimeMatrixDisplayManager.cellHeightMinimum + cellHeightIncrement
         
-        let skip = Int(resolutionInt) * labelSkips
         var index = 0
         while index < TimeMatrixModel.cellsPerDay {
             let cell = TimeMatrixTimeLabelCell(index: index, height: cellHeight)
             self.addArrangedSubview(cell)
             index += skip
         }
-    }
-    
-    func cellHeight(resolution: TimeMatrixDisplayManager.Resolution) {
-        
     }
 }

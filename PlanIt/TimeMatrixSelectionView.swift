@@ -13,6 +13,7 @@ class TimeMatrixSelectionView: UIView, TimeMatrixResolutionListener {
     var model: TimeMatrixModel {
         didSet {
             if oldValue !== model {
+                oldValue.dayListeners.remove(self)
                 for dayView in self.selectionDayViews.values {
                     self.columnStack.removeArrangedSubview(dayView)
                     dayView.removeFromSuperview()
@@ -26,7 +27,7 @@ class TimeMatrixSelectionView: UIView, TimeMatrixResolutionListener {
     
     var columnStack = UIStackView()
     var timeLabelColumn = TimeMatrixTimeLabelColumn()
-    var selectionDayViews = [TimeMatrixDay: TimeMatrixSelectionDayView]()
+    var selectionDayViews = [TimeMatrixDay: TimeMatrixDaySelectionColumn]()
     
     override init(frame: CGRect) {
         fatalError("init(frame:) has not been implemented, use init(frame:model:)")
@@ -67,10 +68,14 @@ class TimeMatrixSelectionView: UIView, TimeMatrixResolutionListener {
     }
     
     private func attachToModel() {
-        for day in self.model.activeDays {
+        var index = 0
+        let days = self.model.activeDays
+        while index < days.count {
+            let day = days[index]
             if let cellModels = self.model.cells[day] {
-                self.onAdded(day: day, cellModels: cellModels)
+                self.onAdded(day: day, cellModels: cellModels, atIndex: index)
             }
+            index += 1
         }
         self.model.dayListeners.insert(self)
     }
@@ -104,23 +109,15 @@ class TimeMatrixSelectionView: UIView, TimeMatrixResolutionListener {
 
 extension TimeMatrixSelectionView: TimeMatrixModelDayListener {
     
-    func onAdded(day: TimeMatrixDay, cellModels: [TimeMatrixCellModel]) {
+    func onAdded(day: TimeMatrixDay, cellModels: [TimeMatrixCellModel], atIndex index: Int) {
         if let oldDayView = self.selectionDayViews[day] {
             self.columnStack.removeArrangedSubview(oldDayView)
             oldDayView.removeFromSuperview()
         }
         
-        var columnStackIndex = 1
-        for activeDay in self.model.activeDays {
-            if activeDay >= day {
-                break
-            }
-            columnStackIndex += 1
-        }
-        
-        let dayView = TimeMatrixSelectionDayView(day: day, cellModels: cellModels)
+        let dayView = TimeMatrixDaySelectionColumn(day: day, cellModels: cellModels)
         self.selectionDayViews[day] = dayView
-        self.columnStack.insertArrangedSubview(dayView, at: columnStackIndex)
+        self.columnStack.insertArrangedSubview(dayView, at: index + 1)
     }
     
     func onRemoved(day: TimeMatrixDay) {

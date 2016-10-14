@@ -36,8 +36,8 @@ class TimeMatrixScrollView: UIScrollView {
     private var panEndPoint: CGPoint?
     private var panStartIndex: Int?
     private var panEndIndex: Int?
-    private var panStartDayView: TimeMatrixSelectionDayView?
-    private var panEndDayView: TimeMatrixSelectionDayView?
+    private var panStartDayView: TimeMatrixDaySelectionColumn?
+    private var panEndDayView: TimeMatrixDaySelectionColumn?
     private var panSelectionState = TimeMatrixCellModel.State.unavailable
     private var selectedCells = Set<TimeMatrixCellModel>()
     
@@ -97,7 +97,7 @@ class TimeMatrixScrollView: UIScrollView {
         let posInSelf = recognizer.location(in: self)
         let view = self.hitTest(posInSelf, with: nil)
         
-        if let dayView = view as? TimeMatrixSelectionDayView {
+        if let dayView = view as? TimeMatrixDaySelectionColumn {
             switch recognizer.state {
             case .began:
                 self.setContentOffset(self.contentOffset, animated: false)
@@ -154,7 +154,7 @@ class TimeMatrixScrollView: UIScrollView {
     }
     
     func updatePanCellSelections() {
-        var leftDay, rightDay: TimeMatrixSelectionDayView?
+        var leftDay, rightDay: TimeMatrixDaySelectionColumn?
         var topIndex, bottomIndex: Int?
         
         if self.panStartPoint!.y < self.panEndPoint!.y {

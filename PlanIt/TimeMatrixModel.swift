@@ -9,7 +9,7 @@
 import Foundation
 
 protocol TimeMatrixModelDayListener: class {
-    func onAdded(day: TimeMatrixDay, cellModels: [TimeMatrixCellModel])
+    func onAdded(day: TimeMatrixDay, cellModels: [TimeMatrixCellModel], atIndex index: Int)
     func onRemoved(day: TimeMatrixDay)
 }
 
@@ -19,9 +19,7 @@ class TimeMatrixModel {
     var activeDays: [TimeMatrixDay] {
         get {
             let arr = Array(self.days)
-            return arr.sorted(by: { (lhs, rhs) -> Bool in
-                return lhs < rhs
-            })
+            return arr.sorted(by: <)
         }
     }
     
@@ -54,8 +52,12 @@ class TimeMatrixModel {
     }
     
     private func informOnAdded(day: TimeMatrixDay, cellModels: [TimeMatrixCellModel]) {
+        var index = 0
+        if let i = self.activeDays.index(of: day) {
+            index = i
+        }
         for listener in self.dayListeners {
-            listener.onAdded(day: day, cellModels: cellModels)
+            listener.onAdded(day: day, cellModels: cellModels, atIndex: index)
         }
     }
     

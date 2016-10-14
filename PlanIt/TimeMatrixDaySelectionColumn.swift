@@ -1,5 +1,5 @@
 //
-//  TimeMatrixSelectionDayView.swift
+//  TimeMatrixDaySelectionColumn.swift
 //  PlanIt
 //
 //  Created by Richmond Starbuck on 10/11/16.
@@ -8,19 +8,7 @@
 
 import UIKit
 
-class TimeMatrixSelectionDayView: UIView, TimeMatrixResolutionListener {
-    static let bgUnavailable = UIColor.red.cgColor //UIColor(red: 1, green: 150/255, blue: 150/255, alpha: 1).cgColor
-    static let bgAvailable = UIColor.yellow.cgColor
-    static let bgPreferred = UIColor.green.cgColor
-    
-    static let strokeWidthMajorTick = CGFloat(1.0)
-    static let strokeWidthMinorTick = CGFloat(0.5)
-    static let strokeColorMajorTick = UIColor.black.cgColor
-    static let strokeColorMinorTick = UIColor.gray.cgColor
-    
-    static let strokeWidthDayBorder = CGFloat(4.0)
-    static let strokeColorDayBorder = UIColor.white.cgColor
-
+class TimeMatrixDaySelectionColumn: UIView, TimeMatrixResolutionListener {
     var day: TimeMatrixDay
     
     var cellModels: [TimeMatrixCellModel]
@@ -49,7 +37,7 @@ class TimeMatrixSelectionDayView: UIView, TimeMatrixResolutionListener {
     }
     
     private func setup() {
-        self.backgroundColor = UIColor(cgColor: TimeMatrixSelectionDayView.bgUnavailable)
+        self.backgroundColor = UIColor(cgColor: TimeMatrixDisplayManager.cellBackgroundColorUnavailable)
     }
     
     func touchResult(at point: CGPoint) -> (index: Int, cell: TimeMatrixCellModel)? {
@@ -71,11 +59,11 @@ class TimeMatrixSelectionDayView: UIView, TimeMatrixResolutionListener {
     func fillColor(from: TimeMatrixCellModel.State) -> CGColor {
         switch (from) {
         case .available:
-            return TimeMatrixSelectionDayView.bgAvailable
+            return TimeMatrixDisplayManager.cellBackgroundColorAvailable
         case .preferred:
-            return TimeMatrixSelectionDayView.bgPreferred
+            return TimeMatrixDisplayManager.cellBackgroundColorPreferred
         case .unavailable:
-            return TimeMatrixSelectionDayView.bgUnavailable
+            return TimeMatrixDisplayManager.cellBackgroundColorUnavailable
         }
     }
     
@@ -130,7 +118,7 @@ class TimeMatrixSelectionDayView: UIView, TimeMatrixResolutionListener {
     private func drawBorders(from start: Int, to end: Int, cellHeight: CGFloat, context: CGContext) {
         let resolution = TimeMatrixDisplayManager.instance.resolution
         let skip = Int(resolution.rawValue * 4)
-        let mod = TimeMatrixDisplayManager.instance.selectionCellsPerTimeLabel
+        let mod = Int(ceil(1 / resolution.rawValue))
         
         var index = start, modIndex = start
         while index < end {
@@ -138,12 +126,12 @@ class TimeMatrixSelectionDayView: UIView, TimeMatrixResolutionListener {
             context.move(to: CGPoint(x: 0, y: yPos))
             context.addLine(to: CGPoint(x: self.bounds.width, y: yPos))
             if modIndex % mod == 0 {
-                context.setStrokeColor(TimeMatrixSelectionDayView.strokeColorMajorTick)
-                context.setLineWidth(TimeMatrixSelectionDayView.strokeWidthMajorTick)
+                context.setStrokeColor(TimeMatrixDisplayManager.cellStrokeColorMajorTick)
+                context.setLineWidth(TimeMatrixDisplayManager.cellStrokeWidthMajorTick)
             }
             else {
-                context.setStrokeColor(TimeMatrixSelectionDayView.strokeColorMinorTick)
-                context.setLineWidth(TimeMatrixSelectionDayView.strokeWidthMinorTick)
+                context.setStrokeColor(TimeMatrixDisplayManager.cellStrokeColorMinorTick)
+                context.setLineWidth(TimeMatrixDisplayManager.cellStrokeWidthMinorTick)
             }
             context.drawPath(using: .stroke)
             index += skip
@@ -155,8 +143,8 @@ class TimeMatrixSelectionDayView: UIView, TimeMatrixResolutionListener {
         
         context.move(to: CGPoint(x: 0, y: top))
         context.addLine(to: CGPoint(x: 0, y: bottom))
-        context.setStrokeColor(TimeMatrixSelectionDayView.strokeColorDayBorder)
-        context.setLineWidth(TimeMatrixSelectionDayView.strokeWidthDayBorder)
+        context.setStrokeColor(TimeMatrixDisplayManager.cellStrokeColorDayBorder)
+        context.setLineWidth(TimeMatrixDisplayManager.cellStrokeWidthDayBorder)
         context.drawPath(using: .stroke)
     }
     

@@ -10,7 +10,7 @@ import UIKit
 import Messages
 
 class MessagesViewController: MSMessagesAppViewController {
-    @IBOutlet weak var timeMatrixScrollView: TimeMatrixScrollView!
+    @IBOutlet weak var timeMatrixView: TimeMatrixView!
     
     let model1 = TimeMatrixModel()
     let model2 = TimeMatrixModel()
@@ -110,12 +110,12 @@ class MessagesViewController: MSMessagesAppViewController {
 
     @IBAction func onModel1(_ sender: AnyObject) {
         self.currentModel = self.model1
-        self.timeMatrixScrollView.model = self.currentModel
+        self.timeMatrixView.model = self.currentModel
     }
     
     @IBAction func onModel2(_ sender: AnyObject) {
         self.currentModel = self.model2
-        self.timeMatrixScrollView.model = self.currentModel
+        self.timeMatrixView.model = self.currentModel
     }
     
     @IBAction func onDay1(_ sender: AnyObject) {

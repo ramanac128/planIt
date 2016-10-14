@@ -34,19 +34,40 @@ func == <T>(lhs: Weak<T>, rhs: Weak<T>) -> Bool {
     return lhs.value as AnyObject === rhs.value as AnyObject
 }
 
-class WeakSet<T>: Sequence, IteratorProtocol {
-    private var values = Set<Weak<T>>()
-    
+class WeakSetIterator<T>: IteratorProtocol {
+    private var weakSet: WeakSet<T>
     private var iterator: SetIterator<Weak<T>>
     private var hasNilReference = false
-    private var isIterating = false
     
-    init() {
-        self.iterator = self.values.makeIterator()
+    init(weakSet: WeakSet<T>, iterator: SetIterator<Weak<T>>) {
+        self.weakSet = weakSet
+        self.iterator = iterator
     }
     
+    func next() -> T? {
+        let next = self.iterator.next()
+        if next == nil {
+            if self.hasNilReference {
+                self.weakSet.reap()
+            }
+            return nil
+        }
+        else if let value = next!.value {
+            return value
+        }
+        else {
+            self.hasNilReference = true
+            return self.next()
+        }
+    }
+}
+
+class WeakSet<T>: Sequence {
+    private var values = Set<Weak<T>>()
+    
+    init() {}
+    
     init(elements: [T]) {
-        self.iterator = self.values.makeIterator()
         for element in elements {
             self.insert(element)
         }
@@ -67,35 +88,16 @@ class WeakSet<T>: Sequence, IteratorProtocol {
     }
     
     func reap() {
-        var toReap = Set<Weak<T>>()
+        var notNil = Set<Weak<T>>()
         for element in self.values {
-            if element.value == nil {
-                toReap.insert(element)
+            if element.value != nil {
+                notNil.insert(element)
             }
         }
-        self.values = self.values.subtracting(toReap)
+        self.values = notNil
     }
     
-    func next() -> T? {
-        if !self.isIterating {
-            self.iterator = self.values.makeIterator()
-            self.isIterating = true
-        }
-        let next = self.iterator.next()
-        if next == nil {
-            if self.hasNilReference {
-                self.reap()
-                self.hasNilReference = false
-            }
-            self.isIterating = false
-            return nil
-        }
-        else if let value = next!.value {
-            return value
-        }
-        else {
-            self.hasNilReference = true
-            return self.next()
-        }
+    func makeIterator() -> WeakSetIterator<T> {
+        return WeakSetIterator<T>(weakSet: self, iterator: self.values.makeIterator())
     }
 }

@@ -12,6 +12,7 @@ struct TimeMatrixDay: Hashable, CustomStringConvertible {
     var year = 2016
     var month = 1
     var day = 1
+    var dayOfWeek = 1
     
     init(date: Date) {
         self.from(date: date)
@@ -31,10 +32,11 @@ struct TimeMatrixDay: Hashable, CustomStringConvertible {
     
     mutating func from(date: Date) {
         let calendar = Calendar.current
-        let components = calendar.dateComponents([.year, .month, .day], from: date)
+        let components = calendar.dateComponents([.year, .month, .day, .weekday], from: date)
         self.year = components.year!
         self.month = components.month!
         self.day = components.day!
+        self.dayOfWeek = components.weekday!
     }
     
     func toDate() -> Date {

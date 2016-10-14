@@ -51,6 +51,16 @@ class TimeMatrixTimeLabelCell: UILabel, TimeMatrixTimeFormatListener {
         self.hour = Int(decimalHours)
         self.minute = Int((decimalHours - Double(self.hour)) * 60)
         
+        if self.minute == 0 {
+            self.textColor = TimeMatrixDisplayManager.timeLabelColorOnHour
+        }
+        else if self.minute == 30 {
+            self.textColor = TimeMatrixDisplayManager.timeLabelColorOn30Min
+        }
+        else {
+            self.textColor = TimeMatrixDisplayManager.timeLabelColorOn15Min
+        }
+        
         self.setLabelText(timeFormat: TimeMatrixDisplayManager.instance.timeFormat)
     }
     
