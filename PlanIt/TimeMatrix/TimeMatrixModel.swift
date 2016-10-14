@@ -14,7 +14,13 @@ protocol TimeMatrixModelDayListener: class {
 }
 
 class TimeMatrixModel {
+    
+    // MARK: - Static constants
+    
     static let cellsPerDay = 24 * 4
+    
+    
+    // MARK: - Properties
     
     var activeDays: [TimeMatrixDay] {
         get {
@@ -23,10 +29,16 @@ class TimeMatrixModel {
         }
     }
     
-    var dayListeners = WeakSet<TimeMatrixModelDayListener>()
+    
+    // MARK: - Variables
     
     private var days = Set<TimeMatrixDay>()
     var cells = [TimeMatrixDay: [TimeMatrixCellModel]]()
+    
+    var dayListeners = WeakSet<TimeMatrixModelDayListener>()
+    
+    
+    // MARK: - TimeMatrixDay handlers
     
     func add(day: TimeMatrixDay) {
         var dayCells = self.cells[day]
@@ -50,6 +62,9 @@ class TimeMatrixModel {
             self.informOnRemoved(day: day)
         }
     }
+    
+    
+    // MARK: - TimeMatrixModelDayListener speaker methods
     
     private func informOnAdded(day: TimeMatrixDay, cellModels: [TimeMatrixCellModel]) {
         var index = 0

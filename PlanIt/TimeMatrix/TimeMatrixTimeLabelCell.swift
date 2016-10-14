@@ -9,10 +9,14 @@
 import UIKit
 
 class TimeMatrixTimeLabelCell: UILabel, TimeMatrixTimeFormatListener {
-    static let fontSize = CGFloat(16)
+    
+    // MARK: - Variables
     
     private var hour = 0
     private var minute = 0
+    
+    
+    // MARK: - Initialization
     
     override init(frame: CGRect) {
         fatalError("init(frame:) has not been implemented, use init(frame:timeSlot:height:)")
@@ -33,7 +37,7 @@ class TimeMatrixTimeLabelCell: UILabel, TimeMatrixTimeFormatListener {
     }
     
     private func setup(height: CGFloat) {
-        self.font = UIFont.systemFont(ofSize: TimeMatrixTimeLabelCell.fontSize)
+        self.font = UIFont.systemFont(ofSize: TimeMatrixDisplayManager.timeLabelFontSize)
         self.adjustsFontSizeToFitWidth = true
         self.textAlignment = .center
         self.baselineAdjustment = .alignCenters
@@ -43,6 +47,9 @@ class TimeMatrixTimeLabelCell: UILabel, TimeMatrixTimeFormatListener {
         
         TimeMatrixDisplayManager.instance.timeFormatListeners.insert(self)
     }
+    
+    
+    // MARK: - Time label setter helpers
     
     func setTime(index: Int) {
         let totalSlots = TimeMatrixModel.cellsPerDay
@@ -83,6 +90,9 @@ class TimeMatrixTimeLabelCell: UILabel, TimeMatrixTimeFormatListener {
             self.text = String(format: "%d:%02d%@", displayHour, self.minute, dayPart)
         }
     }
+    
+    
+    // MARK: - TimeMatrixTimeFormatListener protocol methods
     
     func onChange(timeFormat: TimeMatrixDisplayManager.TimeFormat) {
         self.setLabelText(timeFormat: timeFormat)

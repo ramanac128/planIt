@@ -9,7 +9,13 @@
 import UIKit
 
 class TimeMatrixDayLabelRow: UIStackView, TimeMatrixModelDayListener {
-    var dayLabelCells = [TimeMatrixDay: TimeMatrixDayLabelCell]()
+    
+    // MARK: - Subviews
+    
+    private var dayLabelCells = [TimeMatrixDay: Weak<TimeMatrixDayLabelCell>]()
+    
+    
+    // MARK: - Properties
     
     var model: TimeMatrixModel? {
         didSet {
@@ -17,7 +23,7 @@ class TimeMatrixDayLabelRow: UIStackView, TimeMatrixModelDayListener {
                 if oldValue != nil {
                     oldValue!.dayListeners.remove(self)
                     for cell in self.dayLabelCells.values {
-                        self.removeArrangedSubview(cell)
+                        self.removeArrangedSubview(cell.value!)
                     }
                     self.dayLabelCells.removeAll()
                 }
@@ -27,6 +33,9 @@ class TimeMatrixDayLabelRow: UIStackView, TimeMatrixModelDayListener {
             }
         }
     }
+    
+    
+    // MARK: - Initialization
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -55,17 +64,21 @@ class TimeMatrixDayLabelRow: UIStackView, TimeMatrixModelDayListener {
         }
     }
     
+    
+    // MARK: - TimeMatrixModelDayListener protocol methods
+    
     func onAdded(day: TimeMatrixDay, cellModels: [TimeMatrixCellModel], atIndex index: Int) {
         if self.dayLabelCells[day] == nil {
             let cell = TimeMatrixDayLabelCell(day: day)
-            self.dayLabelCells[day] = cell
+            let weakCell = Weak<TimeMatrixDayLabelCell>(value: cell)
+            self.dayLabelCells[day] = weakCell
             self.insertArrangedSubview(cell, at: index + 1)
         }
     }
     
     func onRemoved(day: TimeMatrixDay) {
         if let cell = self.dayLabelCells.removeValue(forKey: day) {
-            self.removeArrangedSubview(cell)
+            self.removeArrangedSubview(cell.value!)
         }
     }
 }

@@ -9,14 +9,8 @@
 import Foundation
 
 struct TimeMatrixDay: Hashable, CustomStringConvertible {
-    var year = 2016
-    var month = 1
-    var day = 1
-    var dayOfWeek = 1
     
-    init(date: Date) {
-        self.from(date: date)
-    }
+    // MARK: - Properties
     
     var hashValue: Int {
         get {
@@ -29,6 +23,24 @@ struct TimeMatrixDay: Hashable, CustomStringConvertible {
             return String(format: "%d-%02d-%02d", self.year, self.month, self.day)
         }
     }
+    
+    
+    // MARK: - Variables
+    
+    var year = 2016
+    var month = 1
+    var day = 1
+    var dayOfWeek = 1
+    
+    
+    // MARK: - Initialization
+    
+    init(date: Date) {
+        self.from(date: date)
+    }
+    
+    
+    // MARK: - Date conversions
     
     mutating func from(date: Date) {
         let calendar = Calendar.current

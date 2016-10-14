@@ -9,9 +9,27 @@
 import Foundation
 
 class TimeMatrixCellModel: Hashable {
+    
+    // MARK: - Enumerations
+    
     enum State {
         case available, unavailable, preferred
     }
+    
+    
+    // MARK: - Properties
+    
+    var currentState: State {
+        get {
+            return self.currentState_
+        }
+    }
+    
+    var hashValue: Int {
+        return ObjectIdentifier(self).hashValue
+    }
+    
+    // MARK: - Variables
     
     var timeSlot: Int
     
@@ -20,15 +38,15 @@ class TimeMatrixCellModel: Hashable {
     private var currentState_ = State.unavailable
     private var previousState = State.unavailable
     
-    var currentState: State {
-        get {
-            return self.currentState_
-        }
-    }
+    
+    // MARK: - Initialization
     
     init(timeSlot: Int) {
         self.timeSlot = timeSlot
     }
+    
+    
+    // MARK: - Cell selection
     
     func select(state: State) {
         if !self.isSelected {
@@ -47,10 +65,6 @@ class TimeMatrixCellModel: Hashable {
     
     func confirmSelection() {
         self.isSelected = false
-    }
-    
-    var hashValue: Int {
-        return ObjectIdentifier(self).hashValue
     }
 }
 

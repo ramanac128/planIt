@@ -9,9 +9,14 @@
 import UIKit
 
 class TimeMatrixDaySelectionColumn: UIView, TimeMatrixResolutionListener {
-    var day: TimeMatrixDay
     
+    // MARK: - Variables
+    
+    var day: TimeMatrixDay
     var cellModels: [TimeMatrixCellModel]
+    
+    
+    // MARK: - Initialization
     
     override init(frame: CGRect) {
         fatalError("init(frame:) has not been implemented, use init(frame:day:cellModels:)")
@@ -40,6 +45,9 @@ class TimeMatrixDaySelectionColumn: UIView, TimeMatrixResolutionListener {
         self.backgroundColor = UIColor(cgColor: TimeMatrixDisplayManager.cellBackgroundColorUnavailable)
     }
     
+    
+    // MARK: - Cell selection helpers
+    
     func touchResult(at point: CGPoint) -> (index: Int, cell: TimeMatrixCellModel)? {
         if point.y < 0 || point.y > self.bounds.height {
             return nil
@@ -55,6 +63,9 @@ class TimeMatrixDaySelectionColumn: UIView, TimeMatrixResolutionListener {
         }
         return Int(point.y / self.bounds.height * CGFloat(self.cellModels.count))
     }
+    
+    
+    // MARK: - Cell drawing
     
     func fillColor(from: TimeMatrixCellModel.State) -> CGColor {
         switch (from) {
@@ -147,6 +158,9 @@ class TimeMatrixDaySelectionColumn: UIView, TimeMatrixResolutionListener {
         context.setLineWidth(TimeMatrixDisplayManager.cellStrokeWidthDayBorder)
         context.drawPath(using: .stroke)
     }
+    
+    
+    // MARK: - TimeMatrixResolutionListener protocol methods
     
     func onChange(resolution: TimeMatrixDisplayManager.Resolution) {
         self.setNeedsDisplay()

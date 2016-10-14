@@ -10,6 +10,8 @@ import UIKit
 
 class TimeMatrixTimeLabelColumn: UIStackView {
     
+    // MARK: - Initialization
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.setup()

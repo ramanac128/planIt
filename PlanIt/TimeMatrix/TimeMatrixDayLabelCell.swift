@@ -9,8 +9,14 @@
 import UIKit
 
 class TimeMatrixDayLabelCell: UIStackView {
-    private var dayOfWeekLabel = UILabel()
-    private var monthAndDayLabel = UILabel()
+    
+    // MARK: - Subviews
+    
+    private weak var dayOfWeekLabel: UILabel!
+    private weak var monthAndDayLabel: UILabel!
+    
+    
+    // MARK: - Initialization
     
     override init(frame: CGRect) {
         fatalError("init(frame:) has not been implemented, use init(frame:day:)")
@@ -36,11 +42,16 @@ class TimeMatrixDayLabelCell: UIStackView {
         self.spacing = 0
         self.axis = .vertical
         
-        self.dayOfWeekLabel.adjustsFontSizeToFitWidth = true
-        self.dayOfWeekLabel.textAlignment = .center
-        self.monthAndDayLabel.adjustsFontSizeToFitWidth = true
-        self.monthAndDayLabel.textAlignment = .center
+        let dayOfWeekLabel = UILabel()
+        dayOfWeekLabel.adjustsFontSizeToFitWidth = true
+        dayOfWeekLabel.textAlignment = .center
         
+        let monthAndDayLabel = UILabel()
+        monthAndDayLabel.adjustsFontSizeToFitWidth = true
+        monthAndDayLabel.textAlignment = .center
+        
+        self.dayOfWeekLabel = dayOfWeekLabel
+        self.monthAndDayLabel = monthAndDayLabel
         self.addArrangedSubview(self.dayOfWeekLabel)
         self.addArrangedSubview(self.monthAndDayLabel)
     }
@@ -55,6 +66,9 @@ class TimeMatrixDayLabelCell: UIStackView {
         self.dayOfWeekLabel.text = self.dayOfWeekText(from: day)
         self.monthAndDayLabel.text = self.monthAndDayText(from: day)
     }
+    
+    
+    // MARK: - TimeMatrixDay conversions
     
     func dayOfWeekText(from day: TimeMatrixDay) -> String {
         switch (day.dayOfWeek) {

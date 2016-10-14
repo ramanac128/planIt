@@ -10,27 +10,36 @@ import UIKit
 
 class TimeMatrixScrollView: UIScrollView {
     
+    // MARK: - Subviews
+    
+    private weak var contentView: UIStackView!
+    private var selectionViews = [Weak<TimeMatrixSelectionView>]()
+    
+    
+    // MARK: - Properties
+    
     var model: TimeMatrixModel? {
         didSet {
             if oldValue !== self.model {
                 if oldValue == nil {
                     for _ in 1...3 {
                         let selectionView = TimeMatrixSelectionView(model: self.model!)
-                        self.selectionViews.append(selectionView)
+                        let weakView = Weak<TimeMatrixSelectionView>(value: selectionView)
+                        self.selectionViews.append(weakView)
                         contentView.addArrangedSubview(selectionView)
                     }
                 }
                 else {
                     for selectionView in self.selectionViews {
-                        selectionView.model = self.model!
+                        selectionView.value!.model = self.model!
                     }
                 }
             }
         }
     }
     
-    private let contentView = UIStackView()
-    private var selectionViews = [TimeMatrixSelectionView]()
+    
+    // MARK: - Variables
     
     private var panStartPoint: CGPoint?
     private var panEndPoint: CGPoint?
@@ -40,6 +49,9 @@ class TimeMatrixScrollView: UIScrollView {
     private var panEndDayView: TimeMatrixDaySelectionColumn?
     private var panSelectionState = TimeMatrixCellModel.State.unavailable
     private var selectedCells = Set<TimeMatrixCellModel>()
+    
+    
+    // MARK: - Initialization
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -51,13 +63,9 @@ class TimeMatrixScrollView: UIScrollView {
         self.setup()
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        contentView.frame = CGRect(origin: CGPoint(x: 0, y: 0), size: contentView.frame.size)
-        self.contentSize = contentView.bounds.size
-    }
-    
     private func setup() {
+        let contentView = UIStackView()
+        
         contentView.alignment = .fill
         contentView.distribution = .fillEqually
         contentView.spacing = 0
@@ -67,8 +75,10 @@ class TimeMatrixScrollView: UIScrollView {
         self.showsVerticalScrollIndicator = false
         self.showsHorizontalScrollIndicator = false
         self.clipsToBounds = true
-        self.addSubview(contentView)
         self.delegate = self
+        
+        self.contentView = contentView
+        self.addSubview(contentView)
         
         let leading = NSLayoutConstraint(item: contentView, attribute: .leading, relatedBy: .equal, toItem: self, attribute: .leading, multiplier: 1, constant: 0)
         let trailing = NSLayoutConstraint(item: contentView, attribute: .trailing, relatedBy: .equal, toItem: self, attribute: .trailing, multiplier: 1, constant: 0)
@@ -79,6 +89,15 @@ class TimeMatrixScrollView: UIScrollView {
         panRecognizer.delegate = self
         self.addGestureRecognizer(panRecognizer)
     }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        contentView.frame = CGRect(origin: CGPoint(x: 0, y: 0), size: contentView.frame.size)
+        self.contentSize = contentView.bounds.size
+    }
+    
+    
+    // MARK: - Cell selection
     
     func selectionState(from: TimeMatrixCellModel.State) -> TimeMatrixCellModel.State {
         switch from {
@@ -212,11 +231,12 @@ class TimeMatrixScrollView: UIScrollView {
             self.selectedCells = newSelectedCells
             
             for selectionView in self.selectionViews {
-                selectionView.setNeedsDisplay()
+                selectionView.value!.setNeedsDisplay()
             }
         }
     }
 }
+
 
 extension TimeMatrixScrollView: UIScrollViewDelegate {
     
@@ -237,6 +257,7 @@ extension TimeMatrixScrollView: UIScrollViewDelegate {
         scrollView.setContentOffset(scrollView.contentOffset, animated: false)
     }
 }
+
 
 extension TimeMatrixScrollView: UIGestureRecognizerDelegate {
     

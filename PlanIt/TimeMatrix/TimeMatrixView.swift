@@ -9,8 +9,14 @@
 import UIKit
 
 class TimeMatrixView: UIStackView {
+    
+    // MARK: - Subviews
+    
     weak var scrollView: TimeMatrixScrollView!
     weak var labelRow: TimeMatrixDayLabelRow!
+    
+    
+    // MARK: - Properties
     
     var model: TimeMatrixModel? {
         didSet {
@@ -22,6 +28,9 @@ class TimeMatrixView: UIStackView {
             }
         }
     }
+    
+    
+    // MARK: - Initialization
     
     override init(frame: CGRect) {
         super.init(frame: frame)
