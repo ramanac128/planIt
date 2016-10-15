@@ -15,6 +15,8 @@ class TimeMatrixTimeLabelCell: UILabel, TimeMatrixTimeFormatListener {
     private var hour = 0
     private var minute = 0
     
+    private weak var heightConstraint: NSLayoutConstraint!
+    
     
     // MARK: - Initialization
     
@@ -42,7 +44,29 @@ class TimeMatrixTimeLabelCell: UILabel, TimeMatrixTimeFormatListener {
         self.textAlignment = .center
         self.baselineAdjustment = .alignCenters
         
+        let resolution = TimeMatrixDisplayManager.instance.resolution
+        let cellHeight = TimeMatrixTimeLabelCell.cellHeight(resolution: resolution)
+        
+        let height = NSLayoutConstraint(item: self, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: cellHeight)
+        self.heightConstraint = height
+        self.translatesAutoresizingMaskIntoConstraints = false
+        self.addConstraint(height)
+        
         TimeMatrixDisplayManager.instance.timeFormatListeners.insert(self)
+    }
+    
+    
+    // MARK: - Layout and display
+    
+    static func cellHeight(resolution: TimeMatrixDisplayManager.Resolution) -> CGFloat {
+        let resolutionInt = Int(resolution.rawValue * 4)
+        let cellHeightIncrement = TimeMatrixDisplayManager.cellHeightIncrement * CGFloat(resolutionInt - 1)
+        let cellHeight = TimeMatrixDisplayManager.cellHeightMinimum + cellHeightIncrement
+        return cellHeight
+    }
+    
+    func setHeight(height: CGFloat) {
+        self.heightConstraint.constant = height
     }
     
     

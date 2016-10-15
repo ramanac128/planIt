@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TimeMatrixTimeLabelColumn: UIStackView, TimeMatrixResolutionListener {
+class TimeMatrixTimeLabelColumn: UIView, TimeMatrixResolutionListener {
     
     // MARK: - Subviews
     
@@ -22,34 +22,44 @@ class TimeMatrixTimeLabelColumn: UIStackView, TimeMatrixResolutionListener {
         self.setup()
     }
     
-    required init(coder: NSCoder) {
+    required init?(coder: NSCoder) {
         super.init(coder: coder)
         self.setup()
     }
     
     private func setup() {
-        self.alignment = .fill
-        self.distribution = .fillEqually
-        self.spacing = 0
-        self.axis = .vertical
+        var viewDict = [String: UIView]()
+        var vString = "V:|"
         
         let numCells = TimeMatrixModel.cellsPerDay
         self.timeLabelCells.reserveCapacity(numCells)
         for index in 0..<numCells {
+            let viewString = String(format: "v%d", index)
             let cell = TimeMatrixTimeLabelCell(index: index)
+            self.addSubview(cell)
             self.timeLabelCells.append(cell)
+            
+            viewDict[viewString] = cell
+            vString += String(format: "-0-[%@]", viewString)
         }
+        vString += "-0-|"
+        
+        let constraints = NSLayoutConstraint.constraints(withVisualFormat: vString, options: .directionLeftToRight, metrics: nil, views: viewDict)
+        self.addConstraints(constraints)
         
         let resolution = TimeMatrixDisplayManager.instance.resolution
-        let skip = Int(resolution.rawValue * 4)
-        var index = 0
-        while index < numCells {
-            let cell = self.timeLabelCells[index]
-            self.addArrangedSubview(cell)
-            index += skip
-        }
+        self.onChange(resolution: resolution, previous: TimeMatrixDisplayManager.Resolution.fifteenMinutes)
         
         TimeMatrixDisplayManager.instance.resolutionListeners.insert(self)
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        let width = self.bounds.width
+        for cell in self.timeLabelCells {
+            cell.frame = CGRect(x: 0, y: cell.frame.origin.y, width: width, height: cell.frame.size.height)
+        }
     }
     
     
@@ -59,23 +69,24 @@ class TimeMatrixTimeLabelColumn: UIStackView, TimeMatrixResolutionListener {
         let newMod = Int(resolution.rawValue * 4)
         let oldMod = Int(previous.rawValue * 4)
         
+        let cellHeight = TimeMatrixTimeLabelCell.cellHeight(resolution: resolution)
+        
         var index = 0
         if newMod < oldMod {
-            while index < timeLabelCells.count {
+            while index < self.timeLabelCells.count {
                 let cell = self.timeLabelCells[index]
-                if index % oldMod > 0 {
-                    let insertionPoint = index / newMod
-                    self.insertArrangedSubview(cell, at: insertionPoint)
-                }
+                cell.setHeight(height: cellHeight)
                 index += newMod
             }
         }
         else {
-            while index < timeLabelCells.count {
+            while index < self.timeLabelCells.count {
                 let cell = self.timeLabelCells[index]
                 if index % newMod > 0 {
-                    self.removeArrangedSubview(cell)
-                    cell.removeFromSuperview()
+                    cell.setHeight(height: 0)
+                }
+                else {
+                    cell.setHeight(height: cellHeight)
                 }
                 index += oldMod
             }

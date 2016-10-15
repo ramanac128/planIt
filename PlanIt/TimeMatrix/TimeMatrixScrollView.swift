@@ -80,10 +80,8 @@ class TimeMatrixScrollView: UIScrollView {
         self.contentView = contentView
         self.addSubview(contentView)
         
-        let leading = NSLayoutConstraint(item: contentView, attribute: .leading, relatedBy: .equal, toItem: self, attribute: .leading, multiplier: 1, constant: 0)
-        let trailing = NSLayoutConstraint(item: contentView, attribute: .trailing, relatedBy: .equal, toItem: self, attribute: .trailing, multiplier: 1, constant: 0)
         let width = NSLayoutConstraint(item: contentView, attribute: .width, relatedBy: .equal, toItem: self, attribute: .width, multiplier: 1, constant: 0)
-        NSLayoutConstraint.activate([leading, trailing, width])
+        self.addConstraint(width)
         
         let panRecognizer = TimeMatrixPanGestureRecognizer(target: self, action: #selector(TimeMatrixScrollView.handlePan(recognizer:)))
         panRecognizer.delegate = self
@@ -94,15 +92,15 @@ class TimeMatrixScrollView: UIScrollView {
     // MARK: - Layout
     
     override func layoutSubviews() {
-        let oldHeight = self.contentView.frame.size.height
-        let oldContentOffset = self.contentOffset.y
+//        let oldHeight = self.contentView.frame.size.height
+//        let oldContentOffset = self.contentOffset.y
         super.layoutSubviews()
-        self.contentView.frame = CGRect(origin: CGPoint(x: 0, y: 0), size: self.contentView.frame.size)
+        self.contentView.frame = CGRect(x: 0, y: 0, width: self.bounds.size.width, height: self.contentView.frame.height)
         self.contentSize = self.contentView.bounds.size
-        if oldHeight != self.contentView.frame.height && self.frame.size.height > 0 {
-            let percent = self.contentCenterAsPercent(contentOffset: oldContentOffset)
-            self.scrollCenterTo(percent: percent, animated: false)
-        }
+//        if oldHeight != self.contentView.frame.height && self.frame.size.height > 0 {
+//            let percent = self.contentCenterAsPercent(contentOffset: oldContentOffset)
+//            self.scrollCenterTo(percent: percent, animated: false)
+//        }
     }
     
     func contentCenterAsPercent(contentOffset: CGFloat) -> CGFloat {
