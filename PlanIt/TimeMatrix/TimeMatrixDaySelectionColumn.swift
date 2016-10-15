@@ -65,7 +65,7 @@ class TimeMatrixDaySelectionColumn: UIView, TimeMatrixResolutionListener {
     }
     
     
-    // MARK: - Cell drawing
+    // MARK: - Display
     
     func fillColor(from: TimeMatrixCellModel.State) -> CGColor {
         switch (from) {
@@ -162,7 +162,7 @@ class TimeMatrixDaySelectionColumn: UIView, TimeMatrixResolutionListener {
     
     // MARK: - TimeMatrixResolutionListener protocol methods
     
-    func onChange(resolution: TimeMatrixDisplayManager.Resolution) {
+    func onChange(resolution: TimeMatrixDisplayManager.Resolution, previous: TimeMatrixDisplayManager.Resolution) {
         self.setNeedsDisplay()
     }
 }

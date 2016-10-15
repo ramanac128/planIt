@@ -26,24 +26,21 @@ class TimeMatrixTimeLabelCell: UILabel, TimeMatrixTimeFormatListener {
         fatalError("init(coder:) has not been implemented, use init(timeSlot:height:)")
     }
     
-    init(frame: CGRect, index: Int, height: CGFloat) {
+    init(frame: CGRect, index: Int) {
         super.init(frame: frame)
-        self.setup(height: height)
+        self.setup()
         self.setTime(index: index)
     }
     
-    convenience init(index: Int, height: CGFloat) {
-        self.init(frame: CGRect(), index: index, height: height)
+    convenience init(index: Int) {
+        self.init(frame: CGRect(), index: index)
     }
     
-    private func setup(height: CGFloat) {
+    private func setup() {
         self.font = UIFont.systemFont(ofSize: TimeMatrixDisplayManager.timeLabelFontSize)
         self.adjustsFontSizeToFitWidth = true
         self.textAlignment = .center
         self.baselineAdjustment = .alignCenters
-        
-        let height = NSLayoutConstraint(item: self, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: height)
-        NSLayoutConstraint.activate([height])
         
         TimeMatrixDisplayManager.instance.timeFormatListeners.insert(self)
     }
@@ -94,7 +91,7 @@ class TimeMatrixTimeLabelCell: UILabel, TimeMatrixTimeFormatListener {
     
     // MARK: - TimeMatrixTimeFormatListener protocol methods
     
-    func onChange(timeFormat: TimeMatrixDisplayManager.TimeFormat) {
+    func onChange(timeFormat: TimeMatrixDisplayManager.TimeFormat, previous: TimeMatrixDisplayManager.TimeFormat) {
         self.setLabelText(timeFormat: timeFormat)
     }
 }

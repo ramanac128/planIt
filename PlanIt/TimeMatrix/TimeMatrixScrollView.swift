@@ -90,10 +90,44 @@ class TimeMatrixScrollView: UIScrollView {
         self.addGestureRecognizer(panRecognizer)
     }
     
+    
+    // MARK: - Layout
+    
     override func layoutSubviews() {
+        let oldHeight = self.contentView.frame.size.height
+        let oldContentOffset = self.contentOffset.y
         super.layoutSubviews()
-        contentView.frame = CGRect(origin: CGPoint(x: 0, y: 0), size: contentView.frame.size)
-        self.contentSize = contentView.bounds.size
+        self.contentView.frame = CGRect(origin: CGPoint(x: 0, y: 0), size: self.contentView.frame.size)
+        self.contentSize = self.contentView.bounds.size
+        if oldHeight != self.contentView.frame.height && self.frame.size.height > 0 {
+            let percent = self.contentCenterAsPercent(contentOffset: oldContentOffset)
+            self.scrollCenterTo(percent: percent, animated: false)
+        }
+    }
+    
+    func contentCenterAsPercent(contentOffset: CGFloat) -> CGFloat {
+        let halfHeight = self.bounds.height / 2
+        let contentHeight = self.contentSize.height / 3
+        var contentCenter = contentOffset + halfHeight
+        while contentCenter > contentHeight {
+            contentCenter -= contentHeight
+        }
+        let percent = contentCenter / contentHeight
+        return percent
+    }
+    
+    func scrollCenterTo(percent: CGFloat, animated: Bool) {
+        let halfHeight = self.bounds.height / 2
+        let contentHeight = self.contentSize.height / 3
+        let contentCenter = contentHeight * CGFloat(percent)
+        var contentOffset = contentCenter - halfHeight
+        while contentOffset < contentHeight {
+            contentOffset += contentHeight
+        }
+        while contentOffset > contentHeight * 2 {
+            contentOffset -= contentHeight
+        }
+        self.contentOffset = CGPoint(x: CGFloat(0), y: contentOffset)
     }
     
     

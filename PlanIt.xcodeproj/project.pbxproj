@@ -134,19 +134,19 @@
 		A17688361DAB3EF700A9E4A3 /* TimeMatrix */ = {
 			isa = PBXGroup;
 			children = (
-				A19939721DB19E6F006A57E4 /* TimeMatrixCellModel.swift */,
-				A19939731DB19E6F006A57E4 /* TimeMatrixDay.swift */,
-				A19939741DB19E6F006A57E4 /* TimeMatrixDayLabelCell.swift */,
-				A19939751DB19E6F006A57E4 /* TimeMatrixDayLabelRow.swift */,
-				A19939761DB19E6F006A57E4 /* TimeMatrixDaySelectionColumn.swift */,
 				A19939771DB19E6F006A57E4 /* TimeMatrixDisplayManager.swift */,
-				A19939781DB19E6F006A57E4 /* TimeMatrixModel.swift */,
-				A19939791DB19E6F006A57E4 /* TimeMatrixPanGestureRecognizer.swift */,
+				A199397E1DB19E6F006A57E4 /* TimeMatrixView.swift */,
 				A199397A1DB19E6F006A57E4 /* TimeMatrixScrollView.swift */,
 				A199397B1DB19E6F006A57E4 /* TimeMatrixSelectionView.swift */,
-				A199397C1DB19E6F006A57E4 /* TimeMatrixTimeLabelCell.swift */,
+				A19939751DB19E6F006A57E4 /* TimeMatrixDayLabelRow.swift */,
+				A19939741DB19E6F006A57E4 /* TimeMatrixDayLabelCell.swift */,
 				A199397D1DB19E6F006A57E4 /* TimeMatrixTimeLabelColumn.swift */,
-				A199397E1DB19E6F006A57E4 /* TimeMatrixView.swift */,
+				A199397C1DB19E6F006A57E4 /* TimeMatrixTimeLabelCell.swift */,
+				A19939761DB19E6F006A57E4 /* TimeMatrixDaySelectionColumn.swift */,
+				A19939781DB19E6F006A57E4 /* TimeMatrixModel.swift */,
+				A19939721DB19E6F006A57E4 /* TimeMatrixCellModel.swift */,
+				A19939731DB19E6F006A57E4 /* TimeMatrixDay.swift */,
+				A19939791DB19E6F006A57E4 /* TimeMatrixPanGestureRecognizer.swift */,
 			);
 			name = TimeMatrix;
 			sourceTree = "<group>";
@@ -164,10 +164,10 @@
 		A19939971DB19EDA006A57E4 /* Calendar */ = {
 			isa = PBXGroup;
 			children = (
-				A19939981DB19EDA006A57E4 /* CalendarDayCell.swift */,
-				A19939991DB19EDA006A57E4 /* CalendarDayCell.xib */,
 				A199399A1DB19EDA006A57E4 /* CalendarViewController.swift */,
 				A199399B1DB19EDA006A57E4 /* CalendarViewController.xib */,
+				A19939981DB19EDA006A57E4 /* CalendarDayCell.swift */,
+				A19939991DB19EDA006A57E4 /* CalendarDayCell.xib */,
 			);
 			path = Calendar;
 			sourceTree = "<group>";
@@ -196,8 +196,8 @@
 			isa = PBXGroup;
 			children = (
 				A19939971DB19EDA006A57E4 /* Calendar */,
-				A199398C1DB19EA0006A57E4 /* Utility */,
 				A17688361DAB3EF700A9E4A3 /* TimeMatrix */,
+				A199398C1DB19EA0006A57E4 /* Utility */,
 				A1FF3B541DA5E0B20013B428 /* Assets.xcassets */,
 				A1FF3B561DA5E0B20013B428 /* Info.plist */,
 			);

@@ -100,7 +100,7 @@ class MessagesViewController: MSMessagesAppViewController {
         let index = n - 1
         let day = self.days[index]
         if self.daySelections[index] {
-            let _ = self.currentModel.remove(day: day)
+            self.currentModel.remove(day: day)
         }
         else {
             self.currentModel.add(day: day)

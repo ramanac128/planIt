@@ -16,6 +16,8 @@ class TimeMatrixSelectionView: UIView, TimeMatrixModelDayListener, TimeMatrixRes
     private weak var timeLabelColumn: TimeMatrixTimeLabelColumn!
     private var selectionDayViews = [TimeMatrixDay: Weak<TimeMatrixDaySelectionColumn>]()
     
+    private weak var heightConstraint: NSLayoutConstraint!
+    
     
     // MARK: - Properties
     
@@ -34,6 +36,9 @@ class TimeMatrixSelectionView: UIView, TimeMatrixModelDayListener, TimeMatrixRes
             }
         }
     }
+    
+    
+    // MARK: - Initialization
     
     override init(frame: CGRect) {
         fatalError("init(frame:) has not been implemented, use init(frame:model:)")
@@ -63,8 +68,10 @@ class TimeMatrixSelectionView: UIView, TimeMatrixModelDayListener, TimeMatrixRes
         self.columnStack = columnStack
         
         let timeLabelColumn = TimeMatrixTimeLabelColumn()
+        timeLabelColumn.translatesAutoresizingMaskIntoConstraints = false
         self.timeLabelColumn = timeLabelColumn
         
+        self.translatesAutoresizingMaskIntoConstraints = false
         columnStack.addArrangedSubview(timeLabelColumn)
         self.addSubview(columnStack)
         
@@ -72,7 +79,14 @@ class TimeMatrixSelectionView: UIView, TimeMatrixModelDayListener, TimeMatrixRes
         let trailing = NSLayoutConstraint(item: self.columnStack, attribute: .trailing, relatedBy: .equal, toItem: self, attribute: .trailing, multiplier: 1, constant: 0)
         let top = NSLayoutConstraint(item: self.columnStack, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1, constant: 0)
         let bottom = NSLayoutConstraint(item: self.columnStack, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1, constant: 0)
-        NSLayoutConstraint.activate([leading, trailing, top, bottom])
+        
+        let resolution = TimeMatrixDisplayManager.instance.resolution
+        let viewHeight = self.heightForResolution(resolution)
+        let height = NSLayoutConstraint(item: self, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: viewHeight)
+        self.heightConstraint = height
+        
+        NSLayoutConstraint.activate([leading, trailing, top, bottom, height])
+        
         
         self.attachToModel()
         TimeMatrixDisplayManager.instance.resolutionListeners.insert(self)
@@ -104,14 +118,41 @@ class TimeMatrixSelectionView: UIView, TimeMatrixModelDayListener, TimeMatrixRes
     private func clearDays() {
         self.selectionDayViews.removeAll()
         for index in 1..<self.columnStack.arrangedSubviews.count {
-            self.columnStack.removeArrangedSubview(self.columnStack.arrangedSubviews[index])
+            let selectionView = self.columnStack.arrangedSubviews[index]
+            self.columnStack.removeArrangedSubview(selectionView)
+            selectionView.removeFromSuperview()
         }
     }
     
-    func onChange(resolution: TimeMatrixDisplayManager.Resolution) {
-        self.makeTimeLabelColumn(resolution: resolution)
+    
+    // MARK: - Layout and display
+    
+    func heightForResolution(_ resolution: TimeMatrixDisplayManager.Resolution) -> CGFloat {
+        let resolutionInt = Int(resolution.rawValue * 4)
+        let cellHeightIncrement = TimeMatrixDisplayManager.cellHeightIncrement * CGFloat(resolutionInt - 1)
+        let cellHeight = TimeMatrixDisplayManager.cellHeightMinimum + cellHeightIncrement
+        let numCells = TimeMatrixModel.cellsPerDay / resolutionInt
+        let totalHeight = cellHeight * CGFloat(numCells)
+        return totalHeight
+    }
+    
+    override func setNeedsDisplay() {
+        for dayView in self.selectionDayViews.values {
+            dayView.value!.setNeedsDisplay()
+        }
+        super.setNeedsDisplay()
+    }
+    
+    
+    // MARK: - TimeMatrixResolutionListener protocol methods
+    
+    func onChange(resolution: TimeMatrixDisplayManager.Resolution, previous: TimeMatrixDisplayManager.Resolution) {
+        let height = self.heightForResolution(resolution)
+        self.heightConstraint.constant = height
         self.setNeedsDisplay()
     }
+    
+    // MARK: - TimeMatrixModelDayListener protocol methods
     
     func onAdded(day: TimeMatrixDay, cellModels: [TimeMatrixCellModel], atIndex index: Int) {
         if let oldWeakDayView = self.selectionDayViews[day] {
@@ -132,11 +173,5 @@ class TimeMatrixSelectionView: UIView, TimeMatrixModelDayListener, TimeMatrixRes
             self.columnStack.removeArrangedSubview(dayView)
             dayView.removeFromSuperview()
         }
-    }
-    override func setNeedsDisplay() {
-        for dayView in self.selectionDayViews.values {
-            dayView.value!.setNeedsDisplay()
-        }
-        super.setNeedsDisplay()
     }
 }

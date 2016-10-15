@@ -20,10 +20,13 @@ class TimeMatrixDayLabelRow: UIStackView, TimeMatrixModelDayListener {
     var model: TimeMatrixModel? {
         didSet {
             if oldValue !== model {
-                if oldValue != nil {
-                    oldValue!.dayListeners.remove(self)
-                    for cell in self.dayLabelCells.values {
-                        self.removeArrangedSubview(cell.value!)
+                if let oldModel = oldValue {
+                    oldModel.dayListeners.remove(self)
+                    for weakCell in self.dayLabelCells.values {
+                        if let cell = weakCell.value {
+                            self.removeArrangedSubview(cell)
+                            cell.removeFromSuperview()
+                        }
                     }
                     self.dayLabelCells.removeAll()
                 }
@@ -77,8 +80,10 @@ class TimeMatrixDayLabelRow: UIStackView, TimeMatrixModelDayListener {
     }
     
     func onRemoved(day: TimeMatrixDay) {
-        if let cell = self.dayLabelCells.removeValue(forKey: day) {
-            self.removeArrangedSubview(cell.value!)
+        if let weakCell = self.dayLabelCells.removeValue(forKey: day),
+            let cell = weakCell.value {
+            self.removeArrangedSubview(cell)
+            cell.removeFromSuperview()
         }
     }
 }

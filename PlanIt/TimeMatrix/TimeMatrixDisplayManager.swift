@@ -9,11 +9,11 @@
 import UIKit
 
 protocol TimeMatrixResolutionListener: class {
-    func onChange(resolution: TimeMatrixDisplayManager.Resolution)
+    func onChange(resolution: TimeMatrixDisplayManager.Resolution, previous: TimeMatrixDisplayManager.Resolution)
 }
 
 protocol TimeMatrixTimeFormatListener: class {
-    func onChange(timeFormat: TimeMatrixDisplayManager.TimeFormat)
+    func onChange(timeFormat: TimeMatrixDisplayManager.TimeFormat, previous: TimeMatrixDisplayManager.TimeFormat)
 }
 
 class TimeMatrixDisplayManager {
@@ -76,7 +76,7 @@ class TimeMatrixDisplayManager {
         didSet {
             if oldValue != self.resolution {
                 for listener in self.resolutionListeners {
-                    listener.onChange(resolution: self.resolution)
+                    listener.onChange(resolution: self.resolution, previous: oldValue)
                 }
             }
         }
@@ -86,7 +86,7 @@ class TimeMatrixDisplayManager {
         didSet {
             if oldValue != self.timeFormat {
                 for listener in self.timeFormatListeners {
-                    listener.onChange(timeFormat: self.timeFormat)
+                    listener.onChange(timeFormat: self.timeFormat, previous: oldValue)
                 }
             }
         }
