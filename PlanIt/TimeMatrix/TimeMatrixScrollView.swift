@@ -92,40 +92,32 @@ class TimeMatrixScrollView: UIScrollView {
     // MARK: - Layout
     
     override func layoutSubviews() {
-//        let oldHeight = self.contentView.frame.size.height
-//        let oldContentOffset = self.contentOffset.y
+        let oldHeight = self.contentView.bounds.height
+        let oldContentOffset = self.contentOffset.y
         super.layoutSubviews()
-        self.contentView.frame = CGRect(x: 0, y: 0, width: self.bounds.size.width, height: self.contentView.frame.height)
+        self.contentView.frame = CGRect(x: 0, y: 0, width: self.bounds.width, height: self.contentView.bounds.height)
         self.contentSize = self.contentView.bounds.size
-//        if oldHeight != self.contentView.frame.height && self.frame.size.height > 0 {
-//            let percent = self.contentCenterAsPercent(contentOffset: oldContentOffset)
-//            self.scrollCenterTo(percent: percent, animated: false)
-//        }
+        if oldHeight != self.contentView.bounds.height && oldHeight > 0 {
+            let percent = self.contentCenterAsPercent(contentOffset: oldContentOffset, contentHeight: oldHeight)
+            self.scrollCenterTo(percent: percent, animated: false)
+        }
     }
     
-    func contentCenterAsPercent(contentOffset: CGFloat) -> CGFloat {
-        let halfHeight = self.bounds.height / 2
-        let contentHeight = self.contentSize.height / 3
-        var contentCenter = contentOffset + halfHeight
-        while contentCenter > contentHeight {
-            contentCenter -= contentHeight
-        }
-        let percent = contentCenter / contentHeight
+    func contentCenterAsPercent(contentOffset: CGFloat, contentHeight: CGFloat) -> CGFloat {
+        let halfFrameHeight = self.bounds.height / 2
+        let selectionViewHeight = contentHeight / 3
+        var centerPos = contentOffset + halfFrameHeight
+        centerPos = centerPos.truncatingRemainder(dividingBy: selectionViewHeight)
+        let percent = centerPos / selectionViewHeight
         return percent
     }
     
     func scrollCenterTo(percent: CGFloat, animated: Bool) {
         let halfHeight = self.bounds.height / 2
         let contentHeight = self.contentSize.height / 3
-        let contentCenter = contentHeight * CGFloat(percent)
-        var contentOffset = contentCenter - halfHeight
-        while contentOffset < contentHeight {
-            contentOffset += contentHeight
-        }
-        while contentOffset > contentHeight * 2 {
-            contentOffset -= contentHeight
-        }
-        self.contentOffset = CGPoint(x: CGFloat(0), y: contentOffset)
+        let contentCenter = contentHeight * percent
+        let contentOffset = contentCenter - halfHeight + contentHeight
+        self.contentOffset = CGPoint(x: 0, y: contentOffset)
     }
     
     
