@@ -10,6 +10,17 @@ import UIKit
 
 class TimeMatrixTimeLabelCell: UILabel, TimeMatrixTimeFormatListener {
     
+    // MARK: - Properties
+    
+    var height: CGFloat {
+        get {
+            return self.heightConstraint.constant
+        }
+        set {
+            self.heightConstraint.constant = newValue
+        }
+    }
+    
     // MARK: - Variables
     
     private var hour = 0
@@ -47,10 +58,10 @@ class TimeMatrixTimeLabelCell: UILabel, TimeMatrixTimeFormatListener {
         let resolution = TimeMatrixDisplayManager.instance.resolution
         let cellHeight = TimeMatrixTimeLabelCell.cellHeight(resolution: resolution)
         
-        let height = NSLayoutConstraint(item: self, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: cellHeight)
-        self.heightConstraint = height
         self.translatesAutoresizingMaskIntoConstraints = false
+        let height = NSLayoutConstraint(item: self, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: cellHeight)
         self.addConstraint(height)
+        self.heightConstraint = height
         
         TimeMatrixDisplayManager.instance.timeFormatListeners.insert(self)
     }
@@ -63,10 +74,6 @@ class TimeMatrixTimeLabelCell: UILabel, TimeMatrixTimeFormatListener {
         let cellHeightIncrement = TimeMatrixDisplayManager.cellHeightIncrement * CGFloat(resolutionInt - 1)
         let cellHeight = TimeMatrixDisplayManager.cellHeightMinimum + cellHeightIncrement
         return cellHeight
-    }
-    
-    func setHeight(height: CGFloat) {
-        self.heightConstraint.constant = height
     }
     
     

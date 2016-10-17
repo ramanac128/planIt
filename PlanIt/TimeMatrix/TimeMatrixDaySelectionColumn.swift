@@ -8,12 +8,12 @@
 
 import UIKit
 
-class TimeMatrixDaySelectionColumn: UIView, TimeMatrixResolutionListener {
+class TimeMatrixDaySelectionColumn: UIView, TimeMatrixRowAnimationListener {
     
     // MARK: - Variables
     
-    var day: TimeMatrixDay
-    var cellModels: [TimeMatrixCellModel]
+    let day: TimeMatrixDay
+    let cellModels: [TimeMatrixCellModel]
     
     
     // MARK: - Initialization
@@ -43,6 +43,8 @@ class TimeMatrixDaySelectionColumn: UIView, TimeMatrixResolutionListener {
     
     private func setup() {
         self.backgroundColor = UIColor(cgColor: TimeMatrixDisplayManager.cellBackgroundColorUnavailable)
+        
+        TimeMatrixDisplayManager.instance.rowAnimationListeners.insert(self)
     }
     
     
@@ -65,7 +67,7 @@ class TimeMatrixDaySelectionColumn: UIView, TimeMatrixResolutionListener {
     }
     
     
-    // MARK: - Display
+    // MARK: - Layout and display
     
     func fillColor(from: TimeMatrixCellModel.State) -> CGColor {
         switch (from) {
@@ -92,33 +94,34 @@ class TimeMatrixDaySelectionColumn: UIView, TimeMatrixResolutionListener {
         let numCells = CGFloat(self.cellModels.count)
         let cellHeight = self.bounds.height / numCells
         
-        let first = Int(rect.origin.y / self.bounds.height * numCells)
-        let end = first + Int(ceil(rect.height / self.bounds.height * numCells))
+        let begin = Int(rect.origin.y / self.bounds.height * numCells)
+        let end = begin + Int(ceil(rect.height / self.bounds.height * numCells))
         
-        self.drawBlocks(from: first, to: end, cellHeight: cellHeight, context: context)
-        self.drawBorders(from: first, to: end, cellHeight: cellHeight, context: context)
+        self.drawBlocks(from: begin, to: end, cellHeight: cellHeight, context: context)
+        self.drawBorders(from: begin, to: end, cellHeight: cellHeight, context: context)
     }
     
-    private func drawBlocks(from start: Int, to end: Int, cellHeight: CGFloat, context: CGContext) {
-        for var index in start..<end {
-            let state = self.cellModels[index].currentState
-            if state == .unavailable {
-                index += 1
-            }
-            else {
-                var next = index + 1
-                while next < end && self.cellModels[next].currentState == state {
-                    next += 1
+    private func drawBlocks(from begin: Int, to end: Int, cellHeight: CGFloat, context: CGContext) {
+        for var index in begin..<end {
+            if let state = self.cellModels[safe: index]?.currentState {
+                if state == .unavailable {
+                    index += 1
                 }
-                self.drawBlock(from: index, to: next, cellHeight: cellHeight, state: state, context: context)
-                index = next
+                else {
+                    var next = index + 1
+                    while next < end && self.cellModels[safe: next]?.currentState == state {
+                        next += 1
+                    }
+                    self.drawBlock(from: index, to: next, cellHeight: cellHeight, state: state, context: context)
+                    index = next
+                }
             }
         }
     }
     
-    private func drawBlock(from start: Int, to end: Int, cellHeight: CGFloat, state: TimeMatrixCellModel.State, context: CGContext) {
-        let top = cellHeight * CGFloat(start)
-        let height = cellHeight * CGFloat(end - start)
+    private func drawBlock(from begin: Int, to end: Int, cellHeight: CGFloat, state: TimeMatrixCellModel.State, context: CGContext) {
+        let top = cellHeight * CGFloat(begin)
+        let height = cellHeight * CGFloat(end - begin)
         let rectangle = CGRect(x: 0, y: top, width: self.bounds.width, height: height)
         
         context.setFillColor(self.fillColor(from: state))
@@ -160,9 +163,9 @@ class TimeMatrixDaySelectionColumn: UIView, TimeMatrixResolutionListener {
     }
     
     
-    // MARK: - TimeMatrixResolutionListener protocol methods
+    // MARK: - TimeMatrixRowAnimationListener protocol methods
     
-    func onChange(resolution: TimeMatrixDisplayManager.Resolution, previous: TimeMatrixDisplayManager.Resolution) {
+    func onRowAnimationFrame() {
         self.setNeedsDisplay()
     }
 }

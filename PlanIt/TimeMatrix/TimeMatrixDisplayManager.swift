@@ -16,6 +16,18 @@ protocol TimeMatrixTimeFormatListener: class {
     func onChange(timeFormat: TimeMatrixDisplayManager.TimeFormat, previous: TimeMatrixDisplayManager.TimeFormat)
 }
 
+protocol TimeMatrixRowAnimationListener: class {
+    func onRowAnimationBegin()
+    func onRowAnimationFrame()
+    func onRowAnimationEnd()
+}
+
+extension TimeMatrixRowAnimationListener {
+    func onRowAnimationBegin() {}
+    func onRowAnimationFrame() {}
+    func onRowAnimationEnd() {}
+}
+
 class TimeMatrixDisplayManager {
     static let instance = TimeMatrixDisplayManager()
     
@@ -33,7 +45,7 @@ class TimeMatrixDisplayManager {
     static let timeLabelFontSize = CGFloat(16)
     
     static let timeLabelColorOnHour = UIColor.black
-    static let timeLabelColorOn30Min = UIColor(white: 0.35, alpha: 1)
+    static let timeLabelColorOn30Min = UIColor(white: 0.3, alpha: 1)
     static let timeLabelColorOn15Min = UIColor(white: 0.6, alpha: 1)
     
     // selection cells
@@ -45,13 +57,19 @@ class TimeMatrixDisplayManager {
     static let cellBackgroundColorAvailable = UIColor.yellow.cgColor
     static let cellBackgroundColorPreferred = UIColor.green.cgColor
     
-    static let cellStrokeWidthMajorTick = CGFloat(2)
+    static let cellStrokeWidthMajorTick = CGFloat(2.5)
     static let cellStrokeWidthMinorTick = CGFloat(1)
     static let cellStrokeColorMajorTick = UIColor(white: 0.85, alpha: 1).cgColor
     static let cellStrokeColorMinorTick = UIColor(white: 0.75, alpha: 1).cgColor
     
     static let cellStrokeWidthDayBorder = CGFloat(8)
     static let cellStrokeColorDayBorder = UIColor.white.cgColor
+    
+    // animations
+    
+    static let resolutionChangeAnimationDuration = TimeInterval(0.6)
+    static let dayAddedAnimationDuration = TimeInterval(0.4)
+    static let dayRemovedAnimationDuration = TimeInterval(0.4)
 
     
     // MARK: - Enumerations
@@ -97,6 +115,7 @@ class TimeMatrixDisplayManager {
     
     let resolutionListeners = WeakSet<TimeMatrixResolutionListener>()
     let timeFormatListeners = WeakSet<TimeMatrixTimeFormatListener>()
+    let rowAnimationListeners = WeakSet<TimeMatrixRowAnimationListener>()
     
     
     // MARK: - Initialization
@@ -106,4 +125,24 @@ class TimeMatrixDisplayManager {
         self.timeFormat = TimeMatrixDisplayManager.defaultTimeFormat
     }
     
+    
+    // MARK: - Speaker methods
+    
+    func informOnRowAnimationBegin() {
+        for listener in self.rowAnimationListeners {
+            listener.onRowAnimationBegin()
+        }
+    }
+    
+    func informOnRowAnimationFrame() {
+        for listener in self.rowAnimationListeners {
+            listener.onRowAnimationFrame()
+        }
+    }
+    
+    func informOnRowAnimationEnd() {
+        for listener in self.rowAnimationListeners {
+            listener.onRowAnimationEnd()
+        }
+    }
 }

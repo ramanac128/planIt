@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TimeMatrixSelectionView: UIStackView, TimeMatrixModelDayListener, TimeMatrixResolutionListener {
+class TimeMatrixSelectionView: UIStackView, TimeMatrixModelDayListener {
     
     // MARK: - Subviews
     
@@ -67,8 +67,6 @@ class TimeMatrixSelectionView: UIStackView, TimeMatrixModelDayListener, TimeMatr
         
         self.addArrangedSubview(timeLabelColumn)
         self.attachToModel()
-        
-        TimeMatrixDisplayManager.instance.resolutionListeners.insert(self)
     }
     
     private func attachToModel() {
@@ -124,12 +122,6 @@ class TimeMatrixSelectionView: UIStackView, TimeMatrixModelDayListener, TimeMatr
         super.setNeedsDisplay()
     }
     
-    
-    // MARK: - TimeMatrixResolutionListener protocol methods
-    
-    func onChange(resolution: TimeMatrixDisplayManager.Resolution, previous: TimeMatrixDisplayManager.Resolution) {
-        self.setNeedsDisplay()
-    }
     
     // MARK: - TimeMatrixModelDayListener protocol methods
     

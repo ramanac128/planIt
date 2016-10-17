@@ -40,18 +40,21 @@ class TimeMatrixTimeLabelColumn: UIView, TimeMatrixResolutionListener {
             self.timeLabelCells.append(cell)
             
             viewDict[viewString] = cell
-            vString += String(format: "-0-[%@]", viewString)
+            vString += String(format: "-0@250-[%@]", viewString)
         }
-        vString += "-0-|"
+        vString += "-0@250-|"
         
         let constraints = NSLayoutConstraint.constraints(withVisualFormat: vString, options: .directionLeftToRight, metrics: nil, views: viewDict)
         self.addConstraints(constraints)
         
         let resolution = TimeMatrixDisplayManager.instance.resolution
-        self.onChange(resolution: resolution, previous: TimeMatrixDisplayManager.Resolution.fifteenMinutes)
+        self.changeResolution(from: TimeMatrixDisplayManager.Resolution.fifteenMinutes, to: resolution)
         
         TimeMatrixDisplayManager.instance.resolutionListeners.insert(self)
     }
+    
+    
+    // MARK: - Layout and display
     
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -62,20 +65,21 @@ class TimeMatrixTimeLabelColumn: UIView, TimeMatrixResolutionListener {
         }
     }
     
-    
-    // MARK: - TimeMatrixResolutionListener protocol methods
-    
-    func onChange(resolution: TimeMatrixDisplayManager.Resolution, previous: TimeMatrixDisplayManager.Resolution) {
-        let newMod = Int(resolution.rawValue * 4)
+    func changeResolution(from previous: TimeMatrixDisplayManager.Resolution, to current: TimeMatrixDisplayManager.Resolution) {
+        let newMod = Int(current.rawValue * 4)
         let oldMod = Int(previous.rawValue * 4)
+        let cellHeight = TimeMatrixTimeLabelCell.cellHeight(resolution: current)
         
-        let cellHeight = TimeMatrixTimeLabelCell.cellHeight(resolution: resolution)
-        
+        self.changeResolutionLoop(newMod: newMod, oldMod: oldMod, cellHeight: cellHeight)
+    }
+    
+    private func changeResolutionLoop(newMod: Int, oldMod: Int, cellHeight: CGFloat) {
         var index = 0
         if newMod < oldMod {
             while index < self.timeLabelCells.count {
                 let cell = self.timeLabelCells[index]
-                cell.setHeight(height: cellHeight)
+                cell.height = cellHeight
+                cell.alpha = 1
                 index += newMod
             }
         }
@@ -83,13 +87,33 @@ class TimeMatrixTimeLabelColumn: UIView, TimeMatrixResolutionListener {
             while index < self.timeLabelCells.count {
                 let cell = self.timeLabelCells[index]
                 if index % newMod > 0 {
-                    cell.setHeight(height: 0)
+                    cell.height = 0
+                    cell.alpha = 0
                 }
                 else {
-                    cell.setHeight(height: cellHeight)
+                    cell.height = cellHeight
+                    cell.alpha = 1
                 }
                 index += oldMod
             }
         }
+    }
+    
+    
+    // MARK: - TimeMatrixResolutionListener protocol methods
+    
+    func onChange(resolution: TimeMatrixDisplayManager.Resolution, previous: TimeMatrixDisplayManager.Resolution) {
+        let newMod = Int(resolution.rawValue * 4)
+        let oldMod = Int(previous.rawValue * 4)
+        let cellHeight = TimeMatrixTimeLabelCell.cellHeight(resolution: resolution)
+        
+        TimeMatrixDisplayManager.instance.informOnRowAnimationBegin()
+        UIView.animate(withDuration: TimeMatrixDisplayManager.resolutionChangeAnimationDuration, animations: {
+            self.changeResolutionLoop(newMod: newMod, oldMod: oldMod, cellHeight: cellHeight)
+            self.layoutIfNeeded()
+            TimeMatrixDisplayManager.instance.informOnRowAnimationFrame()
+        }, completion: {(value: Bool) in
+            TimeMatrixDisplayManager.instance.informOnRowAnimationEnd()
+        })
     }
 }

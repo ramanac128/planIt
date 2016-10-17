@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TimeMatrixScrollView: UIScrollView {
+class TimeMatrixScrollView: UIScrollView, TimeMatrixRowAnimationListener, UIScrollViewDelegate, UIGestureRecognizerDelegate {
     
     // MARK: - Subviews
     
@@ -50,6 +50,8 @@ class TimeMatrixScrollView: UIScrollView {
     private var panSelectionState = TimeMatrixCellModel.State.unavailable
     private var selectedCells = Set<TimeMatrixCellModel>()
     
+    private var isAnimatingRow = false
+    
     
     // MARK: - Initialization
     
@@ -86,6 +88,8 @@ class TimeMatrixScrollView: UIScrollView {
         let panRecognizer = TimeMatrixPanGestureRecognizer(target: self, action: #selector(TimeMatrixScrollView.handlePan(recognizer:)))
         panRecognizer.delegate = self
         self.addGestureRecognizer(panRecognizer)
+        
+        TimeMatrixDisplayManager.instance.rowAnimationListeners.insert(self)
     }
     
     
@@ -259,31 +263,54 @@ class TimeMatrixScrollView: UIScrollView {
             }
         }
     }
-}
-
-
-extension TimeMatrixScrollView: UIScrollViewDelegate {
+    
+    
+    // MARK: - TimeMatrixRowAnimationListener protocol methods
+    
+    func onRowAnimationBegin() {
+        self.isAnimatingRow = true
+    }
+    
+    func onRowAnimationFrame() {
+        self.layoutIfNeeded()
+    }
+    
+    func onRowAnimationEnd() {
+        self.isAnimatingRow = false
+        self.realignContentOffsetIfNeeded()
+    }
+    
+    
+    // MARK: - UIScrollViewDeleagate protocol methods
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let yPos = scrollView.contentOffset.y
-        let selectionViewHeight = scrollView.contentSize.height / 3
-        
-        
-        if yPos < selectionViewHeight {
-            scrollView.setContentOffset(CGPoint(x: 0, y: yPos + selectionViewHeight), animated: false)
+        if !self.isAnimatingRow {
+            self.realignContentOffsetIfNeeded()
         }
-        else if yPos > selectionViewHeight * 2 {
-            scrollView.setContentOffset(CGPoint(x: 0, y: yPos - selectionViewHeight), animated: false)
+    }
+    
+    private func realignContentOffsetIfNeeded() {
+        let yPos = self.contentOffset.y
+        let centerPos = yPos + (self.frame.height / 2)
+        let selectionViewHeight = self.contentSize.height / 3
+        
+        
+        if centerPos < selectionViewHeight {
+            let offset = CGPoint(x: 0, y: yPos + selectionViewHeight)
+            self.setContentOffset(offset, animated: false)
+        }
+        else if centerPos > selectionViewHeight * 2 {
+            let offset = CGPoint(x: 0, y: yPos - selectionViewHeight)
+            self.setContentOffset(offset, animated: false)
         }
     }
     
     func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
         scrollView.setContentOffset(scrollView.contentOffset, animated: false)
     }
-}
-
-
-extension TimeMatrixScrollView: UIGestureRecognizerDelegate {
+    
+    
+    // MARK: - UIGestureRecognizerDelegate protocol methods
     
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true

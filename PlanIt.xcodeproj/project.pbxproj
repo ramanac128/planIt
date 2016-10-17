@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		7C1E3EB67175B58EB040A565 /* Pods_MessagesExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 51803BE5F60E5220A13690AA /* Pods_MessagesExtension.framework */; };
 		9A23AE9265C57D426E88506B /* Pods_PlanIt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 405E55FED25351856ED177B1 /* Pods_PlanIt.framework */; };
+		A11401961DB3FD8C005FF26B /* FrameworkExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11401951DB3FD8C005FF26B /* FrameworkExtensions.swift */; };
 		A199397F1DB19E76006A57E4 /* TimeMatrixCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19939721DB19E6F006A57E4 /* TimeMatrixCellModel.swift */; };
 		A19939801DB19E77006A57E4 /* TimeMatrixDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19939731DB19E6F006A57E4 /* TimeMatrixDay.swift */; };
 		A19939811DB19E77006A57E4 /* TimeMatrixDayLabelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19939741DB19E6F006A57E4 /* TimeMatrixDayLabelCell.swift */; };
@@ -66,6 +67,7 @@
 		405E55FED25351856ED177B1 /* Pods_PlanIt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PlanIt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		51803BE5F60E5220A13690AA /* Pods_MessagesExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MessagesExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8278480FCB25AD365EDFB370 /* Pods-MessagesExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MessagesExtension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MessagesExtension/Pods-MessagesExtension.debug.xcconfig"; sourceTree = "<group>"; };
+		A11401951DB3FD8C005FF26B /* FrameworkExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrameworkExtensions.swift; sourceTree = "<group>"; };
 		A19939721DB19E6F006A57E4 /* TimeMatrixCellModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimeMatrixCellModel.swift; path = TimeMatrix/TimeMatrixCellModel.swift; sourceTree = "<group>"; };
 		A19939731DB19E6F006A57E4 /* TimeMatrixDay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimeMatrixDay.swift; path = TimeMatrix/TimeMatrixDay.swift; sourceTree = "<group>"; };
 		A19939741DB19E6F006A57E4 /* TimeMatrixDayLabelCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimeMatrixDayLabelCell.swift; path = TimeMatrix/TimeMatrixDayLabelCell.swift; sourceTree = "<group>"; };
@@ -154,6 +156,7 @@
 		A199398C1DB19EA0006A57E4 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				A11401951DB3FD8C005FF26B /* FrameworkExtensions.swift */,
 				A199398D1DB19EA0006A57E4 /* Delay.swift */,
 				A199398E1DB19EA0006A57E4 /* Weak.swift */,
 				A199398F1DB19EA0006A57E4 /* WeakSet.swift */,
@@ -421,6 +424,7 @@
 				A1FF3B641DA5E0B20013B428 /* MessagesViewController.swift in Sources */,
 				A199398A1DB19E77006A57E4 /* TimeMatrixTimeLabelColumn.swift in Sources */,
 				A19939911DB19EAC006A57E4 /* Weak.swift in Sources */,
+				A11401961DB3FD8C005FF26B /* FrameworkExtensions.swift in Sources */,
 				A19939811DB19E77006A57E4 /* TimeMatrixDayLabelCell.swift in Sources */,
 				A19939821DB19E77006A57E4 /* TimeMatrixDayLabelRow.swift in Sources */,
 				A199397F1DB19E76006A57E4 /* TimeMatrixCellModel.swift in Sources */,
