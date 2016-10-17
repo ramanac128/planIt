@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TimeMatrixDaySelectionColumn: UIView, TimeMatrixRowAnimationListener {
+class TimeMatrixDaySelectionColumn: UIView, TimeMatrixRowAnimationListener, TimeMatrixColumnAnimationListener {
     
     // MARK: - Variables
     
@@ -45,6 +45,7 @@ class TimeMatrixDaySelectionColumn: UIView, TimeMatrixRowAnimationListener {
         self.backgroundColor = UIColor(cgColor: TimeMatrixDisplayManager.cellBackgroundColorUnavailable)
         
         TimeMatrixDisplayManager.instance.rowAnimationListeners.insert(self)
+        TimeMatrixDisplayManager.instance.columnAnimationListeners.insert(self)
     }
     
     
@@ -166,6 +167,13 @@ class TimeMatrixDaySelectionColumn: UIView, TimeMatrixRowAnimationListener {
     // MARK: - TimeMatrixRowAnimationListener protocol methods
     
     func onRowAnimationFrame() {
+        self.setNeedsDisplay()
+    }
+    
+    
+    // MARK: - TimeMatrixColumnAnimationListener protocol methods
+    
+    func onColumnAnimationEnd() {
         self.setNeedsDisplay()
     }
 }

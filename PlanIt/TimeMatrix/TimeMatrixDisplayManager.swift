@@ -28,6 +28,18 @@ extension TimeMatrixRowAnimationListener {
     func onRowAnimationEnd() {}
 }
 
+protocol TimeMatrixColumnAnimationListener: class {
+    func onColumnAnimationBegin()
+    func onColumnAnimationFrame()
+    func onColumnAnimationEnd()
+}
+
+extension TimeMatrixColumnAnimationListener {
+    func onColumnAnimationBegin() {}
+    func onColumnAnimationFrame() {}
+    func onColumnAnimationEnd() {}
+}
+
 class TimeMatrixDisplayManager {
     static let instance = TimeMatrixDisplayManager()
     
@@ -68,6 +80,7 @@ class TimeMatrixDisplayManager {
     // animations
     
     static let resolutionChangeAnimationDuration = TimeInterval(0.6)
+    
     static let dayAddedAnimationDuration = TimeInterval(0.4)
     static let dayRemovedAnimationDuration = TimeInterval(0.4)
 
@@ -116,6 +129,7 @@ class TimeMatrixDisplayManager {
     let resolutionListeners = WeakSet<TimeMatrixResolutionListener>()
     let timeFormatListeners = WeakSet<TimeMatrixTimeFormatListener>()
     let rowAnimationListeners = WeakSet<TimeMatrixRowAnimationListener>()
+    let columnAnimationListeners = WeakSet<TimeMatrixColumnAnimationListener>()
     
     
     // MARK: - Initialization
@@ -143,6 +157,24 @@ class TimeMatrixDisplayManager {
     func informOnRowAnimationEnd() {
         for listener in self.rowAnimationListeners {
             listener.onRowAnimationEnd()
+        }
+    }
+    
+    func informOnColumnAnimationBegin() {
+        for listener in self.columnAnimationListeners {
+            listener.onColumnAnimationBegin()
+        }
+    }
+    
+    func informOnColumnAnimationFrame() {
+        for listener in self.columnAnimationListeners {
+            listener.onColumnAnimationFrame()
+        }
+    }
+    
+    func informOnColumnAnimationEnd() {
+        for listener in self.columnAnimationListeners {
+            listener.onColumnAnimationEnd()
         }
     }
 }

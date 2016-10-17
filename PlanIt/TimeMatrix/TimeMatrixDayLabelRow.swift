@@ -8,82 +8,26 @@
 
 import UIKit
 
-class TimeMatrixDayLabelRow: UIStackView, TimeMatrixModelDayListener {
-    
-    // MARK: - Subviews
-    
-    private var dayLabelCells = [TimeMatrixDay: Weak<TimeMatrixDayLabelCell>]()
-    
-    
-    // MARK: - Properties
-    
-    var model: TimeMatrixModel? {
-        didSet {
-            if oldValue !== model {
-                if let oldModel = oldValue {
-                    oldModel.dayListeners.remove(self)
-                    for weakCell in self.dayLabelCells.values {
-                        if let cell = weakCell.value {
-                            self.removeArrangedSubview(cell)
-                            cell.removeFromSuperview()
-                        }
-                    }
-                    self.dayLabelCells.removeAll()
-                }
-                if let model = self.model {
-                    self.attachToModel(model)
-                }
-            }
-        }
-    }
-    
+class TimeMatrixDayLabelRow: TimeMatrixDayViewLayoutManager<TimeMatrixDayLabelCell> {
     
     // MARK: - Initialization
     
     override init(frame: CGRect) {
-        super.init(frame: frame)
-        self.setup()
+        super.init(frame: frame, sideView: UIView())
     }
     
     required init(coder: NSCoder) {
-        super.init(coder: coder)
-        self.setup()
+        super.init(coder: coder, sideView: UIView())
     }
     
-    private func setup() {
-        self.alignment = .fill
-        self.distribution = .fillEqually
-        self.spacing = 0
-        self.axis = .horizontal
-        
-        self.addArrangedSubview(UIView())
-    }
-    
-    private func attachToModel(_ model: TimeMatrixModel) {
-        model.dayListeners.insert(self)
-        let days = model.activeDays
-        for index in 0..<days.count {
-            self.onAdded(day: days[index], cellModels: [], atIndex: index)
-        }
+    convenience init() {
+        self.init(frame: CGRect())
     }
     
     
-    // MARK: - TimeMatrixModelDayListener protocol methods
+    // MARK: - Layout and display
     
-    func onAdded(day: TimeMatrixDay, cellModels: [TimeMatrixCellModel], atIndex index: Int) {
-        if self.dayLabelCells[day] == nil {
-            let cell = TimeMatrixDayLabelCell(day: day)
-            let weakCell = Weak<TimeMatrixDayLabelCell>(value: cell)
-            self.dayLabelCells[day] = weakCell
-            self.insertArrangedSubview(cell, at: index + 1)
-        }
-    }
-    
-    func onRemoved(day: TimeMatrixDay) {
-        if let weakCell = self.dayLabelCells.removeValue(forKey: day),
-            let cell = weakCell.value {
-            self.removeArrangedSubview(cell)
-            cell.removeFromSuperview()
-        }
+    override func makeDayView(day: TimeMatrixDay, cellModels: [TimeMatrixCellModel]) -> TimeMatrixDayLabelCell {
+        return TimeMatrixDayLabelCell(day: day)
     }
 }

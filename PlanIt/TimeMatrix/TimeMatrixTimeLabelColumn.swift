@@ -33,16 +33,21 @@ class TimeMatrixTimeLabelColumn: UIView, TimeMatrixResolutionListener {
         
         let numCells = TimeMatrixModel.cellsPerDay
         self.timeLabelCells.reserveCapacity(numCells)
+        
         for index in 0..<numCells {
             let viewString = String(format: "v%d", index)
             let cell = TimeMatrixTimeLabelCell(index: index)
             self.addSubview(cell)
             self.timeLabelCells.append(cell)
             
+            let center = NSLayoutConstraint(item: cell, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant: 0)
+            let width = NSLayoutConstraint(item: cell, attribute: .width, relatedBy: .lessThanOrEqual, toItem: self, attribute: .width, multiplier: 0.9, constant: 0)
+            self.addConstraints([center, width])
+            
             viewDict[viewString] = cell
-            vString += String(format: "-0@250-[%@]", viewString)
+            vString += String(format: "-0-[%@]", viewString)
         }
-        vString += "-0@250-|"
+        vString += "-0-|"
         
         let constraints = NSLayoutConstraint.constraints(withVisualFormat: vString, options: .directionLeftToRight, metrics: nil, views: viewDict)
         self.addConstraints(constraints)
@@ -56,14 +61,14 @@ class TimeMatrixTimeLabelColumn: UIView, TimeMatrixResolutionListener {
     
     // MARK: - Layout and display
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        let width = self.bounds.width
-        for cell in self.timeLabelCells {
-            cell.frame = CGRect(x: 0, y: cell.frame.origin.y, width: width, height: cell.frame.size.height)
-        }
-    }
+//    override func layoutSubviews() {
+//        super.layoutSubviews()
+//        
+//        let width = self.bounds.width
+//        for cell in self.timeLabelCells {
+//            cell.frame = CGRect(x: 0, y: cell.frame.origin.y, width: width, height: cell.frame.size.height)
+//        }
+//    }
     
     func changeResolution(from previous: TimeMatrixDisplayManager.Resolution, to current: TimeMatrixDisplayManager.Resolution) {
         let newMod = Int(current.rawValue * 4)

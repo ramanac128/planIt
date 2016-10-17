@@ -8,141 +8,35 @@
 
 import UIKit
 
-class TimeMatrixSelectionView: UIStackView, TimeMatrixModelDayListener {
-    
-    // MARK: - Subviews
-    
-    private weak var timeLabelColumn: TimeMatrixTimeLabelColumn!
-    private var selectionDayViews = [TimeMatrixDay: Weak<TimeMatrixDaySelectionColumn>]()
-    
-    
-    // MARK: - Properties
-    
-    var model: TimeMatrixModel {
-        didSet {
-            if oldValue !== model {
-                oldValue.dayListeners.remove(self)
-                for weakDayView in self.selectionDayViews.values {
-                    if let dayView = weakDayView.value {
-                        self.removeArrangedSubview(dayView)
-                        dayView.removeFromSuperview()
-                    }
-                }
-                self.selectionDayViews.removeAll()
-                self.attachToModel()
-                self.setNeedsLayout()
-            }
-        }
-    }
-    
+class TimeMatrixSelectionView: TimeMatrixDayViewLayoutManager<TimeMatrixDaySelectionColumn> {
     
     // MARK: - Initialization
     
     override init(frame: CGRect) {
-        fatalError("init(frame:) has not been implemented, use init(frame:model:)")
+        super.init(frame: frame, sideView: TimeMatrixTimeLabelColumn())
     }
     
     required init(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented, use init(model:)")
+        super.init(coder: aDecoder, sideView: TimeMatrixTimeLabelColumn())
     }
     
-    init(frame: CGRect, model: TimeMatrixModel) {
-        self.model = model
-        super.init(frame: frame)
-        self.setup()
-    }
-    
-    convenience init(model: TimeMatrixModel) {
-        self.init(frame: CGRect(), model: model)
-    }
-    
-    private func setup() {
-        self.alignment = .fill
-        self.distribution = .fillEqually
-        self.spacing = 0
-        self.axis = .horizontal
-        
-        let timeLabelColumn = TimeMatrixTimeLabelColumn()
-        self.timeLabelColumn = timeLabelColumn
-        
-        self.addArrangedSubview(timeLabelColumn)
-        self.attachToModel()
-    }
-    
-    private func attachToModel() {
-        var index = 0
-        let days = self.model.activeDays
-        while index < days.count {
-            let day = days[index]
-            if let cellModels = self.model.cells[day] {
-                self.onAdded(day: day, cellModels: cellModels, atIndex: index)
-            }
-            index += 1
-        }
-        self.model.dayListeners.insert(self)
-    }
-    
-    private func makeTimeLabelColumn(resolution: TimeMatrixDisplayManager.Resolution) {
-        if self.timeLabelColumn != nil {
-            self.removeArrangedSubview(self.timeLabelColumn)
-            self.timeLabelColumn.removeFromSuperview()
-        }
-        let timeLabelColumn = TimeMatrixTimeLabelColumn()
-        self.timeLabelColumn = timeLabelColumn
-        self.insertArrangedSubview(timeLabelColumn, at: 0)
-    }
-    
-    private func clearDays() {
-        self.selectionDayViews.removeAll()
-        for index in 1..<self.arrangedSubviews.count {
-            let selectionView = self.arrangedSubviews[index]
-            self.removeArrangedSubview(selectionView)
-            selectionView.removeFromSuperview()
-        }
+    convenience init() {
+        self.init(frame: CGRect())
     }
     
     
     // MARK: - Layout and display
     
-    func heightForResolution(_ resolution: TimeMatrixDisplayManager.Resolution) -> CGFloat {
-        let resolutionInt = Int(resolution.rawValue * 4)
-        let cellHeightIncrement = TimeMatrixDisplayManager.cellHeightIncrement * CGFloat(resolutionInt - 1)
-        let cellHeight = TimeMatrixDisplayManager.cellHeightMinimum + cellHeightIncrement
-        let numCells = TimeMatrixModel.cellsPerDay / resolutionInt
-        let totalHeight = cellHeight * CGFloat(numCells)
-        return totalHeight
+    override func makeDayView(day: TimeMatrixDay, cellModels: [TimeMatrixCellModel]) -> TimeMatrixDaySelectionColumn {
+        return TimeMatrixDaySelectionColumn(day: day, cellModels: cellModels)
     }
     
     override func setNeedsDisplay() {
-        for weakDayView in self.selectionDayViews.values {
-            if let dayView = weakDayView.value {
-                dayView.setNeedsDisplay()
+        for tuple in self.dayViews.values {
+            if let selectionColumn = tuple.view.value {
+                selectionColumn.setNeedsDisplay()
             }
         }
         super.setNeedsDisplay()
-    }
-    
-    
-    // MARK: - TimeMatrixModelDayListener protocol methods
-    
-    func onAdded(day: TimeMatrixDay, cellModels: [TimeMatrixCellModel], atIndex index: Int) {
-        if let oldWeakDayView = self.selectionDayViews[day],
-            let oldDayView = oldWeakDayView.value {
-            self.removeArrangedSubview(oldDayView)
-            oldDayView.removeFromSuperview()
-        }
-        
-        let dayView = TimeMatrixDaySelectionColumn(day: day, cellModels: cellModels)
-        let weakDayView = Weak<TimeMatrixDaySelectionColumn>(value: dayView)
-        self.selectionDayViews[day] = weakDayView
-        self.insertArrangedSubview(dayView, at: index + 1)
-    }
-    
-    func onRemoved(day: TimeMatrixDay) {
-        if let weakDayView = self.selectionDayViews.removeValue(forKey: day),
-            let dayView = weakDayView.value {
-            self.removeArrangedSubview(dayView)
-            dayView.removeFromSuperview()
-        }
     }
 }

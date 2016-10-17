@@ -21,18 +21,8 @@ class TimeMatrixScrollView: UIScrollView, TimeMatrixRowAnimationListener, UIScro
     var model: TimeMatrixModel? {
         didSet {
             if oldValue !== self.model {
-                if oldValue == nil {
-                    for _ in 1...3 {
-                        let selectionView = TimeMatrixSelectionView(model: self.model!)
-                        let weakView = Weak<TimeMatrixSelectionView>(value: selectionView)
-                        self.selectionViews.append(weakView)
-                        contentView.addArrangedSubview(selectionView)
-                    }
-                }
-                else {
-                    for selectionView in self.selectionViews {
-                        selectionView.value!.model = self.model!
-                    }
+                for selectionView in self.selectionViews {
+                    selectionView.value!.model = self.model!
                 }
             }
         }
@@ -66,18 +56,24 @@ class TimeMatrixScrollView: UIScrollView, TimeMatrixRowAnimationListener, UIScro
     }
     
     private func setup() {
-        let contentView = UIStackView()
+        self.showsVerticalScrollIndicator = false
+        self.showsHorizontalScrollIndicator = false
+        self.clipsToBounds = true
+        self.delegate = self
         
+        let contentView = UIStackView()
         contentView.alignment = .fill
         contentView.distribution = .fillEqually
         contentView.spacing = 0
         contentView.axis = .vertical
         contentView.translatesAutoresizingMaskIntoConstraints = false
         
-        self.showsVerticalScrollIndicator = false
-        self.showsHorizontalScrollIndicator = false
-        self.clipsToBounds = true
-        self.delegate = self
+        for _ in 1...3 {
+            let selectionView = TimeMatrixSelectionView()
+            let weakView = Weak<TimeMatrixSelectionView>(value: selectionView)
+            self.selectionViews.append(weakView)
+            contentView.addArrangedSubview(selectionView)
+        }
         
         self.contentView = contentView
         self.addSubview(contentView)
