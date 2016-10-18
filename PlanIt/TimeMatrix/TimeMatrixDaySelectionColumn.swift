@@ -173,7 +173,7 @@ class TimeMatrixDaySelectionColumn: UIView, TimeMatrixRowAnimationListener, Time
     
     // MARK: - TimeMatrixColumnAnimationListener protocol methods
     
-    func onColumnAnimationEnd() {
+    func onColumnAnimationFrame() {
         self.setNeedsDisplay()
     }
 }

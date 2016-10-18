@@ -25,7 +25,7 @@ class MessagesViewController: MSMessagesAppViewController {
         
         let calendar = Calendar.current
         let today = Date()
-        for index in 0...4 {
+        for index in 1...5 {
             let date = calendar.date(byAdding: .day, value: index, to: today)
             days.append(TimeMatrixDay(date: date!))
             daySelections.append(false)

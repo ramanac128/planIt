@@ -43,10 +43,12 @@ class TimeMatrixDayLabelCell: UIStackView {
         self.axis = .vertical
         
         let dayOfWeekLabel = UILabel()
+        dayOfWeekLabel.font = UIFont(name: "GillSans", size: TimeMatrixDisplayManager.dayLabelDayOfWeekFontSize)
         dayOfWeekLabel.adjustsFontSizeToFitWidth = true
         dayOfWeekLabel.textAlignment = .center
         
         let monthAndDayLabel = UILabel()
+        monthAndDayLabel.font = UIFont(name: "GillSans", size: TimeMatrixDisplayManager.dayLabelMonthAndDayFontSize)
         monthAndDayLabel.adjustsFontSizeToFitWidth = true
         monthAndDayLabel.textAlignment = .center
         
@@ -54,12 +56,6 @@ class TimeMatrixDayLabelCell: UIStackView {
         self.monthAndDayLabel = monthAndDayLabel
         self.addArrangedSubview(self.dayOfWeekLabel)
         self.addArrangedSubview(self.monthAndDayLabel)
-    }
-    
-    override func layoutSubviews() {
-        self.dayOfWeekLabel.font = UIFont.systemFont(ofSize: TimeMatrixDisplayManager.dayLabelDayOfWeekFontSize)
-        self.monthAndDayLabel.font = UIFont.systemFont(ofSize: TimeMatrixDisplayManager.dayLabelMonthAndDayFontSize)
-        super.layoutSubviews()
     }
     
     private func setDay(_ day: TimeMatrixDay) {

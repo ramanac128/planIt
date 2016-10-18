@@ -151,14 +151,15 @@ class TimeMatrixDayViewLayoutManager<DayView: UIView>: UIStackView, TimeMatrixMo
         let duration = TimeMatrixDisplayManager.dayAddedAnimationDuration
         TimeMatrixDisplayManager.instance.informOnColumnAnimationBegin()
         self.layoutIfNeeded()
-        UIView.animate(withDuration: duration, animations: {
+        UIView.animate(withDuration: duration, delay: 0, options: UIViewAnimationOptions.allowUserInteraction, animations: {
             if let shrink = shrinkIfNeeded {
                 shrink.largeWidth.isActive = false
                 shrink.smallWidth.isActive = true
             }
             zeroWidth.isActive = false
             nextWidth.isActive = true
-            //TimeMatrixDisplayManager.instance.informOnColumnAnimationFrame()
+            
+            TimeMatrixDisplayManager.instance.informOnColumnAnimationFrame()
             self.layoutIfNeeded()
         }, completion: {(Bool) -> Void in
             TimeMatrixDisplayManager.instance.informOnColumnAnimationEnd()
@@ -172,7 +173,7 @@ class TimeMatrixDayViewLayoutManager<DayView: UIView>: UIStackView, TimeMatrixMo
             let duration = TimeMatrixDisplayManager.dayRemovedAnimationDuration
             TimeMatrixDisplayManager.instance.informOnColumnAnimationBegin()
             self.layoutIfNeeded()
-            UIView.animate(withDuration: duration, animations: {
+            UIView.animate(withDuration: duration, delay: 0, options: UIViewAnimationOptions.allowUserInteraction, animations: {
                 if let grow = growIfNeeded {
                     grow.smallWidth.isActive = false
                     grow.largeWidth.isActive = true
@@ -180,7 +181,8 @@ class TimeMatrixDayViewLayoutManager<DayView: UIView>: UIStackView, TimeMatrixMo
                 item.smallWidth.isActive = false
                 item.largeWidth.isActive = false
                 item.zeroWidth.isActive = true
-                //TimeMatrixDisplayManager.instance.informOnColumnAnimationFrame()
+                
+                TimeMatrixDisplayManager.instance.informOnColumnAnimationFrame()
                 self.layoutIfNeeded()
             }, completion: {(Bool) -> Void in
                 self.removeArrangedSubview(view)

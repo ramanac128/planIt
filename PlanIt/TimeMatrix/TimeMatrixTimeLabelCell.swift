@@ -50,7 +50,7 @@ class TimeMatrixTimeLabelCell: UILabel, TimeMatrixTimeFormatListener {
     }
     
     private func setup() {
-        self.font = UIFont.systemFont(ofSize: TimeMatrixDisplayManager.timeLabelFontSize)
+        self.font = UIFont(name: "GillSans", size: TimeMatrixDisplayManager.timeLabelFontSize)
         self.adjustsFontSizeToFitWidth = true
         self.textAlignment = .center
         self.baselineAdjustment = .alignCenters

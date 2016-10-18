@@ -59,17 +59,6 @@ class TimeMatrixTimeLabelColumn: UIView, TimeMatrixResolutionListener {
     }
     
     
-    // MARK: - Layout and display
-    
-//    override func layoutSubviews() {
-//        super.layoutSubviews()
-//        
-//        let width = self.bounds.width
-//        for cell in self.timeLabelCells {
-//            cell.frame = CGRect(x: 0, y: cell.frame.origin.y, width: width, height: cell.frame.size.height)
-//        }
-//    }
-    
     func changeResolution(from previous: TimeMatrixDisplayManager.Resolution, to current: TimeMatrixDisplayManager.Resolution) {
         let newMod = Int(current.rawValue * 4)
         let oldMod = Int(previous.rawValue * 4)
@@ -111,12 +100,13 @@ class TimeMatrixTimeLabelColumn: UIView, TimeMatrixResolutionListener {
         let newMod = Int(resolution.rawValue * 4)
         let oldMod = Int(previous.rawValue * 4)
         let cellHeight = TimeMatrixTimeLabelCell.cellHeight(resolution: resolution)
+        let duration = TimeMatrixDisplayManager.resolutionChangeAnimationDuration
         
         TimeMatrixDisplayManager.instance.informOnRowAnimationBegin()
-        UIView.animate(withDuration: TimeMatrixDisplayManager.resolutionChangeAnimationDuration, animations: {
+        UIView.animate(withDuration: duration, delay: 0, options: UIViewAnimationOptions.allowUserInteraction, animations: {
             self.changeResolutionLoop(newMod: newMod, oldMod: oldMod, cellHeight: cellHeight)
-            self.layoutIfNeeded()
             TimeMatrixDisplayManager.instance.informOnRowAnimationFrame()
+            self.layoutIfNeeded()
         }, completion: {(value: Bool) in
             TimeMatrixDisplayManager.instance.informOnRowAnimationEnd()
         })
