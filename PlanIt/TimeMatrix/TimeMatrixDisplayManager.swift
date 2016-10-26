@@ -57,8 +57,8 @@ class TimeMatrixDisplayManager {
     static let timeLabelFontSize = CGFloat(16)
     
     static let timeLabelColorOnHour = UIColor.black
-    static let timeLabelColorOn30Min = UIColor(white: 0.3, alpha: 1)
-    static let timeLabelColorOn15Min = UIColor(white: 0.6, alpha: 1)
+    static let timeLabelColorOn30Min = UIColor(white: 0.4, alpha: 1)
+    static let timeLabelColorOn15Min = UIColor(white: 0.7, alpha: 1)
     
     // selection cells
     

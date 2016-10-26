@@ -136,7 +136,7 @@ class TimeMatrixDaySelectionColumn: UIView, TimeMatrixRowAnimationListener, Time
         let mod = Int(ceil(1 / resolution.rawValue))
         
         var index = start, modIndex = start
-        while index < end {
+        while index <= end {
             let yPos = CGFloat(index) * cellHeight
             context.move(to: CGPoint(x: 0, y: yPos))
             context.addLine(to: CGPoint(x: self.bounds.width, y: yPos))
@@ -173,7 +173,7 @@ class TimeMatrixDaySelectionColumn: UIView, TimeMatrixRowAnimationListener, Time
     
     // MARK: - TimeMatrixColumnAnimationListener protocol methods
     
-    func onColumnAnimationFrame() {
-        self.setNeedsDisplay()
+    func onColumnAnimationEnd() {
+        self.layoutIfNeeded()
     }
 }
