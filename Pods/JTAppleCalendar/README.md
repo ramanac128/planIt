@@ -3,18 +3,19 @@
 An iOS calendar control. Written in swift.
 
 
-
-
 [![CI Status](http://img.shields.io/travis/patchthecode/JTAppleCalendar.svg?style=flat)](https://travis-ci.org/patchthecode/JTAppleCalendar) [![Version](https://img.shields.io/cocoapods/v/JTAppleCalendar.svg?style=flat)](http://cocoapods.org/pods/JTAppleCalendar) [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage) [![Platform](https://img.shields.io/cocoapods/p/JTAppleCalendar.svg?style=flat)](http://cocoapods.org/pods/JTAppleCalendar) [![License](https://img.shields.io/cocoapods/l/JTAppleCalendar.svg?style=flat)](http://cocoapods.org/pods/JTAppleCalendar) [![](https://www.paypalobjects.com/webstatic/en_US/btn/btn_donate_74x21.png)](https://salt.bountysource.com/teams/jtapplecalendar)
 
-### **Screenshots**
-The look of this calendar is up to the developer. Check out what people have developed with this library and also post your own images [at this link](https://github.com/patchthecode/JTAppleCalendar/issues/2). A sample iOS application is also included in this project's [Github Repository](https://github.com/patchthecode/JTAppleCalendar) to give you an idea of what you can do.
+## Tutorials and guide is now on [patchthecode.github.io](https://patchthecode.github.io/)
 
-* Downloaded and liked this calendar's ease of use?
-* Then don't forget to leave a ★ Star rating on [Github](https://github.com/patchthecode/JTAppleCalendar). It's needed to make this control #1 :)
-* Also, [Support](https://salt.bountysource.com/teams/jtapplecalendar) is not manditory, but will be much appreciated. Let's keep ~~OpenSource~~ good OpenSource projects alive.
+This Library is a `UICollectionView` subclass. This means your date cells will look however you want it to look. 100% customizable.
 
-### **Features**
+
+
+<img src="https://cloud.githubusercontent.com/assets/12565719/14400904/878bd590-fe00-11e5-9ae6-eb97107af0c0.png" height="300" width="170"> | <img src="https://cloud.githubusercontent.com/assets/6205705/15713434/b6c8867e-2816-11e6-8b90-cd82caea28dd.gif" height="300" width="170"> | <img src="https://cloud.githubusercontent.com/assets/4571502/16706761/ff11073e-45ea-11e6-8d1a-79fc0c15df90.gif" height="200" width="200"> | **[See more](https://github.com/patchthecode/JTAppleCalendar/issues/2)**
+----  |  ----  |  ----  |  ----
+   |    |    | 
+
+## Features
 ---
 
 - [x] Range selection - select dates in a range. The design is entirely up to you.
@@ -28,114 +29,6 @@ The look of this calendar is up to the developer. Check out what people have dev
 - [x] Ability to scroll to any month by simply using the date
 - [x] Ability to design your calendar [however you want.](https://github.com/patchthecode/JTAppleCalendar/issues/2) You want it, you build it
 - [x] [Complete Documentation](http://cocoadocs.org/docsets/JTAppleCalendar)
-
-### **The Problem**
----
-
-1. Apple has no calendar control.
-2. Other calendar projects on Github try to cram every feature into their control, hoping it will meet the programmer's requirements.
-
-This is an incorrect way to build controls. It leaves the developer with an extremely wide selection of (in many cases non-conventional) features that he has to sift through in order to configure the calendar. Also, no matter how wide the feature selection, the developer is always restricted to a predefined configuration-set shipped with the calendarControl.  Do you see Apple building their `UITableView` by guessing what they think you want the UITableView to look like? No. So neither should we. 
-
-### **The Solution: JTAppleCalendar**
----
-
-#### [Click here to check out a quick tutorial](https://github.com/patchthecode/JTAppleCalendar/wiki)
-
-#### Properties/functions/structs to help configure your calendar
-
-
-The following structure was returned when a cell is about to be displayed.
-
-```swift
-    public enum DateOwner: Int {
-        case ThisMonth = 0, PreviousMonthWithinBoundary, PreviousMonthOutsideBoundary, FollowingMonthWithinBoundary, FollowingMonthOutsideBoundary
-    }
-```
-
-
-* `.ThisMonth` = the date to be displayed belongs to the month section
-* `.PreviousMonthWithinBoundary` = date belongs to the previous month, and it is within the date boundary you set
-* `.PreviousMonthOutsideBoundary` = date belongs to previous month, and it is outside the boundary you have set
-* `.FollowingMonthWithinBoundary` = date belongs to following month, within boundary
-* `.FollowingMonthOutsideBoundary` = date belongs to following month, outside boundary
-
-#### User functions
-
-```swift
-    public func generateDateRange(from startDate: Date, to endDate:Date)-> [Date]
-    public func reloadData()
-    public func reloadDates(dates: [Date])
-    public func scrollToNextSegment() 
-    public func scrollToPreviousSegment()
-    public func scrollToDate()
-    public func selectDates()
-    public func selectDates(from startDate:Date, to endDate:Date)
-    public func cellStatusForDate(date: Date)-> CellState?
-    public func cellStatusForDateAtRow(row: Int, column: Int) -> CellState?
-    public func currentCalendarDateSegment() -> (startDate: Date, endDate: Date)
-    public func scrollToHeaderForDate(date: Date)
-```
-
-#### Properties you can configure
-```swift
-// Note: You do not need to configure your calendar with this if it is already the default
-calendarView.direction = .Horizontal                                 // default is horizontal
-calendarView.cellInset = CGPoint(x: 0, y: 0)                         // default is (3,3)
-calendarView.allowsMultipleSelection = false                         // default is false
-calendarView.firstDayOfWeek = .Sunday                                // default is Sunday
-calendarView.scrollEnabled = true                                    // default is true
-calendarView.scrollingMode = .StopAtEachCalendarFrameWidth           // default is .StopAtEachCalendarFrameWidth
-calendarView.itemSize = nil                                          // default is nil. Use a value here to change the size of your cells
-calendarView.rangeSelectionWillBeUsed = false                        // default is false
-```
-
-Do you have any other questions?. If you are trying to bend heaven and earth to do something complicated with this calendar, then chances are there is already an easy way for it to be done. So [Opening an issue](https://github.com/patchthecode/JTAppleCalendar/issues/new) might be a good idea.
-
-Did you remember to leave a like? I would really appreciate it if you did. 
-
-Other functions/properties are coming. This is a very active project.
-
-### **Requirements**
----
-
-* iOS 8.0+ 
-* Xcode 7.2+
-
-
-
-### **Communication on Github**
----
-* Found a bug? [open an issue](https://github.com/patchthecode/JTAppleCalendar/issues)
-* Got a cool feature request? [open an issue](https://github.com/patchthecode/JTAppleCalendar/issues)
-* Need a question answered? [open an issue](https://github.com/patchthecode/JTAppleCalendar/issues) 
-
-
-### **Installation using CocoaPods**
-
-CocoaPods is a dependency manager for Cocoa projects. Cocoapods can be installed with the following command:
-
-$ gem install cocoapods
-
-
-
-> CocoaPods 0.39.0+ is required to build JTAppleCalendar
-
-To integrate JTAppleCalendar into your Xcode project using CocoaPods, specify it in your Podfile:
-
-```ruby
-platform :ios, '8.0'
-use_frameworks!
-
-pod 'JTAppleCalendar'
-```
-
-Then, run the following command at your project location:
-
-```bash
-$ pod install
-```
-
 
 ## Author
 

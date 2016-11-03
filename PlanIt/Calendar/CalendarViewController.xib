@@ -1,38 +1,136 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11201"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CalendarViewController" customModule="MessagesExtension" customModuleProvider="target">
             <connections>
-                <outlet property="calendarView" destination="gW0-sc-gk5" id="Reu-tq-3cp"/>
+                <outlet property="calendarView" destination="JgE-UZ-fcO" id="EVb-su-99X"/>
+                <outlet property="monthLabel" destination="tKY-4X-8jv" id="eX0-Jk-WQm"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="375"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT" userLabel="Calendar View Controller">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="195"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gW0-sc-gk5" customClass="JTAppleCalendarView" customModule="JTAppleCalendar">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9hB-vj-BCZ" userLabel="Header View">
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="December 2016" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="tKY-4X-8jv">
+                            <fontDescription key="fontDescription" name="GillSans-SemiBold" family="Gill Sans" pointSize="24"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hW3-eP-BoX" userLabel="Back Button">
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="hW3-eP-BoX" secondAttribute="height" multiplier="1:1" id="LNB-5A-xjQ"/>
+                            </constraints>
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <inset key="imageEdgeInsets" minX="8" minY="8" maxX="8" maxY="8"/>
+                            <state key="normal" image="Back Icon"/>
+                            <connections>
+                                <action selector="backButtonTouch:" destination="-1" eventType="touchUpInside" id="GWE-Yj-eRw"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z9w-YO-hP9" userLabel="Forward Button">
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="z9w-YO-hP9" secondAttribute="height" multiplier="1:1" id="6wa-4A-ZeE"/>
+                            </constraints>
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <inset key="imageEdgeInsets" minX="8" minY="8" maxX="8" maxY="8"/>
+                            <state key="normal" image="Forward Icon"/>
+                            <connections>
+                                <action selector="forwardButtonTouch:" destination="-1" eventType="touchUpInside" id="Ggd-a5-eIn"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" red="0.20000000000000001" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstItem="hW3-eP-BoX" firstAttribute="leading" secondItem="9hB-vj-BCZ" secondAttribute="leading" constant="1" id="1dQ-xW-Tpr"/>
+                        <constraint firstItem="hW3-eP-BoX" firstAttribute="top" secondItem="9hB-vj-BCZ" secondAttribute="top" id="1xH-HH-uD3"/>
+                        <constraint firstAttribute="height" constant="40" id="A9k-Zw-ZTD"/>
+                        <constraint firstAttribute="trailing" secondItem="tKY-4X-8jv" secondAttribute="trailing" constant="60" id="Fb1-9j-6Nb"/>
+                        <constraint firstItem="tKY-4X-8jv" firstAttribute="leading" secondItem="9hB-vj-BCZ" secondAttribute="leading" constant="60" id="M3m-Lw-KHJ"/>
+                        <constraint firstAttribute="bottom" secondItem="hW3-eP-BoX" secondAttribute="bottom" id="Rjm-OX-zw7"/>
+                        <constraint firstItem="tKY-4X-8jv" firstAttribute="centerY" secondItem="9hB-vj-BCZ" secondAttribute="centerY" id="aET-zC-hI4"/>
+                        <constraint firstAttribute="bottom" secondItem="z9w-YO-hP9" secondAttribute="bottom" id="bDl-p0-JZO"/>
+                        <constraint firstAttribute="trailing" secondItem="z9w-YO-hP9" secondAttribute="trailing" id="e3H-Mj-kM0"/>
+                        <constraint firstItem="z9w-YO-hP9" firstAttribute="top" secondItem="9hB-vj-BCZ" secondAttribute="top" id="xhp-gX-wVb"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JgE-UZ-fcO" customClass="JTAppleCalendarView" customModule="JTAppleCalendar">
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Xl2-fO-hgb">
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Su" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mWt-IB-7R5">
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mo" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1tg-40-cuj">
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tu" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dcY-CI-irB">
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8GK-l4-4UN">
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Th" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AoA-JQ-8xM">
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fr" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jAw-EY-XAA">
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sa" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mli-1u-I08">
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="b5G-BD-L0R"/>
+                    </constraints>
+                </stackView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="gW0-sc-gk5" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="7u9-uW-QKc"/>
-                <constraint firstAttribute="trailing" secondItem="gW0-sc-gk5" secondAttribute="trailing" id="Pj5-6n-KA4"/>
-                <constraint firstItem="gW0-sc-gk5" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Tyi-ps-Mh4"/>
-                <constraint firstAttribute="bottom" secondItem="gW0-sc-gk5" secondAttribute="bottom" id="kxj-O2-6jV"/>
+                <constraint firstAttribute="bottom" secondItem="JgE-UZ-fcO" secondAttribute="bottom" id="6tW-TG-6Z5"/>
+                <constraint firstAttribute="trailing" secondItem="9hB-vj-BCZ" secondAttribute="trailing" id="ERa-JX-S80"/>
+                <constraint firstItem="Xl2-fO-hgb" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Lr4-Ne-Vsw"/>
+                <constraint firstItem="Xl2-fO-hgb" firstAttribute="top" secondItem="9hB-vj-BCZ" secondAttribute="bottom" id="VVd-PL-oTg"/>
+                <constraint firstItem="JgE-UZ-fcO" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="bqe-uX-v3Z"/>
+                <constraint firstItem="9hB-vj-BCZ" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="i0h-OJ-UUC"/>
+                <constraint firstAttribute="trailing" secondItem="JgE-UZ-fcO" secondAttribute="trailing" id="k0c-4I-tTd"/>
+                <constraint firstAttribute="trailing" secondItem="Xl2-fO-hgb" secondAttribute="trailing" id="sEY-01-R8g"/>
+                <constraint firstItem="JgE-UZ-fcO" firstAttribute="top" secondItem="Xl2-fO-hgb" secondAttribute="bottom" id="zgO-CV-3Zg"/>
+                <constraint firstItem="9hB-vj-BCZ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="zvm-eT-Onf"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="26.5" y="-240.5"/>
+            <point key="canvasLocation" x="34.5" y="-159.5"/>
         </view>
     </objects>
+    <resources>
+        <image name="Back Icon" width="50" height="50"/>
+        <image name="Forward Icon" width="50" height="50"/>
+    </resources>
 </document>

@@ -17,6 +17,9 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="15" translatesAutoresizingMaskIntoConstraints="NO" id="xyt-bG-Rim">
+                    <constraints>
+                        <constraint firstAttribute="height" constant="167" id="AY6-6z-1ZI"/>
+                    </constraints>
                     <date key="date" timeIntervalSinceReferenceDate="499726130.38998401">
                         <!--2016-11-01 20:48:50 +0000-->
                     </date>
@@ -32,6 +35,7 @@
                 <constraint firstItem="RE7-iu-F7F" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="Kmr-26-CmU"/>
                 <constraint firstItem="xyt-bG-Rim" firstAttribute="width" secondItem="RE7-iu-F7F" secondAttribute="width" id="OCM-16-TQ6"/>
                 <constraint firstItem="RE7-iu-F7F" firstAttribute="leading" secondItem="xyt-bG-Rim" secondAttribute="trailing" constant="16" id="TD6-f9-bzv"/>
+                <constraint firstItem="RE7-iu-F7F" firstAttribute="height" secondItem="xyt-bG-Rim" secondAttribute="height" id="YK7-Zu-ILi"/>
                 <constraint firstItem="xyt-bG-Rim" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="bpy-o3-IP7"/>
                 <constraint firstItem="xyt-bG-Rim" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="f58-gE-Z8P"/>
                 <constraint firstAttribute="trailing" secondItem="RE7-iu-F7F" secondAttribute="trailing" id="svJ-XN-wMQ"/>

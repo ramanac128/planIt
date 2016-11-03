@@ -1,11 +1,11 @@
 PODS:
-  - JTAppleCalendar (5.0.1)
+  - JTAppleCalendar (6.0.1)
 
 DEPENDENCIES:
   - JTAppleCalendar
 
 SPEC CHECKSUMS:
-  JTAppleCalendar: cb2417b1f3367d1993e31720a663646742139a5c
+  JTAppleCalendar: 7793cd7284a495ed72b0cad225c1be835eefa018
 
 PODFILE CHECKSUM: 5475dacf52b9e1fa9ed141df7efe91dd06adfe0f
 

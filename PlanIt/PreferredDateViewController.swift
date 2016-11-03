@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import Messages
 
-class PreferredDateViewController: UIViewController {
+class PreferredDateViewController: MSMessagesAppViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

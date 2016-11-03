@@ -13,6 +13,7 @@
 		A11128041DC935720053C598 /* PreferredDateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A11128021DC935720053C598 /* PreferredDateViewController.xib */; };
 		A11401961DB3FD8C005FF26B /* FrameworkExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11401951DB3FD8C005FF26B /* FrameworkExtensions.swift */; };
 		A11401981DB47AEC005FF26B /* TimeMatrixDayViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11401971DB47AEC005FF26B /* TimeMatrixDayViewManager.swift */; };
+		A148DD021DCBB7F50036E0DE /* CalendarViewDisplayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A148DD011DCBB7F50036E0DE /* CalendarViewDisplayManager.swift */; };
 		A199397F1DB19E76006A57E4 /* TimeMatrixCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19939721DB19E6F006A57E4 /* TimeMatrixCellModel.swift */; };
 		A19939801DB19E77006A57E4 /* TimeMatrixDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19939731DB19E6F006A57E4 /* TimeMatrixDay.swift */; };
 		A19939811DB19E77006A57E4 /* TimeMatrixDayLabelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19939741DB19E6F006A57E4 /* TimeMatrixDayLabelCell.swift */; };
@@ -31,8 +32,8 @@
 		A19939921DB19EAC006A57E4 /* WeakSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A199398F1DB19EA0006A57E4 /* WeakSet.swift */; };
 		A199399E1DB19EE1006A57E4 /* CalendarDayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19939981DB19EDA006A57E4 /* CalendarDayCell.swift */; };
 		A199399F1DB19EE1006A57E4 /* CalendarDayCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A19939991DB19EDA006A57E4 /* CalendarDayCell.xib */; };
-		A19939A01DB19EE1006A57E4 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A199399A1DB19EDA006A57E4 /* CalendarViewController.swift */; };
-		A19939A11DB19EE1006A57E4 /* CalendarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A199399B1DB19EDA006A57E4 /* CalendarViewController.xib */; };
+		A1F52F071DCB1AB70001B58A /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F52F051DCB1AB70001B58A /* CalendarViewController.swift */; };
+		A1F52F081DCB1AB70001B58A /* CalendarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1F52F061DCB1AB70001B58A /* CalendarViewController.xib */; };
 		A1FF3B551DA5E0B20013B428 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1FF3B541DA5E0B20013B428 /* Assets.xcassets */; };
 		A1FF3B5C1DA5E0B20013B428 /* MessagesExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = A1FF3B5B1DA5E0B20013B428 /* MessagesExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		A1FF3B611DA5E0B20013B428 /* Messages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FF3B601DA5E0B20013B428 /* Messages.framework */; };
@@ -74,6 +75,7 @@
 		A11128021DC935720053C598 /* PreferredDateViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PreferredDateViewController.xib; sourceTree = "<group>"; };
 		A11401951DB3FD8C005FF26B /* FrameworkExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrameworkExtensions.swift; sourceTree = "<group>"; };
 		A11401971DB47AEC005FF26B /* TimeMatrixDayViewManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimeMatrixDayViewManager.swift; path = TimeMatrix/TimeMatrixDayViewManager.swift; sourceTree = "<group>"; };
+		A148DD011DCBB7F50036E0DE /* CalendarViewDisplayManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewDisplayManager.swift; sourceTree = "<group>"; };
 		A19939721DB19E6F006A57E4 /* TimeMatrixCellModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimeMatrixCellModel.swift; path = TimeMatrix/TimeMatrixCellModel.swift; sourceTree = "<group>"; };
 		A19939731DB19E6F006A57E4 /* TimeMatrixDay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimeMatrixDay.swift; path = TimeMatrix/TimeMatrixDay.swift; sourceTree = "<group>"; };
 		A19939741DB19E6F006A57E4 /* TimeMatrixDayLabelCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimeMatrixDayLabelCell.swift; path = TimeMatrix/TimeMatrixDayLabelCell.swift; sourceTree = "<group>"; };
@@ -92,8 +94,8 @@
 		A199398F1DB19EA0006A57E4 /* WeakSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeakSet.swift; sourceTree = "<group>"; };
 		A19939981DB19EDA006A57E4 /* CalendarDayCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarDayCell.swift; sourceTree = "<group>"; };
 		A19939991DB19EDA006A57E4 /* CalendarDayCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CalendarDayCell.xib; sourceTree = "<group>"; };
-		A199399A1DB19EDA006A57E4 /* CalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
-		A199399B1DB19EDA006A57E4 /* CalendarViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CalendarViewController.xib; sourceTree = "<group>"; };
+		A1F52F051DCB1AB70001B58A /* CalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
+		A1F52F061DCB1AB70001B58A /* CalendarViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CalendarViewController.xib; sourceTree = "<group>"; };
 		A1FF3B511DA5E0B20013B428 /* PlanIt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlanIt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1FF3B541DA5E0B20013B428 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A1FF3B561DA5E0B20013B428 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -183,8 +185,9 @@
 		A19939971DB19EDA006A57E4 /* Calendar */ = {
 			isa = PBXGroup;
 			children = (
-				A199399A1DB19EDA006A57E4 /* CalendarViewController.swift */,
-				A199399B1DB19EDA006A57E4 /* CalendarViewController.xib */,
+				A148DD011DCBB7F50036E0DE /* CalendarViewDisplayManager.swift */,
+				A1F52F051DCB1AB70001B58A /* CalendarViewController.swift */,
+				A1F52F061DCB1AB70001B58A /* CalendarViewController.xib */,
 				A19939981DB19EDA006A57E4 /* CalendarDayCell.swift */,
 				A19939991DB19EDA006A57E4 /* CalendarDayCell.xib */,
 			);
@@ -344,8 +347,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				A11128041DC935720053C598 /* PreferredDateViewController.xib in Resources */,
-				A19939A11DB19EE1006A57E4 /* CalendarViewController.xib in Resources */,
 				A1FF3B691DA5E0B20013B428 /* Assets.xcassets in Resources */,
+				A1F52F081DCB1AB70001B58A /* CalendarViewController.xib in Resources */,
 				A199399F1DB19EE1006A57E4 /* CalendarDayCell.xib in Resources */,
 				A1FF3B671DA5E0B20013B428 /* MainInterface.storyboard in Resources */,
 			);
@@ -436,6 +439,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A1F52F071DCB1AB70001B58A /* CalendarViewController.swift in Sources */,
 				A19939921DB19EAC006A57E4 /* WeakSet.swift in Sources */,
 				A19939801DB19E77006A57E4 /* TimeMatrixDay.swift in Sources */,
 				A19939831DB19E77006A57E4 /* TimeMatrixDaySelectionColumn.swift in Sources */,
@@ -448,7 +452,6 @@
 				A19939821DB19E77006A57E4 /* TimeMatrixDayLabelRow.swift in Sources */,
 				A199397F1DB19E76006A57E4 /* TimeMatrixCellModel.swift in Sources */,
 				A19939851DB19E77006A57E4 /* TimeMatrixModel.swift in Sources */,
-				A19939A01DB19EE1006A57E4 /* CalendarViewController.swift in Sources */,
 				A19939841DB19E77006A57E4 /* TimeMatrixDisplayManager.swift in Sources */,
 				A199398B1DB19E77006A57E4 /* TimeMatrixView.swift in Sources */,
 				A19939901DB19EAC006A57E4 /* Delay.swift in Sources */,
@@ -456,6 +459,7 @@
 				A199399E1DB19EE1006A57E4 /* CalendarDayCell.swift in Sources */,
 				A11128031DC935720053C598 /* PreferredDateViewController.swift in Sources */,
 				A19939871DB19E77006A57E4 /* TimeMatrixScrollView.swift in Sources */,
+				A148DD021DCBB7F50036E0DE /* CalendarViewDisplayManager.swift in Sources */,
 				A19939891DB19E77006A57E4 /* TimeMatrixTimeLabelCell.swift in Sources */,
 				A19939861DB19E77006A57E4 /* TimeMatrixPanGestureRecognizer.swift in Sources */,
 			);
