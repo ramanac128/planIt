@@ -63,22 +63,7 @@ func ==(lhs: TimeMatrixDay, rhs: TimeMatrixDay) -> Bool {
 }
 
 func <(lhs: TimeMatrixDay, rhs: TimeMatrixDay) -> Bool {
-    if lhs.year < rhs.year {
-        return true
-    }
-    if lhs.year > rhs.year {
-        return false
-    }
-    if lhs.month < rhs.month {
-        return true
-    }
-    if lhs.month > rhs.month {
-        return false
-    }
-    if lhs.day < rhs.day {
-        return true
-    }
-    return false
+    return lhs.year < rhs.year || lhs.month < rhs.month || lhs.day < rhs.day;
 }
 
 func >(lhs: TimeMatrixDay, rhs: TimeMatrixDay) -> Bool {
@@ -86,9 +71,9 @@ func >(lhs: TimeMatrixDay, rhs: TimeMatrixDay) -> Bool {
 }
 
 func <=(lhs: TimeMatrixDay, rhs: TimeMatrixDay) -> Bool {
-    return lhs < rhs || lhs == rhs
+    return !(lhs > rhs)
 }
 
 func >=(lhs: TimeMatrixDay, rhs: TimeMatrixDay) -> Bool {
-    return lhs > rhs || lhs == rhs
+    return !(lhs < rhs)
 }

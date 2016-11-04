@@ -9,25 +9,37 @@
 import Foundation
 import JTAppleCalendar
 
-class CalendarDayCell: JTAppleDayCellView {
+class CalendarDayCell: JTAppleDayCellView, TimeMatrixModelPreferredDayListener {
+    
+    // MARK: - Properties
+    
     @IBOutlet weak var dayNumber: UILabel!
     
+    var day: TimeMatrixDay!
+    
+    // MARK: - Variables
+    
     var isToday = false
-    
+    var isPreferredDay = false
     var position = SelectionRangePosition.none
-    var selectedItemHeight = CGFloat(0)
     
-    func setupCellBeforeDisplay(cellState: CellState, date: Date) {
-        let cellDay = TimeMatrixDay(date: date)
+    
+    // MARK: - Initialization
+    
+    func setupCellBeforeDisplay(cellState: CellState, model: TimeMatrixModel?) {
         let today = TimeMatrixDay(date: Date())
-        self.isToday = (cellDay == today)
-        if cellDay < today {
-            self.isUserInteractionEnabled = false
-        }
+        self.day = TimeMatrixDay(date: cellState.date)
+        self.isToday = (self.day == today)
+        self.isUserInteractionEnabled = !(self.day < today)
         
         self.dayNumber.text =  cellState.text
         self.configureTextColor(cellState: cellState)
         self.position = cellState.selectedPosition()
+        
+        if let m = model {
+            m.preferredDayListeners.insert(self)
+            self.onChange(preferredDay: m.preferredDay)
+        }
     }
     
     func configureTextColor(cellState: CellState) {
@@ -38,9 +50,39 @@ class CalendarDayCell: JTAppleDayCellView {
         }
     }
     
-    func cellSelectionChanged(_ cellState: CellState) {
+    func cellSelectionChanged(_ cellState: CellState, configuration: CalendarViewDisplayManager.Configuration) {
         self.position = cellState.selectedPosition()
         self.setNeedsDisplay()
+    }
+    
+    
+    // MARK: - TimeMatrixDay handling
+    
+    func onChange(preferredDay: TimeMatrixDay?) {
+        self.isPreferredDay = preferredDay == self.day;
+    }
+    
+    
+    // MARK: - Layout and display
+    
+    override func layoutSubviews() {
+        setNeedsDisplay()
+    }
+    
+    override func draw(_ rect: CGRect) {
+        guard let context = UIGraphicsGetCurrentContext() else {
+            return
+        }
+        
+        self.drawBackground(context: context)
+        if self.isToday {
+            self.drawTodayIndicator(context: context)
+        }
+        if self.position != .none {
+            self.drawSelectionIndicator(context: context)
+        }
+        
+        super.draw(rect)
     }
     
     func drawBackground(context: CGContext) {
@@ -48,11 +90,22 @@ class CalendarDayCell: JTAppleDayCellView {
         context.fill(self.bounds)
     }
     
+    func drawTodayIndicator(context: CGContext) {
+        let yPos = self.bounds.height * CalendarViewDisplayManager.selectedCellYPosPct - (CalendarViewDisplayManager.todayCellStrokeWidth / 2)
+        let height = self.bounds.height * CalendarViewDisplayManager.selectedCellHeightPct + CalendarViewDisplayManager.todayCellStrokeWidth
+        
+        context.addEllipse(in: ellipseRect(yPos: yPos, height: height))
+        context.setStrokeColor(CalendarViewDisplayManager.todayCellStrokeColor)
+        context.setLineWidth(CalendarViewDisplayManager.todayCellStrokeWidth)
+        context.drawPath(using: .stroke)
+    }
+    
     func drawSelectionIndicator(context: CGContext) {
         let yPos = self.bounds.height * CalendarViewDisplayManager.selectedCellYPosPct
         let height = self.bounds.height * CalendarViewDisplayManager.selectedCellHeightPct
         
         switch self.position {
+            
         case .full:
             context.addEllipse(in: ellipseRect(yPos: yPos, height: height))
             break
@@ -74,46 +127,22 @@ class CalendarDayCell: JTAppleDayCellView {
             break
             
         default:
-            break
+            return
         }
         
         context.setFillColor(CalendarViewDisplayManager.selectedCellColor)
         context.drawPath(using: .fill)
-    }
-    
-    func drawTodayIndicator(context: CGContext) {
-        let yPos = self.bounds.height * CalendarViewDisplayManager.selectedCellYPosPct - (CalendarViewDisplayManager.todayCellStrokeWidth / 2)
-        let height = self.bounds.height * CalendarViewDisplayManager.selectedCellHeightPct + CalendarViewDisplayManager.todayCellStrokeWidth
         
-        context.addEllipse(in: ellipseRect(yPos: yPos, height: height))
-        context.setStrokeColor(CalendarViewDisplayManager.todayCellStrokeColor)
-        context.setLineWidth(CalendarViewDisplayManager.todayCellStrokeWidth)
-        context.drawPath(using: .stroke)
+        if (self.isPreferredDay) {
+            context.addEllipse(in: ellipseRect(yPos: yPos, height: height))
+            context.setFillColor(CalendarViewDisplayManager.preferredDateCellColor)
+            context.drawPath(using: .fill)
+        }
     }
     
     func ellipseRect(yPos: CGFloat, height: CGFloat) -> CGRect {
         let xPos = (self.bounds.width - height) / 2
         let rect = CGRect(x: xPos, y: yPos, width: height, height: height)
         return rect
-    }
-    
-    override func draw(_ rect: CGRect) {
-        guard let context = UIGraphicsGetCurrentContext() else {
-            return
-        }
-        
-        self.drawBackground(context: context)
-        if self.isToday {
-            self.drawTodayIndicator(context: context)
-        }
-        if self.position != .none {
-            self.drawSelectionIndicator(context: context)
-        }
-        
-        super.draw(rect)
-    }
-    
-    override func layoutSubviews() {
-        setNeedsDisplay()
     }
 }

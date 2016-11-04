@@ -13,6 +13,10 @@ protocol TimeMatrixModelDayListener: class {
     func onRemoved(day: TimeMatrixDay)
 }
 
+protocol TimeMatrixModelPreferredDayListener: class {
+    func onChange(preferredDay: TimeMatrixDay?)
+}
+
 class TimeMatrixModel {
     
     // MARK: - Static constants
@@ -21,6 +25,14 @@ class TimeMatrixModel {
     
     
     // MARK: - Properties
+    
+    var preferredDay: TimeMatrixDay? {
+        didSet {
+            if oldValue != self.preferredDay {
+                self.informOnChange(preferredDay: self.preferredDay)
+            }
+        }
+    }
     
     var activeDays: [TimeMatrixDay] {
         get {
@@ -36,6 +48,7 @@ class TimeMatrixModel {
     var cells = [TimeMatrixDay: [TimeMatrixCellModel]]()
     
     var dayListeners = WeakSet<TimeMatrixModelDayListener>()
+    var preferredDayListeners = WeakSet<TimeMatrixModelPreferredDayListener>()
     
     
     // MARK: - TimeMatrixDay handlers
@@ -63,9 +76,6 @@ class TimeMatrixModel {
         }
     }
     
-    
-    // MARK: - TimeMatrixModelDayListener speaker methods
-    
     private func informOnAdded(day: TimeMatrixDay, cellModels: [TimeMatrixCellModel]) {
         var index = 0
         if let i = self.activeDays.index(of: day) {
@@ -79,6 +89,12 @@ class TimeMatrixModel {
     private func informOnRemoved(day: TimeMatrixDay) {
         for listener in self.dayListeners {
             listener.onRemoved(day: day)
+        }
+    }
+    
+    private func informOnChange(preferredDay: TimeMatrixDay?) {
+        for listener in self.preferredDayListeners {
+            listener.onChange(preferredDay: preferredDay)
         }
     }
 }
