@@ -9,7 +9,7 @@
 import UIKit
 import JTAppleCalendar
 
-class CalendarViewController: UIViewController, CalendarViewConfigurationListener {
+class CalendarViewController: UIViewController, CalendarViewConfigurationListener, CalendarViewModelListener {
     
     // MARK: - Properties
     
@@ -54,7 +54,20 @@ class CalendarViewController: UIViewController, CalendarViewConfigurationListene
         
         let displayManager = CalendarViewDisplayManager.instance
         displayManager.configurationListeners.insert(self)
+        displayManager.modelListeners.insert(self)
         self.onChange(configuration: displayManager.configuration)
+        self.onChange(model: displayManager.model)
+    }
+    
+    func refreshCellSelectionStates() {
+        self.calendarView.deselectAllDates(triggerSelectionDelegate: false)
+        if let days = self.model?.activeDays {
+            var dates = [Date]()
+            for day in days {
+                dates.append(day.toDate())
+            }
+            self.calendarView.selectDates(dates, triggerSelectionDelegate: false, keepSelectionIfMultiSelectionAllowed: false)
+        }
     }
     
     
@@ -89,7 +102,6 @@ class CalendarViewController: UIViewController, CalendarViewConfigurationListene
     // MARK: - CalendarViewConfiguration protocol methods
     
     func onChange(configuration: CalendarViewDisplayManager.Configuration) {
-        self.configuration = configuration
         switch configuration {
             
         case .preferredDate:
@@ -107,7 +119,13 @@ class CalendarViewController: UIViewController, CalendarViewConfigurationListene
             break
         }
         
+        self.configuration = configuration
+        self.refreshCellSelectionStates()
         self.calendarView.reloadData(withAnchor: Date(), animation: true)
+    }
+    
+    func onChange(model: TimeMatrixModel?) {
+        self.model = model
     }
 }
 
@@ -134,7 +152,7 @@ extension CalendarViewController: JTAppleCalendarViewDataSource {
 extension CalendarViewController: JTAppleCalendarViewDelegate {
     
     func calendar(_ calendar: JTAppleCalendarView, willDisplayCell cell: JTAppleDayCellView, date: Date, cellState: CellState) {
-        (cell as! CalendarDayCell).setupCellBeforeDisplay(cellState: cellState, model: model)
+        (cell as! CalendarDayCell).setupCellBeforeDisplay(cellState: cellState)
     }
     
     func calendar(_ calendar: JTAppleCalendarView, didScrollToDateSegmentWith visibleDates: DateSegmentInfo) {
@@ -144,19 +162,35 @@ extension CalendarViewController: JTAppleCalendarViewDelegate {
     }
     
     func calendar(_ calendar: JTAppleCalendarView, didSelectDate date: Date, cell: JTAppleDayCellView?, cellState: CellState) {
-        self.didChangeSelection(cell, date: date, cellState: cellState)
+        if let model = self.model {
+            let day = TimeMatrixDay(date: date)
+            switch self.configuration {
+            case .preferredDate:
+                model.preferredDay = day
+                break
+                
+            case .availableDates:
+                model.add(day: day)
+                break
+            }
+            self.calendarView.reloadData()
+        }
     }
     
     func calendar(_ calendar: JTAppleCalendarView, didDeselectDate date: Date, cell: JTAppleDayCellView?, cellState: CellState) {
-        self.didChangeSelection(cell, date: date, cellState: cellState)
-    }
-    
-    func didChangeSelection(_ cell: JTAppleDayCellView?, date: Date, cellState: CellState) {
-        if CalendarViewDisplayManager.instance.configuration == .preferredDate {
-            self.model?.preferredDay = TimeMatrixDay(date: date)
+        if let model = self.model {
+            let day = TimeMatrixDay(date: date)
+            switch self.configuration {
+            case .preferredDate:
+                model.preferredDay = nil
+                break
+                
+            case .availableDates:
+                model.remove(day: day)
+                break
+            }
+            self.calendarView.reloadData()
         }
-        (cell as? CalendarDayCell)?.cellSelectionChanged(cellState, configuration: self.configuration)
-        self.calendarView.reloadData()
     }
 }
 

@@ -9,7 +9,7 @@
 import Foundation
 import JTAppleCalendar
 
-class CalendarDayCell: JTAppleDayCellView, TimeMatrixModelPreferredDayListener {
+class CalendarDayCell: JTAppleDayCellView {
     
     // MARK: - Properties
     
@@ -26,19 +26,22 @@ class CalendarDayCell: JTAppleDayCellView, TimeMatrixModelPreferredDayListener {
     
     // MARK: - Initialization
     
-    func setupCellBeforeDisplay(cellState: CellState, model: TimeMatrixModel?) {
+    func setupCellBeforeDisplay(cellState: CellState) {
+        let displayManager = CalendarViewDisplayManager.instance
         let today = TimeMatrixDay(date: Date())
         self.day = TimeMatrixDay(date: cellState.date)
         self.isToday = (self.day == today)
-        self.isUserInteractionEnabled = !(self.day < today)
         
         self.dayNumber.text =  cellState.text
         self.configureTextColor(cellState: cellState)
-        self.position = cellState.selectedPosition()
         
-        if let m = model {
-            m.preferredDayListeners.insert(self)
-            self.onChange(preferredDay: m.preferredDay)
+        if let model = displayManager.model {
+            self.isPreferredDay = (model.preferredDay == self.day)
+            self.position = self.getPosition()
+            self.isUserInteractionEnabled = (self.day >= today && (displayManager.configuration == .preferredDate || !self.isPreferredDay))
+        }
+        else {
+            self.isUserInteractionEnabled = false
         }
     }
     
@@ -50,16 +53,30 @@ class CalendarDayCell: JTAppleDayCellView, TimeMatrixModelPreferredDayListener {
         }
     }
     
-    func cellSelectionChanged(_ cellState: CellState, configuration: CalendarViewDisplayManager.Configuration) {
-        self.position = cellState.selectedPosition()
-        self.setNeedsDisplay()
+    func getPosition() -> SelectionRangePosition {
+        if let model = CalendarViewDisplayManager.instance.model {
+            if model.hasDay(self.day) {
+                let leftDay = TimeMatrixDay(from: self.day, byAdding: .day, value: -1)
+                let hasLeft = model.hasDay(leftDay)
+                
+                let rightDay = TimeMatrixDay(from: self.day, byAdding: .day, value: 1)
+                let hasRight = model.hasDay(rightDay)
+                
+                if hasLeft {
+                    return (hasRight ? .middle : .right)
+                }
+                return (hasRight ? .left : .full)
+            }
+        }
+            
+        return .none
     }
     
     
     // MARK: - TimeMatrixDay handling
     
     func onChange(preferredDay: TimeMatrixDay?) {
-        self.isPreferredDay = preferredDay == self.day;
+        self.isPreferredDay = (preferredDay == self.day);
     }
     
     
@@ -80,6 +97,9 @@ class CalendarDayCell: JTAppleDayCellView, TimeMatrixModelPreferredDayListener {
         }
         if self.position != .none {
             self.drawSelectionIndicator(context: context)
+        }
+        if self.isPreferredDay {
+            self.drawPreferredDayIndicator(context: context)
         }
         
         super.draw(rect)
@@ -132,12 +152,15 @@ class CalendarDayCell: JTAppleDayCellView, TimeMatrixModelPreferredDayListener {
         
         context.setFillColor(CalendarViewDisplayManager.selectedCellColor)
         context.drawPath(using: .fill)
+    }
+    
+    func drawPreferredDayIndicator(context: CGContext) {
+        let yPos = self.bounds.height * CalendarViewDisplayManager.selectedCellYPosPct
+        let height = self.bounds.height * CalendarViewDisplayManager.selectedCellHeightPct
         
-        if (self.isPreferredDay) {
-            context.addEllipse(in: ellipseRect(yPos: yPos, height: height))
-            context.setFillColor(CalendarViewDisplayManager.preferredDateCellColor)
-            context.drawPath(using: .fill)
-        }
+        context.addEllipse(in: ellipseRect(yPos: yPos, height: height))
+        context.setFillColor(CalendarViewDisplayManager.preferredDateCellColor)
+        context.drawPath(using: .fill)
     }
     
     func ellipseRect(yPos: CGFloat, height: CGFloat) -> CGRect {

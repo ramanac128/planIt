@@ -8,8 +8,12 @@
 
 import UIKit
 
-protocol CalendarViewConfigurationListener {
+protocol CalendarViewConfigurationListener: class {
     func onChange(configuration: CalendarViewDisplayManager.Configuration)
+}
+
+protocol CalendarViewModelListener: class {
+    func onChange(model: TimeMatrixModel?)
 }
 
 class CalendarViewDisplayManager {
@@ -26,7 +30,7 @@ class CalendarViewDisplayManager {
     static var selectedCellYPosPct = (CGFloat(1) - CalendarViewDisplayManager.selectedCellHeightPct) / CGFloat(2)
     
     static var todayCellStrokeWidth = CGFloat(3.5)
-    static var todayCellStrokeColor = UIColor(hex: 0x33CCCC).cgColor
+    static var todayCellStrokeColor = UIColor(hex: 0x3399FF).cgColor
     
     
     // MARK: - Enumerations
@@ -42,9 +46,22 @@ class CalendarViewDisplayManager {
     var configuration: Configuration {
         didSet {
             if oldValue != self.configuration {
+                if oldValue == .preferredDate {
+                    if let preferredDay = self.model?.preferredDay {
+                        self.model!.add(day: preferredDay, isPreferred: false)
+                    }
+                }
                 for listener in self.configurationListeners {
                     listener.onChange(configuration: self.configuration)
                 }
+            }
+        }
+    }
+    
+    var model: TimeMatrixModel? {
+        didSet {
+            for listener in self.modelListeners {
+                listener.onChange(model: self.model)
             }
         }
     }
@@ -53,6 +70,7 @@ class CalendarViewDisplayManager {
     // MARK: - Variables
     
     let configurationListeners = WeakSet<CalendarViewConfigurationListener>()
+    let modelListeners = WeakSet<CalendarViewModelListener>()
     
     
     // MARK: - Initialization

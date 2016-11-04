@@ -39,6 +39,18 @@ struct TimeMatrixDay: Hashable, CustomStringConvertible {
         self.from(date: date)
     }
     
+    init(from otherDay: TimeMatrixDay) {
+        self.day = otherDay.day
+        self.month = otherDay.month
+        self.year = otherDay.year
+        self.dayOfWeek = otherDay.dayOfWeek
+    }
+    
+    init(from otherDay: TimeMatrixDay, byAdding component: Calendar.Component, value: Int) {
+        self.init(from: otherDay)
+        self.add(component, value: value)
+    }
+    
     
     // MARK: - Date conversions
     
@@ -49,6 +61,25 @@ struct TimeMatrixDay: Hashable, CustomStringConvertible {
         self.month = components.month!
         self.day = components.day!
         self.dayOfWeek = components.weekday!
+    }
+    
+    mutating func add(_ component: Calendar.Component, value: Int) {
+        switch component {
+        case .day:
+            self.day += value
+            break
+            
+        case .month:
+            self.month += value
+            break
+            
+        case .year:
+            self.year += value
+            break
+            
+        default:
+            break
+        }
     }
     
     func toDate() -> Date {

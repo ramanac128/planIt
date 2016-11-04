@@ -11,12 +11,15 @@ import Messages
 
 class CalendarViewTestController: MSMessagesAppViewController {
     @IBOutlet weak var calendarViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var timeMatrixView: TimeMatrixView!
     
     var model = TimeMatrixModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        CalendarViewDisplayManager.instance.model = model
+        timeMatrixView.model = model
         // Do any additional setup after loading the view.
     }
 

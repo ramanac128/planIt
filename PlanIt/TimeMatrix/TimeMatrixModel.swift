@@ -29,6 +29,14 @@ class TimeMatrixModel {
     var preferredDay: TimeMatrixDay? {
         didSet {
             if oldValue != self.preferredDay {
+                if let previous = oldValue {
+                    if !self.nonPreferredDays.contains(previous) {
+                        self.remove(day: previous, isPreferred: true)
+                    }
+                }
+                if let current = self.preferredDay {
+                    self.add(day: current, isPreferred: true)
+                }
                 self.informOnChange(preferredDay: self.preferredDay)
             }
         }
@@ -41,10 +49,15 @@ class TimeMatrixModel {
         }
     }
     
+    func hasDay(_ day: TimeMatrixDay) -> Bool {
+        return days.contains(day)
+    }
+    
     
     // MARK: - Variables
     
     private var days = Set<TimeMatrixDay>()
+    private var nonPreferredDays = Set<TimeMatrixDay>()
     var cells = [TimeMatrixDay: [TimeMatrixCellModel]]()
     
     var dayListeners = WeakSet<TimeMatrixModelDayListener>()
@@ -53,7 +66,7 @@ class TimeMatrixModel {
     
     // MARK: - TimeMatrixDay handlers
     
-    func add(day: TimeMatrixDay) {
+    func add(day: TimeMatrixDay, isPreferred: Bool = false) {
         var dayCells = self.cells[day]
         if dayCells == nil {
             dayCells = [TimeMatrixCellModel]()
@@ -65,12 +78,28 @@ class TimeMatrixModel {
             self.cells[day] = dayCells
         }
         
+        if !isPreferred {
+            self.nonPreferredDays.insert(day)
+        }
         if days.insert(day).inserted {
             self.informOnAdded(day: day, cellModels: dayCells!)
         }
     }
 
-    func remove(day: TimeMatrixDay) {
+    func remove(day: TimeMatrixDay, isPreferred: Bool = false) {
+        if day == self.preferredDay {
+            if isPreferred {
+                self.preferredDay = nil
+            }
+            else {
+                return
+            }
+        }
+            
+        if !isPreferred {
+            self.nonPreferredDays.remove(day)
+        }
+        
         if days.remove(day) != nil {
             self.informOnRemoved(day: day)
         }

@@ -189,11 +189,18 @@
                                     </button>
                                 </subviews>
                             </stackView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pjo-Jy-X1w" customClass="TimeMatrixView" customModule="MessagesExtension" customModuleProvider="target">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="RhV-9L-Wjb" firstAttribute="top" secondItem="Pjo-Jy-X1w" secondAttribute="bottom" id="3eO-96-l5A"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Pjo-Jy-X1w" secondAttribute="trailing" constant="-16" id="5D6-zG-28B"/>
+                            <constraint firstItem="Pjo-Jy-X1w" firstAttribute="leading" secondItem="p1m-f6-VCe" secondAttribute="leadingMargin" constant="-16" id="96h-Th-Krh"/>
                             <constraint firstItem="XvM-1j-mOp" firstAttribute="centerX" secondItem="p1m-f6-VCe" secondAttribute="centerX" id="E85-q9-bz9"/>
                             <constraint firstItem="XvM-1j-mOp" firstAttribute="top" secondItem="daA-qW-ScZ" secondAttribute="bottom" constant="8" id="EWi-Og-5WU"/>
+                            <constraint firstItem="Pjo-Jy-X1w" firstAttribute="top" secondItem="XvM-1j-mOp" secondAttribute="bottom" constant="8" id="QPu-eQ-TbM"/>
                             <constraint firstItem="daA-qW-ScZ" firstAttribute="top" secondItem="Goa-yN-myB" secondAttribute="bottom" id="SJe-DU-4qr"/>
                             <constraint firstItem="daA-qW-ScZ" firstAttribute="leading" secondItem="p1m-f6-VCe" secondAttribute="leadingMargin" constant="-16" id="gIb-L5-vdc"/>
                             <constraint firstAttribute="trailingMargin" secondItem="daA-qW-ScZ" secondAttribute="trailing" constant="-16" id="jrn-r2-WzE"/>
@@ -201,6 +208,7 @@
                     </view>
                     <connections>
                         <outlet property="calendarViewHeightConstraint" destination="DbJ-JM-r60" id="hbI-KN-kGo"/>
+                        <outlet property="timeMatrixView" destination="Pjo-Jy-X1w" id="rqw-69-Rjo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JQx-EX-fnC" userLabel="First Responder" sceneMemberID="firstResponder"/>
