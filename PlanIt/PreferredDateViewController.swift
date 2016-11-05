@@ -9,12 +9,30 @@
 import UIKit
 import Messages
 
-class PreferredDateViewController: MSMessagesAppViewController {
+class PreferredDateViewController: MSMessagesAppViewController, CalendarViewSizeListener {
+    
     enum Container {
         case calendar
         case startTime
         case endTime
     }
+    
+    func onChange(size: CalendarViewDisplayManager.ViewSize) {
+        
+        // if size is large - minimize other 2 
+        if (size == .large) {
+            startTimeHeightConstraint.constant = 0
+            endTimeHeightConstraint.constant = 0
+        }
+        
+        // if small, handle size elsewhere - not here
+        // only call animate exactly ONCE
+    }
+    
+    func onSizeAnimationChange() {
+        self.view.layoutIfNeeded()
+    }
+    
     
     var currentExpandedContainer = Container.calendar
     
@@ -27,23 +45,27 @@ class PreferredDateViewController: MSMessagesAppViewController {
     @IBOutlet weak var startTimePicker: UIDatePicker!
     @IBOutlet weak var endTimePicker: UIDatePicker!
     
-    
+    // Update Start Time Text Field
     @IBAction func startTimePickerUpdate(_ sender: UIDatePicker) {
         let timeFormatter = DateFormatter()
         timeFormatter.dateStyle = .none;
         timeFormatter.timeStyle = .short;
         startTime.text = timeFormatter.string(from: startTimePicker.date)
     }
+    
+    // Update End Time Text Field
     @IBAction func endTimePickerUpdate(_ sender: UIDatePicker) {
         let timeFormatter = DateFormatter()
         timeFormatter.dateStyle = .none;
         timeFormatter.timeStyle = .short;
         endTime.text = timeFormatter.string(from:
             endTimePicker.date)
+        // HOW TO: Change calendar size
+        //CalendarViewDisplayManager.instance.viewSize = .small
     }
     
-    
     @IBAction func startTimeClicked(_ sender: UITextField) {
+
         if (startTimeHeightConstraint.constant == 140) {
             startTimeHeightConstraint.constant = 0
             UIView.animate(withDuration: 0.75) {
@@ -72,10 +94,6 @@ class PreferredDateViewController: MSMessagesAppViewController {
             }
         }
     }
-    
-    var startDatePicker = UIDatePicker()
-    var endDatePicker = UIDatePicker()
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -89,20 +107,7 @@ class PreferredDateViewController: MSMessagesAppViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    @IBAction func startTimeEditingBegan(_ sender: AnyObject) {
-        endTimeHeightConstraint.constant = 0
-        UIView.animate(withDuration: 0.75) {
-            self.view.layoutIfNeeded()
-        }
-    }
-    
-    @IBAction func endTimeEditingBegan(_ sender: AnyObject) {
-        startTimeHeightConstraint.constant = 0
-        UIView.animate(withDuration: 0.75) {
-            self.view.layoutIfNeeded()
-        }
-    }
+
     
     /*
     // MARK: - Navigation
@@ -113,6 +118,9 @@ class PreferredDateViewController: MSMessagesAppViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    var startDatePicker = UIDatePicker()
+    var endDatePicker = UIDatePicker()
     
     func startTimeEditing() {
         let currTime = Calendar.current
