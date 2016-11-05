@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PreferredDateViewController" customModule="MessagesExtension" customModuleProvider="target">
             <connections>
                 <outlet property="endTime" destination="3is-mt-6HK" id="gWV-zd-1Rf"/>
+                <outlet property="endTimeHeightConstraint" destination="LoH-vB-Yog" id="gzl-dI-iH8"/>
                 <outlet property="startTime" destination="OrB-3r-1ZJ" id="eFx-M2-rlh"/>
+                <outlet property="startTimeHeightConstraint" destination="Esf-Wo-R7e" id="grq-iF-dqR"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -21,43 +20,84 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Preferred Start:" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RiR-f0-qyn">
-                    <rect key="frame" x="31" y="370" width="156" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <nil key="textColor"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits"/>
-                </textField>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Preferred End:" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XdA-wE-aUl">
-                    <rect key="frame" x="31" y="408" width="131" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <nil key="textColor"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits"/>
-                </textField>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Select Start Time" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OrB-3r-1ZJ">
-                    <rect key="frame" x="148" y="370" width="199" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <nil key="textColor"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits"/>
-                </textField>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Select End Time" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3is-mt-6HK">
-                    <rect key="frame" x="148" y="408" width="199" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <nil key="textColor"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits"/>
-                </textField>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dXU-WS-uLM">
-                    <rect key="frame" x="289" y="616" width="86" height="51"/>
+                    <frame key="frameInset" minX="273" minY="503" width="86" height="51"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
                     <state key="normal" title="Next"/>
                 </button>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="From:" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RiR-f0-qyn">
+                    <constraints>
+                        <constraint firstAttribute="width" constant="119" id="ECp-OZ-0W2"/>
+                    </constraints>
+                    <nil key="textColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="To:" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XdA-wE-aUl">
+                    <constraints>
+                        <constraint firstAttribute="width" constant="119" id="eZ1-P2-Byg"/>
+                    </constraints>
+                    <nil key="textColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Select Start Time" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OrB-3r-1ZJ">
+                    <nil key="textColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                    <connections>
+                        <action selector="startTimeEditingBegan:" destination="-1" eventType="editingDidBegin" id="3qg-IU-pzf"/>
+                    </connections>
+                </textField>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Select End Time" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3is-mt-6HK">
+                    <nil key="textColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                    <connections>
+                        <action selector="endTimeEditingBegan:" destination="-1" eventType="editingDidBegin" id="tPC-JN-S14"/>
+                    </connections>
+                </textField>
+                <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="15" useCurrentDate="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dit-pI-YeF">
+                    <constraints>
+                        <constraint firstAttribute="height" id="Esf-Wo-R7e"/>
+                    </constraints>
+                    <date key="date" timeIntervalSinceReferenceDate="500068800.21730399">
+                        <!--2016-11-05 20:00:00 +0000-->
+                    </date>
+                </datePicker>
+                <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="15" useCurrentDate="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7PF-dZ-YXT">
+                    <constraints>
+                        <constraint firstAttribute="height" id="LoH-vB-Yog"/>
+                    </constraints>
+                    <date key="date" timeIntervalSinceReferenceDate="500072400.73200297">
+                        <!--2016-11-05 21:00:00 +0000-->
+                    </date>
+                </datePicker>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-            <point key="canvasLocation" x="34.5" y="130.5"/>
+            <constraints>
+                <constraint firstItem="XdA-wE-aUl" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="29" id="42k-xE-qLa"/>
+                <constraint firstItem="dit-pI-YeF" firstAttribute="top" secondItem="RiR-f0-qyn" secondAttribute="bottom" constant="8" id="4Oc-R3-jwt"/>
+                <constraint firstItem="7PF-dZ-YXT" firstAttribute="top" secondItem="XdA-wE-aUl" secondAttribute="bottom" constant="8" id="6RX-ld-M8z"/>
+                <constraint firstItem="3is-mt-6HK" firstAttribute="leading" secondItem="XdA-wE-aUl" secondAttribute="trailing" constant="-2" id="7MN-Z4-r1a"/>
+                <constraint firstAttribute="trailing" secondItem="3is-mt-6HK" secondAttribute="trailing" constant="30" id="DqT-v2-f05"/>
+                <constraint firstAttribute="trailing" secondItem="7PF-dZ-YXT" secondAttribute="trailing" constant="30" id="JxT-l3-bQt"/>
+                <constraint firstItem="dit-pI-YeF" firstAttribute="top" secondItem="OrB-3r-1ZJ" secondAttribute="bottom" constant="8" id="Ogt-lU-kUK"/>
+                <constraint firstItem="RiR-f0-qyn" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="R97-l4-Ggy"/>
+                <constraint firstItem="RiR-f0-qyn" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="29" id="SaA-iZ-jPB"/>
+                <constraint firstItem="7PF-dZ-YXT" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="UzB-Rq-uNq"/>
+                <constraint firstItem="dit-pI-YeF" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="WPO-b7-zWb"/>
+                <constraint firstAttribute="trailing" secondItem="RiR-f0-qyn" secondAttribute="trailing" constant="227" id="YL2-Bz-n1e"/>
+                <constraint firstItem="3is-mt-6HK" firstAttribute="top" secondItem="dit-pI-YeF" secondAttribute="bottom" constant="8" id="dZh-R1-F8O"/>
+                <constraint firstItem="7PF-dZ-YXT" firstAttribute="top" secondItem="3is-mt-6HK" secondAttribute="bottom" constant="8" id="gIN-4w-YWT"/>
+                <constraint firstItem="OrB-3r-1ZJ" firstAttribute="leading" secondItem="RiR-f0-qyn" secondAttribute="trailing" constant="-2" id="iLF-4X-a5e"/>
+                <constraint firstItem="XdA-wE-aUl" firstAttribute="top" secondItem="dit-pI-YeF" secondAttribute="bottom" constant="8" id="jS7-yr-QkE"/>
+                <constraint firstAttribute="trailing" secondItem="OrB-3r-1ZJ" secondAttribute="trailing" constant="30" id="kg1-NP-QXc"/>
+                <constraint firstAttribute="trailing" secondItem="dit-pI-YeF" secondAttribute="trailing" constant="16" id="uxC-KN-qdN"/>
+                <constraint firstItem="OrB-3r-1ZJ" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="ylX-eV-3xL"/>
+            </constraints>
+            <point key="canvasLocation" x="34.5" y="84"/>
         </view>
     </objects>
 </document>

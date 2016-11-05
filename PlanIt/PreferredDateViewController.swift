@@ -10,47 +10,89 @@ import UIKit
 import Messages
 
 class PreferredDateViewController: MSMessagesAppViewController {
+    enum Container {
+        case calendar
+        case startTime
+        case endTime
+    }
     
+    var currentExpandedContainer = Container.calendar
+    
+    @IBOutlet weak var startTimeHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var endTimeHeightConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var startTime: UITextField!
     @IBOutlet weak var endTime: UITextField!
+    
     var startDatePicker = UIDatePicker()
     var endDatePicker = UIDatePicker()
     
 
-     func startTimeEditing() {
-        startDatePicker.minuteInterval = 15
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        self.automaticallyAdjustsScrollViewInsets = true
+        // Do any additional setup after loading the view.
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    @IBAction func startTimeEditingBegan(_ sender: AnyObject) {
+        startTimeHeightConstraint.constant = 140
+        UIView.animate(withDuration: 0.75) {
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    @IBAction func endTimeEditingBegan(_ sender: AnyObject) {
+    }
+    
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+    }
+    */
+    
+    func startTimeEditing() {
         let currTime = Calendar.current
         let d = currTime.date(bySettingHour: 4, minute: 0, second: 0, of: Date())
         startDatePicker.setDate(d!, animated: false)
+        startDatePicker.minuteInterval = 15
         
-         startDatePicker.backgroundColor = UIColor.white
-         startDatePicker.datePickerMode = UIDatePickerMode.time
-         startTime.inputView = startDatePicker
-
-         // Intialize tool bar
-         let toolBar = UIToolbar()
-         toolBar.barStyle = .default
-         toolBar.isTranslucent = true
-         toolBar.tintColor = UIColor(red: 92/255, green: 216/255, blue: 255/255, alpha: 1)
-         toolBar.sizeToFit()
-         
-         // Tool bar buttons
-         let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: "doneStartClick")
-         let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-         let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: "cancelStartClick")
-         
-         toolBar.setItems([cancelButton, spaceButton, doneButton], animated: false)
-         toolBar.isUserInteractionEnabled = true
-         startTime.inputAccessoryView = toolBar
-     }
+        startDatePicker.backgroundColor = UIColor.white
+        startDatePicker.datePickerMode = UIDatePickerMode.time
+        startTime.inputView = startDatePicker
+        
+        // Intialize tool bar
+        let toolBar = UIToolbar()
+        toolBar.barStyle = .default
+        toolBar.isTranslucent = true
+        toolBar.tintColor = UIColor(red: 92/255, green: 216/255, blue: 255/255, alpha: 1)
+        toolBar.sizeToFit()
+        
+        // Tool bar buttons
+        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: "doneStartClick")
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: "cancelStartClick")
+        
+        toolBar.setItems([cancelButton, spaceButton, doneButton], animated: false)
+        toolBar.isUserInteractionEnabled = true
+        startTime.inputAccessoryView = toolBar
+    }
     
     func endTimeEditing() {
         //endDatePicker.minuteInterval = 15
         endDatePicker.backgroundColor = UIColor.white
         endDatePicker.datePickerMode = UIDatePickerMode.time
         endTime.inputView = endDatePicker
-       
+        
         // Intialize tool bar
         let toolBar = UIToolbar()
         toolBar.barStyle = .default
@@ -91,32 +133,5 @@ class PreferredDateViewController: MSMessagesAppViewController {
     func cancelEndClick() {
         endTime.resignFirstResponder()
     }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        startDatePicker.minuteInterval = 15
-        endDatePicker.minuteInterval = 15
-        startTimeEditing()
-        endTimeEditing()
-
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
