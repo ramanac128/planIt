@@ -153,10 +153,10 @@
             </objects>
             <point key="canvasLocation" x="14" y="635"/>
         </scene>
-        <!--Calendar View Test Controller-->
+        <!--Date Time View Controller-->
         <scene sceneID="3yd-Uv-oNs">
             <objects>
-                <viewController id="iVf-h0-gVQ" customClass="CalendarViewTestController" customModule="MessagesExtension" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="iVf-h0-gVQ" customClass="DateTimeViewController" customModule="MessagesExtension" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Goa-yN-myB"/>
                         <viewControllerLayoutGuide type="bottom" id="RhV-9L-Wjb"/>
@@ -191,6 +191,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="calendarViewContainerHeightConstraint" destination="DbJ-JM-r60" id="EJE-KH-biL"/>
                         <outlet property="calendarViewHeightConstraint" destination="DbJ-JM-r60" id="hbI-KN-kGo"/>
                     </connections>
                 </viewController>

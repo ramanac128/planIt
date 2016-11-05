@@ -9,7 +9,7 @@
 import UIKit
 import JTAppleCalendar
 
-class CalendarViewController: UIViewController, CalendarViewConfigurationListener, CalendarViewModelListener {
+class CalendarViewController: UIViewController, CalendarViewConfigurationListener, CalendarViewModelListener, CalendarViewSizeListener {
     
     // MARK: - Properties
     
@@ -55,8 +55,10 @@ class CalendarViewController: UIViewController, CalendarViewConfigurationListene
         let displayManager = CalendarViewDisplayManager.instance
         displayManager.configurationListeners.insert(self)
         displayManager.modelListeners.insert(self)
+        displayManager.sizeListeners.insert(self)
         self.onChange(configuration: displayManager.configuration)
         self.onChange(model: displayManager.model)
+        self.onChange(size: displayManager.viewSize)
     }
     
     func refreshCellSelectionStates() {
@@ -106,16 +108,10 @@ class CalendarViewController: UIViewController, CalendarViewConfigurationListene
             
         case .preferredDate:
             self.calendarView.allowsMultipleSelection = false
-            self.numberOfRows = 6
-            self.discreteScrollUnit = .month
-            self.discreteScrollValue = 1
             break
             
         case .availableDates:
             self.calendarView.allowsMultipleSelection = true
-            self.numberOfRows = 2
-            self.discreteScrollUnit = .day
-            self.discreteScrollValue = 7
             break
         }
         
@@ -126,6 +122,25 @@ class CalendarViewController: UIViewController, CalendarViewConfigurationListene
     
     func onChange(model: TimeMatrixModel?) {
         self.model = model
+    }
+    
+    func onChange(size: CalendarViewDisplayManager.ViewSize) {
+        switch size {
+            
+        case .small:
+            self.numberOfRows = 2
+            self.discreteScrollUnit = .day
+            self.discreteScrollValue = 7
+            break
+            
+        case .large:
+            self.numberOfRows = 6
+            self.discreteScrollUnit = .month
+            self.discreteScrollValue = 1
+            break
+        }
+        
+        self.calendarView.reloadData(withAnchor: Date(), animation: true)
     }
 }
 
