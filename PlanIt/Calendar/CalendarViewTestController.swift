@@ -19,7 +19,7 @@ class CalendarViewTestController: MSMessagesAppViewController {
         super.viewDidLoad()
 
         CalendarViewDisplayManager.instance.model = model
-        timeMatrixView.model = model
+        //timeMatrixView.model = model
         // Do any additional setup after loading the view.
     }
 
