@@ -24,13 +24,63 @@ class PreferredDateViewController: MSMessagesAppViewController {
     @IBOutlet weak var startTime: UITextField!
     @IBOutlet weak var endTime: UITextField!
     
+    @IBOutlet weak var startTimePicker: UIDatePicker!
+    @IBOutlet weak var endTimePicker: UIDatePicker!
+    
+    
+    @IBAction func startTimePickerUpdate(_ sender: UIDatePicker) {
+        let timeFormatter = DateFormatter()
+        timeFormatter.dateStyle = .none;
+        timeFormatter.timeStyle = .short;
+        startTime.text = timeFormatter.string(from: startTimePicker.date)
+    }
+    @IBAction func endTimePickerUpdate(_ sender: UIDatePicker) {
+        let timeFormatter = DateFormatter()
+        timeFormatter.dateStyle = .none;
+        timeFormatter.timeStyle = .short;
+        endTime.text = timeFormatter.string(from:
+            endTimePicker.date)
+    }
+    
+    
+    @IBAction func startTimeClicked(_ sender: UITextField) {
+        if (startTimeHeightConstraint.constant == 140) {
+            startTimeHeightConstraint.constant = 0
+            UIView.animate(withDuration: 0.75) {
+                self.view.layoutIfNeeded()
+            }
+        }
+        else {
+            startTimeHeightConstraint.constant = 140
+            UIView.animate(withDuration: 0.75) {
+                self.view.layoutIfNeeded()
+            }
+        }
+
+    }
+    @IBAction func endTimeClicked(_ sender: Any) {
+        if (endTimeHeightConstraint.constant == 140) {
+            endTimeHeightConstraint.constant = 0
+            UIView.animate(withDuration: 0.75) {
+                self.view.layoutIfNeeded()
+            }
+        }
+        else {
+            endTimeHeightConstraint.constant = 140
+            UIView.animate(withDuration: 0.75) {
+                self.view.layoutIfNeeded()
+            }
+        }
+    }
+    
     var startDatePicker = UIDatePicker()
     var endDatePicker = UIDatePicker()
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        startTime.allowsEditingTextAttributes = false
+        endTime.allowsEditingTextAttributes = false
         self.automaticallyAdjustsScrollViewInsets = true
         // Do any additional setup after loading the view.
     }
@@ -41,13 +91,17 @@ class PreferredDateViewController: MSMessagesAppViewController {
     }
     
     @IBAction func startTimeEditingBegan(_ sender: AnyObject) {
-        startTimeHeightConstraint.constant = 140
+        endTimeHeightConstraint.constant = 0
         UIView.animate(withDuration: 0.75) {
             self.view.layoutIfNeeded()
         }
     }
     
     @IBAction func endTimeEditingBegan(_ sender: AnyObject) {
+        startTimeHeightConstraint.constant = 0
+        UIView.animate(withDuration: 0.75) {
+            self.view.layoutIfNeeded()
+        }
     }
     
     /*

@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -10,8 +13,10 @@
             <connections>
                 <outlet property="endTime" destination="3is-mt-6HK" id="gWV-zd-1Rf"/>
                 <outlet property="endTimeHeightConstraint" destination="LoH-vB-Yog" id="gzl-dI-iH8"/>
+                <outlet property="endTimePicker" destination="7PF-dZ-YXT" id="Vnc-aY-TXl"/>
                 <outlet property="startTime" destination="OrB-3r-1ZJ" id="eFx-M2-rlh"/>
                 <outlet property="startTimeHeightConstraint" destination="Esf-Wo-R7e" id="grq-iF-dqR"/>
+                <outlet property="startTimePicker" destination="dit-pI-YeF" id="Rj0-dR-CYe"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -21,12 +26,13 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dXU-WS-uLM">
-                    <frame key="frameInset" minX="273" minY="503" width="86" height="51"/>
+                    <rect key="frame" x="273" y="503" width="86" height="51"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
                     <state key="normal" title="Next"/>
                 </button>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="From:" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RiR-f0-qyn">
+                    <rect key="frame" x="29" y="20" width="119" height="30"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="119" id="ECp-OZ-0W2"/>
                     </constraints>
@@ -35,6 +41,7 @@
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="To:" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XdA-wE-aUl">
+                    <rect key="frame" x="29" y="66" width="119" height="30"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="119" id="eZ1-P2-Byg"/>
                     </constraints>
@@ -42,37 +49,48 @@
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Select Start Time" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OrB-3r-1ZJ">
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Select Start Time" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OrB-3r-1ZJ">
+                    <rect key="frame" x="146" y="20" width="199" height="30"/>
                     <nil key="textColor"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                     <connections>
+                        <action selector="startTimeClicked:" destination="-1" eventType="touchDown" id="deA-jK-ADM"/>
                         <action selector="startTimeEditingBegan:" destination="-1" eventType="editingDidBegin" id="3qg-IU-pzf"/>
                     </connections>
                 </textField>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Select End Time" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3is-mt-6HK">
+                    <rect key="frame" x="146" y="66" width="199" height="30"/>
                     <nil key="textColor"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                     <connections>
+                        <action selector="endTimeClicked:" destination="-1" eventType="touchDown" id="ro4-w2-6po"/>
                         <action selector="endTimeEditingBegan:" destination="-1" eventType="editingDidBegin" id="tPC-JN-S14"/>
                     </connections>
                 </textField>
                 <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="15" useCurrentDate="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dit-pI-YeF">
+                    <rect key="frame" x="16" y="58" width="343" height="0.0"/>
                     <constraints>
                         <constraint firstAttribute="height" id="Esf-Wo-R7e"/>
                     </constraints>
                     <date key="date" timeIntervalSinceReferenceDate="500068800.21730399">
                         <!--2016-11-05 20:00:00 +0000-->
                     </date>
+                    <connections>
+                        <action selector="startTimePickerUpdate:" destination="-1" eventType="valueChanged" id="Frz-K5-I1U"/>
+                    </connections>
                 </datePicker>
                 <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="15" useCurrentDate="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7PF-dZ-YXT">
+                    <rect key="frame" x="16" y="104" width="329" height="0.0"/>
                     <constraints>
                         <constraint firstAttribute="height" id="LoH-vB-Yog"/>
                     </constraints>
                     <date key="date" timeIntervalSinceReferenceDate="500072400.73200297">
                         <!--2016-11-05 21:00:00 +0000-->
                     </date>
+                    <connections>
+                        <action selector="endTimePickerUpdate:" destination="-1" eventType="valueChanged" id="tcN-2V-dtL"/>
+                    </connections>
                 </datePicker>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
