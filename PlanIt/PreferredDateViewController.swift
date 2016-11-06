@@ -9,7 +9,7 @@
 import UIKit
 import Messages
 
-class PreferredDateViewController: MSMessagesAppViewController, CalendarViewSizeListener {
+class PreferredDateViewController: MSMessagesAppViewController, CalendarViewSizeListener, UITextFieldDelegate {
     
     enum Container {
         case calendar
@@ -24,15 +24,15 @@ class PreferredDateViewController: MSMessagesAppViewController, CalendarViewSize
             startTimeHeightConstraint.constant = 0
             endTimeHeightConstraint.constant = 0
         }
-        
-        // if small, handle size elsewhere - not here
-        // only call animate exactly ONCE
     }
     
     func onSizeAnimationChange() {
         self.view.layoutIfNeeded()
     }
     
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        return false
+    }
     
     var currentExpandedContainer = Container.calendar
     
@@ -66,8 +66,8 @@ class PreferredDateViewController: MSMessagesAppViewController, CalendarViewSize
        
         if (currentExpandedContainer == .calendar) {
             CalendarViewDisplayManager.instance.viewSize = .large
-            
         }
+        
         // Start Button
         if (sender.tag == 1) {
             endTimeHeightConstraint.constant = 0
@@ -112,10 +112,10 @@ class PreferredDateViewController: MSMessagesAppViewController, CalendarViewSize
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        startTime.allowsEditingTextAttributes = false
-        endTime.allowsEditingTextAttributes = false
+        
         self.automaticallyAdjustsScrollViewInsets = true
         // Do any additional setup after loading the view.
+
     }
 
     override func didReceiveMemoryWarning() {
