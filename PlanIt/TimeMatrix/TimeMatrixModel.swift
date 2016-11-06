@@ -17,6 +17,11 @@ protocol TimeMatrixModelPreferredDayListener: class {
     func onChange(preferredDay: TimeMatrixDay?)
 }
 
+protocol TimeMatrixModelPreferredTimeListener: class {
+    func onChange(startTime: TimeMatrixTime?)
+    func onChange(endTime: TimeMatrixTime?)
+}
+
 class TimeMatrixModel {
     
     // MARK: - Static constants
@@ -42,6 +47,22 @@ class TimeMatrixModel {
         }
     }
     
+    var preferredStartTime: TimeMatrixTime? {
+        didSet {
+            if oldValue != self.preferredStartTime {
+                self.informOnChange(startTime: self.preferredStartTime)
+            }
+        }
+    }
+    
+    var preferredEndTime: TimeMatrixTime? {
+        didSet {
+            if oldValue != self.preferredEndTime {
+                self.informOnChange(endTime: self.preferredEndTime)
+            }
+        }
+    }
+    
     var activeDays: [TimeMatrixDay] {
         get {
             let arr = Array(self.days)
@@ -53,6 +74,15 @@ class TimeMatrixModel {
         return days.contains(day)
     }
     
+    func buildFromPreferredTimes() {
+        if let day = self.preferredDay, let start = self.preferredStartTime, let end = self.preferredEndTime {
+            let cells = self.cells[day]!
+            for i in 0..<cells.count {
+                cells[i].currentState = (i >= start.rawValue && i < end.rawValue ? .preferred : .unavailable)
+            }
+        }
+    }
+    
     
     // MARK: - Variables
     
@@ -62,6 +92,7 @@ class TimeMatrixModel {
     
     var dayListeners = WeakSet<TimeMatrixModelDayListener>()
     var preferredDayListeners = WeakSet<TimeMatrixModelPreferredDayListener>()
+    var preferredTimeListeners = WeakSet<TimeMatrixModelPreferredTimeListener>()
     
     
     // MARK: - TimeMatrixDay handlers
@@ -105,6 +136,12 @@ class TimeMatrixModel {
         }
     }
     
+    func removeAllDays() {
+        for day in self.activeDays {
+            self.remove(day: day, isPreferred: true)
+        }
+    }
+    
     private func informOnAdded(day: TimeMatrixDay, cellModels: [TimeMatrixCellModel]) {
         var index = 0
         if let i = self.activeDays.index(of: day) {
@@ -124,6 +161,18 @@ class TimeMatrixModel {
     private func informOnChange(preferredDay: TimeMatrixDay?) {
         for listener in self.preferredDayListeners {
             listener.onChange(preferredDay: preferredDay)
+        }
+    }
+    
+    private func informOnChange(startTime: TimeMatrixTime?) {
+        for listener in self.preferredTimeListeners {
+            listener.onChange(startTime: startTime)
+        }
+    }
+    
+    private func informOnChange(endTime: TimeMatrixTime?) {
+        for listener in self.preferredTimeListeners {
+            listener.onChange(endTime: endTime)
         }
     }
 }

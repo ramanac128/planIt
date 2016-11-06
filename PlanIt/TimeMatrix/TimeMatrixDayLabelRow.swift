@@ -13,11 +13,11 @@ class TimeMatrixDayLabelRow: TimeMatrixDayViewLayoutManager<TimeMatrixDayLabelCe
     // MARK: - Initialization
     
     override init(frame: CGRect) {
-        super.init(frame: frame, sideView: UIView())
+        super.init(frame: frame, sideView: TimeMatrixResolutionStepperView())
     }
     
     required init(coder: NSCoder) {
-        super.init(coder: coder, sideView: UIView())
+        super.init(coder: coder, sideView: TimeMatrixResolutionStepperView())
     }
     
     convenience init() {

@@ -9,16 +9,13 @@
 import UIKit
 import Messages
 
-class PreferredDateViewController: MSMessagesAppViewController, CalendarViewSizeListener, UITextFieldDelegate {
+class PreferredDateViewController: MSMessagesAppViewController, TimeMatrixModelListener, CalendarViewSizeListener, UITextFieldDelegate {
     
     enum Container {
         case calendar
         case startTime
         case endTime
     }
-    
-    var currentExpandedContainer = Container.calendar
-    
     @IBOutlet weak var startTimeHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var endTimeHeightConstraint: NSLayoutConstraint!
     
@@ -28,29 +25,37 @@ class PreferredDateViewController: MSMessagesAppViewController, CalendarViewSize
     @IBOutlet weak var startTimePicker: UIDatePicker!
     @IBOutlet weak var endTimePicker: UIDatePicker!
     
+    var model: TimeMatrixModel?
+    
+    var timeFormatter = DateFormatter()
+    
+    var currentExpandedContainer = Container.calendar
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.timeFormatter.dateStyle = .none;
+        self.timeFormatter.timeStyle = .short;
         
         self.automaticallyAdjustsScrollViewInsets = true
         CalendarViewDisplayManager.instance.sizeListeners.insert(self)
         
+        let modelManager = TimeMatrixModelManager.instance
+        modelManager.modelListeners.insert(self)
+        self.onChange(model: modelManager.model)
     }
     
     // Update Start Time Text Field
     @IBAction func startTimePickerUpdate(_ sender: UIDatePicker) {
-        let timeFormatter = DateFormatter()
-        timeFormatter.dateStyle = .none;
-        timeFormatter.timeStyle = .short;
         startTime.text = timeFormatter.string(from: startTimePicker.date)
+        self.model?.preferredStartTime = TimeMatrixTime(date: startTimePicker.date)
     }
     
     // Update End Time Text Field
     @IBAction func endTimePickerUpdate(_ sender: UIDatePicker) {
-        let timeFormatter = DateFormatter()
-        timeFormatter.dateStyle = .none;
-        timeFormatter.timeStyle = .short;
-        endTime.text = timeFormatter.string(from:
-            endTimePicker.date)
+        endTime.text = timeFormatter.string(from: endTimePicker.date)
+        self.model?.preferredEndTime = TimeMatrixTime(date: endTimePicker.date)
     }
     
     func onChange(size: CalendarViewDisplayManager.ViewSize) {
@@ -81,6 +86,7 @@ class PreferredDateViewController: MSMessagesAppViewController, CalendarViewSize
             }
             else {
                 // Changing start time input
+                self.startTimePickerUpdate(self.startTimePicker)
                 startTimeHeightConstraint.constant = DateTimeViewController.expandedItemSize
                 endTimeHeightConstraint.constant = 0
                 
@@ -102,6 +108,7 @@ class PreferredDateViewController: MSMessagesAppViewController, CalendarViewSize
             }
             else {
                 // Changing end time input
+                self.endTimePickerUpdate(self.endTimePicker)
                 endTimeHeightConstraint.constant = DateTimeViewController.expandedItemSize
                 startTimeHeightConstraint.constant = 0
                 
@@ -113,5 +120,9 @@ class PreferredDateViewController: MSMessagesAppViewController, CalendarViewSize
                 }
             }
         }
+    }
+    
+    func onChange(model: TimeMatrixModel?) {
+        self.model = model
     }
 }

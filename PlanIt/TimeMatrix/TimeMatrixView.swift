@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TimeMatrixView: UIStackView {
+class TimeMatrixView: UIStackView, TimeMatrixModelListener {
     
     // MARK: - Subviews
     
@@ -55,5 +55,13 @@ class TimeMatrixView: UIStackView {
         self.labelRow = labelRow
         self.addArrangedSubview(labelRow)
         self.addArrangedSubview(scrollView)
+        
+        let modelManager = TimeMatrixModelManager.instance
+        modelManager.modelListeners.insert(self)
+        self.onChange(model: modelManager.model)
+    }
+    
+    func onChange(model: TimeMatrixModel?) {
+        self.model = model
     }
 }

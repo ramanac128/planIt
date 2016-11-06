@@ -12,10 +12,6 @@ protocol CalendarViewConfigurationListener: class {
     func onChange(configuration: CalendarViewDisplayManager.Configuration)
 }
 
-protocol CalendarViewModelListener: class {
-    func onChange(model: TimeMatrixModel?)
-}
-
 protocol CalendarViewSizeListener: class {
     func onChange(size: CalendarViewDisplayManager.ViewSize)
     func onSizeAnimationBegin()
@@ -29,7 +25,7 @@ extension CalendarViewSizeListener {
     func onSizeAnimationEnd() {}
 }
 
-class CalendarViewDisplayManager {
+class CalendarViewDisplayManager: TimeMatrixModelListener {
     static let instance = CalendarViewDisplayManager()
     
     // MARK: - Display constants
@@ -77,14 +73,6 @@ class CalendarViewDisplayManager {
         }
     }
     
-    var model: TimeMatrixModel? {
-        didSet {
-            for listener in self.modelListeners {
-                listener.onChange(model: self.model)
-            }
-        }
-    }
-    
     var viewSize: ViewSize {
         didSet {
             if oldValue != self.viewSize {
@@ -106,12 +94,13 @@ class CalendarViewDisplayManager {
             }
         }
     }
+    
+    var model: TimeMatrixModel?
 
     
     // MARK: - Variables
     
     let configurationListeners = WeakSet<CalendarViewConfigurationListener>()
-    let modelListeners = WeakSet<CalendarViewModelListener>()
     let sizeListeners = WeakSet<CalendarViewSizeListener>()
     
     
@@ -120,5 +109,13 @@ class CalendarViewDisplayManager {
     private init() {
         self.configuration = .preferredDate
         self.viewSize = .large
+        
+        let modelManager = TimeMatrixModelManager.instance
+        modelManager.modelListeners.insert(self)
+        self.onChange(model: modelManager.model)
+    }
+    
+    func onChange(model: TimeMatrixModel?) {
+        self.model = model
     }
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TimeMatrixScrollView: UIScrollView, TimeMatrixRowAnimationListener, UIScrollViewDelegate, UIGestureRecognizerDelegate {
+class TimeMatrixScrollView: UIScrollView, TimeMatrixWillDisplayListener, TimeMatrixModelPreferredDayListener, TimeMatrixModelPreferredTimeListener, TimeMatrixRowAnimationListener, UIScrollViewDelegate, UIGestureRecognizerDelegate {
     
     // MARK: - Subviews
     
@@ -20,7 +20,11 @@ class TimeMatrixScrollView: UIScrollView, TimeMatrixRowAnimationListener, UIScro
     
     var model: TimeMatrixModel? {
         didSet {
-            if oldValue !== self.model {
+            oldValue?.preferredDayListeners.remove(self)
+            oldValue?.preferredTimeListeners.remove(self)
+            if oldValue !== self.model && self.model != nil {
+                self.model!.preferredDayListeners.insert(self)
+                self.model!.preferredTimeListeners.insert(self)
                 for selectionView in self.selectionViews {
                     selectionView.value!.model = self.model!
                 }
@@ -85,7 +89,9 @@ class TimeMatrixScrollView: UIScrollView, TimeMatrixRowAnimationListener, UIScro
         panRecognizer.delegate = self
         self.addGestureRecognizer(panRecognizer)
         
-        TimeMatrixDisplayManager.instance.rowAnimationListeners.insert(self)
+        let displayManager = TimeMatrixDisplayManager.instance
+        displayManager.rowAnimationListeners.insert(self)
+        displayManager.willDisplayListeners.insert(self)
     }
     
     
@@ -118,6 +124,12 @@ class TimeMatrixScrollView: UIScrollView, TimeMatrixRowAnimationListener, UIScro
         let contentCenter = contentHeight * percent
         let contentOffset = contentCenter - halfHeight + contentHeight
         self.contentOffset = CGPoint(x: 0, y: contentOffset)
+    }
+    
+    func onWillDisplay() {
+        for selectionView in self.selectionViews {
+            selectionView.value!.setNeedsDisplay()
+        }
     }
     
     
@@ -260,6 +272,27 @@ class TimeMatrixScrollView: UIScrollView, TimeMatrixRowAnimationListener, UIScro
         }
     }
     
+    
+    // MARK: - TimeMatrixModel protocol methods
+    
+    func onChange(preferredDay: TimeMatrixDay?) {
+        self.scrollToPreferredTime()
+    }
+    
+    func onChange(startTime: TimeMatrixTime?) {
+        self.scrollToPreferredTime()
+    }
+    
+    func onChange(endTime: TimeMatrixTime?) {
+        self.scrollToPreferredTime()
+    }
+    
+    func scrollToPreferredTime() {
+        if let model = self.model, let start = model.preferredStartTime, let end = model.preferredEndTime {
+            let percent = CGFloat(start.rawValue + end.rawValue - 1) / CGFloat(TimeMatrixModel.cellsPerDay * 2)
+            self.scrollCenterTo(percent: percent, animated: false)
+        }
+    }
     
     // MARK: - TimeMatrixRowAnimationListener protocol methods
     

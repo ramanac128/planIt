@@ -9,7 +9,7 @@
 import UIKit
 import JTAppleCalendar
 
-class CalendarViewController: UIViewController, CalendarViewConfigurationListener, CalendarViewModelListener, CalendarViewSizeListener {
+class CalendarViewController: UIViewController, TimeMatrixModelListener, CalendarViewConfigurationListener, CalendarViewSizeListener {
     
     // MARK: - Properties
     
@@ -52,12 +52,14 @@ class CalendarViewController: UIViewController, CalendarViewConfigurationListene
         self.calendarView.direction = .vertical
         self.calendarView.scrollingMode = .stopAtEach(customInterval: 7)
         
+        let modelManager = TimeMatrixModelManager.instance
+        modelManager.modelListeners.insert(self)
+        self.onChange(model: modelManager.model)
+        
         let displayManager = CalendarViewDisplayManager.instance
         displayManager.configurationListeners.insert(self)
-        displayManager.modelListeners.insert(self)
         displayManager.sizeListeners.insert(self)
         self.onChange(configuration: displayManager.configuration)
-        self.onChange(model: displayManager.model)
         self.onChange(size: displayManager.viewSize)
     }
     

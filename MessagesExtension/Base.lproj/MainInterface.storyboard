@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="iVf-h0-gVQ">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="iVf-h0-gVQ">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -23,34 +20,28 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="27" translatesAutoresizingMaskIntoConstraints="NO" id="K5n-kQ-GwS">
-                                <rect key="frame" x="16" y="20" width="221" height="120"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="aPf-eF-DBL">
-                                        <rect key="frame" x="0.0" y="0.0" width="48" height="120"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eZG-P4-OLb">
-                                                <rect key="frame" x="0.0" y="0.0" width="48" height="30"/>
                                                 <state key="normal" title="15 min"/>
                                                 <connections>
                                                     <action selector="on15min:" destination="ObA-dk-sSI" eventType="touchUpInside" id="r3j-SR-MV4"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n9j-ey-8lZ">
-                                                <rect key="frame" x="0.0" y="30" width="48" height="30"/>
                                                 <state key="normal" title="30 min"/>
                                                 <connections>
                                                     <action selector="on30min:" destination="ObA-dk-sSI" eventType="touchUpInside" id="ywa-Ql-aEW"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IHh-77-wBb">
-                                                <rect key="frame" x="0.0" y="60" width="48" height="30"/>
                                                 <state key="normal" title="1 hr"/>
                                                 <connections>
                                                     <action selector="on1hr:" destination="ObA-dk-sSI" eventType="touchUpInside" id="Dnv-3u-ylt"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Ml-zs-kp7">
-                                                <rect key="frame" x="0.0" y="90" width="48" height="30"/>
                                                 <state key="normal" title="2 hr"/>
                                                 <connections>
                                                     <action selector="on2hr:" destination="ObA-dk-sSI" eventType="touchUpInside" id="2no-iP-xLv"/>
@@ -59,17 +50,14 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="R4S-p3-TLe">
-                                        <rect key="frame" x="75" y="0.0" width="63" height="120"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vXa-Rl-CsM">
-                                                <rect key="frame" x="0.0" y="0.0" width="63" height="60"/>
                                                 <state key="normal" title="Standard"/>
                                                 <connections>
                                                     <action selector="onStandardTime:" destination="ObA-dk-sSI" eventType="touchUpInside" id="TEa-rF-QyM"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zgl-o1-Sab">
-                                                <rect key="frame" x="0.0" y="60" width="63" height="60"/>
                                                 <state key="normal" title="Military"/>
                                                 <connections>
                                                     <action selector="onMilitaryTime:" destination="ObA-dk-sSI" eventType="touchUpInside" id="jD6-tB-JXf"/>
@@ -78,17 +66,14 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="Lzc-Ys-Ocg">
-                                        <rect key="frame" x="165" y="0.0" width="56" height="120"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TWE-Gq-6nR">
-                                                <rect key="frame" x="0.0" y="0.0" width="56" height="60"/>
                                                 <state key="normal" title="Model 1"/>
                                                 <connections>
                                                     <action selector="onModel1:" destination="ObA-dk-sSI" eventType="touchUpInside" id="QVf-5s-zx5"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hl9-PM-4Zc">
-                                                <rect key="frame" x="0.0" y="60" width="56" height="60"/>
                                                 <state key="normal" title="Model 2"/>
                                                 <connections>
                                                     <action selector="onModel2:" destination="ObA-dk-sSI" eventType="touchUpInside" id="iqD-xg-1K9"/>
@@ -99,38 +84,32 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="Q57-Dw-guM">
-                                <rect key="frame" x="14" y="160" width="210" height="30"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oQ2-hP-avP">
-                                        <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
                                         <state key="normal" title="D1"/>
                                         <connections>
                                             <action selector="onDay1:" destination="ObA-dk-sSI" eventType="touchUpInside" id="mke-98-LaM"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ARi-G3-esr">
-                                        <rect key="frame" x="45" y="0.0" width="30" height="30"/>
                                         <state key="normal" title="D2"/>
                                         <connections>
                                             <action selector="onDay2:" destination="ObA-dk-sSI" eventType="touchUpInside" id="XKs-O4-gGt"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Fd-zP-GgQ">
-                                        <rect key="frame" x="90" y="0.0" width="30" height="30"/>
                                         <state key="normal" title="D3"/>
                                         <connections>
                                             <action selector="onDay3:" destination="ObA-dk-sSI" eventType="touchUpInside" id="7q6-d5-xnJ"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AJc-bi-wag">
-                                        <rect key="frame" x="135" y="0.0" width="30" height="30"/>
                                         <state key="normal" title="D4"/>
                                         <connections>
                                             <action selector="onDay4:" destination="ObA-dk-sSI" eventType="touchUpInside" id="MZo-Ea-VEI"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TTA-LA-Xu5">
-                                        <rect key="frame" x="180" y="0.0" width="30" height="30"/>
                                         <state key="normal" title="D5"/>
                                         <connections>
                                             <action selector="onDay5:" destination="ObA-dk-sSI" eventType="touchUpInside" id="KLN-xl-lY9"/>
@@ -139,7 +118,6 @@
                                 </subviews>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="85p-jp-XYh" customClass="TimeMatrixView" customModule="MessagesExtension" customModuleProvider="target">
-                                <rect key="frame" x="16" y="249" width="288" height="259"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
@@ -187,8 +165,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="daA-qW-ScZ">
-                                <rect key="frame" x="0.0" y="20" width="375" height="300"/>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="daA-qW-ScZ" userLabel="Calendar Container">
                                 <constraints>
                                     <constraint firstAttribute="height" constant="300" id="DbJ-JM-r60"/>
                                 </constraints>
@@ -196,26 +173,76 @@
                                     <segue destination="t6c-5k-M8g" kind="embed" id="qK0-V5-2ve"/>
                                 </connections>
                             </containerView>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Ck-be-Zs2">
-                                <rect key="frame" x="0.0" y="315" width="375" height="352"/>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Ck-be-Zs2" userLabel="Time Container">
                                 <connections>
                                     <segue destination="l88-pq-0DJ" kind="embed" id="6g6-am-U2Q"/>
+                                </connections>
+                            </containerView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0dJ-bh-1hh" userLabel="Navigation View">
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0oT-Uo-vL0">
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="180" id="ess-aQ-Pou"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <state key="normal" title="Set Availability">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="nextButtonTouch:" destination="iVf-h0-gVQ" eventType="touchUpInside" id="FnX-gN-WK7"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CAh-ds-Fc3">
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="87" id="l1Y-ch-xQl"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="18"/>
+                                        <state key="normal" title="Cancel"/>
+                                        <connections>
+                                            <action selector="backButtonTouch:" destination="iVf-h0-gVQ" eventType="touchUpInside" id="a4S-xL-y4o"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="CAh-ds-Fc3" firstAttribute="leading" secondItem="0dJ-bh-1hh" secondAttribute="leading" constant="15" id="6X6-BU-51k"/>
+                                    <constraint firstAttribute="height" constant="53" id="BNe-Mm-HtU"/>
+                                    <constraint firstAttribute="trailing" secondItem="0oT-Uo-vL0" secondAttribute="trailing" constant="15" id="TRn-VN-euq"/>
+                                    <constraint firstItem="0oT-Uo-vL0" firstAttribute="centerY" secondItem="0dJ-bh-1hh" secondAttribute="centerY" id="h6Q-FK-r6L"/>
+                                    <constraint firstItem="CAh-ds-Fc3" firstAttribute="centerY" secondItem="0dJ-bh-1hh" secondAttribute="centerY" id="jiH-tT-uRe"/>
+                                </constraints>
+                            </view>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nwc-zb-uiC" userLabel="Availability Container">
+                                <connections>
+                                    <segue destination="ntR-Ya-daV" kind="embed" id="VdT-R3-Z6T"/>
                                 </connections>
                             </containerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="3Ck-be-Zs2" firstAttribute="leading" secondItem="p1m-f6-VCe" secondAttribute="leadingMargin" constant="-16" id="87O-F4-lp3"/>
-                            <constraint firstItem="RhV-9L-Wjb" firstAttribute="top" secondItem="3Ck-be-Zs2" secondAttribute="bottom" id="Fh0-j5-HPc"/>
+                            <constraint firstItem="Nwc-zb-uiC" firstAttribute="bottom" secondItem="3Ck-be-Zs2" secondAttribute="bottom" id="9du-Wn-rCG"/>
+                            <constraint firstItem="0dJ-bh-1hh" firstAttribute="leading" secondItem="p1m-f6-VCe" secondAttribute="leadingMargin" constant="-16" id="NcW-Nc-lgv"/>
                             <constraint firstAttribute="trailingMargin" secondItem="3Ck-be-Zs2" secondAttribute="trailing" constant="-16" id="RIV-8D-1LM"/>
                             <constraint firstItem="daA-qW-ScZ" firstAttribute="top" secondItem="Goa-yN-myB" secondAttribute="bottom" id="SJe-DU-4qr"/>
+                            <constraint firstItem="RhV-9L-Wjb" firstAttribute="top" secondItem="0dJ-bh-1hh" secondAttribute="bottom" id="SrX-cD-JII"/>
                             <constraint firstItem="daA-qW-ScZ" firstAttribute="leading" secondItem="p1m-f6-VCe" secondAttribute="leadingMargin" constant="-16" id="gIb-L5-vdc"/>
+                            <constraint firstItem="Nwc-zb-uiC" firstAttribute="leading" secondItem="3Ck-be-Zs2" secondAttribute="leading" id="hZm-n5-Lz9"/>
                             <constraint firstAttribute="trailingMargin" secondItem="daA-qW-ScZ" secondAttribute="trailing" constant="-16" id="jrn-r2-WzE"/>
+                            <constraint firstItem="Nwc-zb-uiC" firstAttribute="top" secondItem="3Ck-be-Zs2" secondAttribute="top" id="naM-GX-1Gw"/>
+                            <constraint firstItem="0dJ-bh-1hh" firstAttribute="top" secondItem="3Ck-be-Zs2" secondAttribute="bottom" constant="-3" id="obC-Nk-PIL"/>
                             <constraint firstItem="3Ck-be-Zs2" firstAttribute="top" secondItem="daA-qW-ScZ" secondAttribute="bottom" constant="-5" id="uXR-XC-uxO"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="0dJ-bh-1hh" secondAttribute="trailing" constant="-16" id="xwV-df-F94"/>
+                            <constraint firstItem="Nwc-zb-uiC" firstAttribute="trailing" secondItem="3Ck-be-Zs2" secondAttribute="trailing" id="zOv-yB-3n3"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="availabilityContainer" destination="Nwc-zb-uiC" id="bsp-dz-feI"/>
+                        <outlet property="backButton" destination="CAh-ds-Fc3" id="vtb-uO-u1N"/>
                         <outlet property="calendarViewContainerHeightConstraint" destination="DbJ-JM-r60" id="EJE-KH-biL"/>
+                        <outlet property="nextButton" destination="0oT-Uo-vL0" id="4ER-ag-EVp"/>
+                        <outlet property="timeContainer" destination="3Ck-be-Zs2" id="VH5-Z8-ilc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JQx-EX-fnC" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -228,7 +255,7 @@
                 <viewController id="t6c-5k-M8g" customClass="CalendarViewController" customModule="MessagesExtension" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zxb-ZZ-WuJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1638" y="394"/>
+            <point key="canvasLocation" x="1570" y="141"/>
         </scene>
         <!--Preferred Date View Controller-->
         <scene sceneID="MV3-Zb-NSh">
@@ -236,7 +263,15 @@
                 <viewController id="l88-pq-0DJ" customClass="PreferredDateViewController" customModule="MessagesExtension" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QEL-QA-5T0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1591" y="752"/>
+            <point key="canvasLocation" x="1569" y="753"/>
+        </scene>
+        <!--Time Matrix View Controller-->
+        <scene sceneID="zOd-hj-U4d">
+            <objects>
+                <viewController id="ntR-Ya-daV" customClass="TimeMatrixViewController" customModule="MessagesExtension" customModuleProvider="target" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IGv-XV-x6i" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1569" y="445"/>
         </scene>
     </scenes>
 </document>

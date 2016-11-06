@@ -19,7 +19,7 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="349"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="310"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="From:" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RiR-f0-qyn">
@@ -27,12 +27,12 @@
                         <constraint firstAttribute="width" constant="100" id="ECp-OZ-0W2"/>
                     </constraints>
                     <nil key="textColor"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                    <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="20"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="249" restorationIdentifier="startPicker" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Select Start Time" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OrB-3r-1ZJ">
                     <nil key="textColor"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                    <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="20"/>
                     <textInputTraits key="textInputTraits"/>
                     <connections>
                         <action selector="textBoxClicked:" destination="-1" eventType="touchDown" id="7Re-SP-zO5"/>
@@ -66,12 +66,12 @@
                         <constraint firstAttribute="width" constant="100" id="eZ1-P2-Byg"/>
                     </constraints>
                     <nil key="textColor"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                    <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="20"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="249" restorationIdentifier="endPicker" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Select End Time" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3is-mt-6HK">
                     <nil key="textColor"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                    <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="20"/>
                     <textInputTraits key="textInputTraits"/>
                     <connections>
                         <action selector="textBoxClicked:" destination="-1" eventType="touchDown" id="NJa-r4-tmp"/>
@@ -100,10 +100,6 @@
                         <constraint firstItem="7PF-dZ-YXT" firstAttribute="centerY" secondItem="ADg-rK-AyP" secondAttribute="centerY" id="qyx-F0-wPx"/>
                     </constraints>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dXU-WS-uLM">
-                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                    <state key="normal" title="Next"/>
-                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
@@ -113,24 +109,22 @@
                 <constraint firstAttribute="trailing" secondItem="3is-mt-6HK" secondAttribute="trailing" constant="30" id="DqT-v2-f05"/>
                 <constraint firstItem="3is-mt-6HK" firstAttribute="top" secondItem="ej5-28-ZGg" secondAttribute="bottom" constant="8" id="F9h-Hb-ohY"/>
                 <constraint firstAttribute="trailing" secondItem="ej5-28-ZGg" secondAttribute="trailing" constant="16" id="HDY-et-h5s"/>
-                <constraint firstAttribute="trailing" secondItem="dXU-WS-uLM" secondAttribute="trailing" constant="16" id="KQd-l5-nFa"/>
-                <constraint firstAttribute="bottom" secondItem="dXU-WS-uLM" secondAttribute="bottom" constant="20" id="RDf-1k-BdZ"/>
                 <constraint firstItem="RiR-f0-qyn" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="29" id="SaA-iZ-jPB"/>
                 <constraint firstItem="ADg-rK-AyP" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="U1g-Q7-z9o"/>
                 <constraint firstItem="ej5-28-ZGg" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="Ulh-CO-uiN"/>
-                <constraint firstItem="ej5-28-ZGg" firstAttribute="top" secondItem="OrB-3r-1ZJ" secondAttribute="bottom" constant="8" id="WRd-0r-mAD"/>
+                <constraint firstItem="ej5-28-ZGg" firstAttribute="top" secondItem="OrB-3r-1ZJ" secondAttribute="bottom" constant="20" id="WRd-0r-mAD"/>
                 <constraint firstItem="RiR-f0-qyn" firstAttribute="centerY" secondItem="OrB-3r-1ZJ" secondAttribute="centerY" id="bYE-RU-pgV"/>
                 <constraint firstItem="ADg-rK-AyP" firstAttribute="top" secondItem="3is-mt-6HK" secondAttribute="bottom" constant="8" id="gA0-h5-rEn"/>
                 <constraint firstItem="OrB-3r-1ZJ" firstAttribute="leading" secondItem="RiR-f0-qyn" secondAttribute="trailing" constant="-2" id="iLF-4X-a5e"/>
                 <constraint firstAttribute="trailing" secondItem="OrB-3r-1ZJ" secondAttribute="trailing" constant="30" id="kg1-NP-QXc"/>
                 <constraint firstAttribute="trailing" secondItem="ADg-rK-AyP" secondAttribute="trailing" constant="16" id="vAs-10-KZK"/>
-                <constraint firstItem="OrB-3r-1ZJ" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="ylX-eV-3xL"/>
+                <constraint firstItem="OrB-3r-1ZJ" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="30" id="ylX-eV-3xL"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="34.5" y="-75.5"/>
+            <point key="canvasLocation" x="34.5" y="-95"/>
         </view>
     </objects>
 </document>

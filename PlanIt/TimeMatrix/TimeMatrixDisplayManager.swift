@@ -16,6 +16,10 @@ protocol TimeMatrixTimeFormatListener: class {
     func onChange(timeFormat: TimeMatrixDisplayManager.TimeFormat, previous: TimeMatrixDisplayManager.TimeFormat)
 }
 
+protocol TimeMatrixWillDisplayListener: class {
+    func onWillDisplay()
+}
+
 protocol TimeMatrixRowAnimationListener: class {
     func onRowAnimationBegin()
     func onRowAnimationFrame()
@@ -128,6 +132,7 @@ class TimeMatrixDisplayManager {
     
     let resolutionListeners = WeakSet<TimeMatrixResolutionListener>()
     let timeFormatListeners = WeakSet<TimeMatrixTimeFormatListener>()
+    let willDisplayListeners = WeakSet<TimeMatrixWillDisplayListener>()
     let rowAnimationListeners = WeakSet<TimeMatrixRowAnimationListener>()
     let columnAnimationListeners = WeakSet<TimeMatrixColumnAnimationListener>()
     
@@ -141,6 +146,12 @@ class TimeMatrixDisplayManager {
     
     
     // MARK: - Speaker methods
+    
+    func informWillDisplay() {
+        for listener in self.willDisplayListeners {
+            listener.onWillDisplay()
+        }
+    }
     
     func informOnRowAnimationBegin() {
         for listener in self.rowAnimationListeners {
