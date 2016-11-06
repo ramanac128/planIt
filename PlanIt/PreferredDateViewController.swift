@@ -60,39 +60,54 @@ class PreferredDateViewController: MSMessagesAppViewController, CalendarViewSize
         timeFormatter.timeStyle = .short;
         endTime.text = timeFormatter.string(from:
             endTimePicker.date)
-        // HOW TO: Change calendar size
-        //CalendarViewDisplayManager.instance.viewSize = .small
     }
     
-    @IBAction func startTimeClicked(_ sender: UITextField) {
-
-        if (startTimeHeightConstraint.constant == 140) {
-            startTimeHeightConstraint.constant = 0
-            UIView.animate(withDuration: 0.75) {
-                self.view.layoutIfNeeded()
-            }
+    @IBAction func textBoxClicked(_ sender: UITextField) {
+       
+        if (currentExpandedContainer == .calendar) {
+            CalendarViewDisplayManager.instance.viewSize = .large
+            
         }
-        else {
-            startTimeHeightConstraint.constant = 140
-            UIView.animate(withDuration: 0.75) {
-                self.view.layoutIfNeeded()
-            }
-        }
-
-    }
-    @IBAction func endTimeClicked(_ sender: Any) {
-        if (endTimeHeightConstraint.constant == 140) {
+        // Start Button
+        if (sender.tag == 1) {
             endTimeHeightConstraint.constant = 0
-            UIView.animate(withDuration: 0.75) {
-                self.view.layoutIfNeeded()
+            
+            // Previously opened start time, so now want to close the text
+            if (currentExpandedContainer == .startTime) {
+                startTimeHeightConstraint.constant = 0
+                currentExpandedContainer = .calendar
+                CalendarViewDisplayManager.instance.viewSize = .small
+            }
+                
+            // Changing start time input
+            else {
+                startTimeHeightConstraint.constant = DateTimeViewController.expandedItemSize
+                currentExpandedContainer = .startTime
             }
         }
+            
+        // End button (sender.tag == 2)
         else {
-            endTimeHeightConstraint.constant = 140
-            UIView.animate(withDuration: 0.75) {
-                self.view.layoutIfNeeded()
+            startTimeHeightConstraint.constant = 0
+            
+            // Previously opened end time, so now want to close the text
+            if (currentExpandedContainer == .endTime) {
+                endTimeHeightConstraint.constant = 0
+                currentExpandedContainer = .calendar
+                CalendarViewDisplayManager.instance.viewSize = .small
+            }
+                
+            // Changing end time input
+            else {
+                endTimeHeightConstraint.constant = DateTimeViewController.expandedItemSize
+                currentExpandedContainer = .endTime
             }
         }
+        
+        UIView.animate(withDuration: 0.75) {
+            self.view.layoutIfNeeded()
+        }
+
     }
 
     override func viewDidLoad() {
