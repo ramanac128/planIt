@@ -100,6 +100,11 @@ class CalendarViewController: UIViewController, CalendarViewConfigurationListene
         }
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        CalendarViewDisplayManager.instance.viewSize = .large
+        super.touchesBegan(touches, with: event)
+    }
+    
     
     // MARK: - CalendarViewConfiguration protocol methods
     
@@ -131,16 +136,22 @@ class CalendarViewController: UIViewController, CalendarViewConfigurationListene
             self.numberOfRows = 2
             self.discreteScrollUnit = .day
             self.discreteScrollValue = 7
+            self.calendarView.scrollingMode = .stopAtEach(customInterval: 7)
             break
             
         case .large:
             self.numberOfRows = 6
             self.discreteScrollUnit = .month
             self.discreteScrollValue = 1
+            self.calendarView.scrollingMode = .stopAtEachCalendarFrameWidth
             break
         }
         
         self.calendarView.reloadData(withAnchor: Date(), animation: true)
+    }
+    
+    func onSizeAnimationChange() {
+        self.view.layoutIfNeeded()
     }
 }
 

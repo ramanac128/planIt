@@ -13,13 +13,15 @@ class DateTimeViewController: MSMessagesAppViewController, CalendarViewSizeListe
     static let expandedItemSize = CGFloat(140)
     
     @IBOutlet weak var calendarViewContainerHeightConstraint: NSLayoutConstraint!
+    
+    var model = TimeMatrixModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         let calendarManager = CalendarViewDisplayManager.instance
+        calendarManager.model = model
         calendarManager.sizeListeners.insert(self)
-        self.onChange(size: calendarManager.viewSize)
         // Do any additional setup after loading the view.
     }
 
@@ -31,13 +33,17 @@ class DateTimeViewController: MSMessagesAppViewController, CalendarViewSizeListe
     func onChange(size: CalendarViewDisplayManager.ViewSize) {
         switch size {
         case .small:
-            self.calendarViewContainerHeightConstraint.constant += DateTimeViewController.expandedItemSize
+            self.calendarViewContainerHeightConstraint.constant -= DateTimeViewController.expandedItemSize
             break
             
         case .large:
-            self.calendarViewContainerHeightConstraint.constant -= DateTimeViewController.expandedItemSize
+            self.calendarViewContainerHeightConstraint.constant += DateTimeViewController.expandedItemSize
             break
         }
+    }
+    
+    func onSizeAnimationChange() {
+        self.view.layoutIfNeeded()
     }
     
 

@@ -17,23 +17,6 @@ class PreferredDateViewController: MSMessagesAppViewController, CalendarViewSize
         case endTime
     }
     
-    func onChange(size: CalendarViewDisplayManager.ViewSize) {
-        
-        // if size is large - minimize other 2 
-        if (size == .large) {
-            startTimeHeightConstraint.constant = 0
-            endTimeHeightConstraint.constant = 0
-        }
-    }
-    
-    func onSizeAnimationChange() {
-        self.view.layoutIfNeeded()
-    }
-    
-    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        return false
-    }
-    
     var currentExpandedContainer = Container.calendar
     
     @IBOutlet weak var startTimeHeightConstraint: NSLayoutConstraint!
@@ -44,6 +27,14 @@ class PreferredDateViewController: MSMessagesAppViewController, CalendarViewSize
     
     @IBOutlet weak var startTimePicker: UIDatePicker!
     @IBOutlet weak var endTimePicker: UIDatePicker!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        self.automaticallyAdjustsScrollViewInsets = true
+        CalendarViewDisplayManager.instance.sizeListeners.insert(self)
+        
+    }
     
     // Update Start Time Text Field
     @IBAction func startTimePickerUpdate(_ sender: UIDatePicker) {
@@ -62,153 +53,65 @@ class PreferredDateViewController: MSMessagesAppViewController, CalendarViewSize
             endTimePicker.date)
     }
     
-    @IBAction func textBoxClicked(_ sender: UITextField) {
-       
-        if (currentExpandedContainer == .calendar) {
-            CalendarViewDisplayManager.instance.viewSize = .large
-        }
-        
-        // Start Button
-        if (sender.tag == 1) {
+    func onChange(size: CalendarViewDisplayManager.ViewSize) {
+        // if size is large - minimize other 2
+        if (size == .large) {
+            startTimeHeightConstraint.constant = 0
             endTimeHeightConstraint.constant = 0
-            
-            // Previously opened start time, so now want to close the text
+            currentExpandedContainer = .calendar
+        }
+    }
+    
+    func onSizeAnimationChange() {
+        self.view.layoutIfNeeded()
+    }
+    
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        return false
+    }
+    
+    @IBAction func textBoxClicked(_ sender: UITextField) {
+        if (sender.tag == 1) {
+            // Start Button
             if (currentExpandedContainer == .startTime) {
+                // Previously opened start time, so now want to close the text
                 startTimeHeightConstraint.constant = 0
                 currentExpandedContainer = .calendar
-                CalendarViewDisplayManager.instance.viewSize = .small
+                CalendarViewDisplayManager.instance.viewSize = .large
             }
-                
-            // Changing start time input
             else {
+                // Changing start time input
                 startTimeHeightConstraint.constant = DateTimeViewController.expandedItemSize
+                endTimeHeightConstraint.constant = 0
+                
                 currentExpandedContainer = .startTime
+                CalendarViewDisplayManager.instance.viewSize = .small
+                
+                UIView.animate(withDuration: CalendarViewDisplayManager.sizeChangeAnimationDuration) {
+                    self.view.layoutIfNeeded()
+                }
             }
         }
-            
-        // End button (sender.tag == 2)
         else {
-            startTimeHeightConstraint.constant = 0
-            
-            // Previously opened end time, so now want to close the text
+            // End button (sender.tag == 2)
             if (currentExpandedContainer == .endTime) {
+                // Previously opened end time, so now want to close the text
                 endTimeHeightConstraint.constant = 0
                 currentExpandedContainer = .calendar
-                CalendarViewDisplayManager.instance.viewSize = .small
+                CalendarViewDisplayManager.instance.viewSize = .large
             }
-                
-            // Changing end time input
             else {
+                // Changing end time input
                 endTimeHeightConstraint.constant = DateTimeViewController.expandedItemSize
+                startTimeHeightConstraint.constant = 0
+                
                 currentExpandedContainer = .endTime
+                CalendarViewDisplayManager.instance.viewSize = .small
+                
+                UIView.animate(withDuration: CalendarViewDisplayManager.sizeChangeAnimationDuration) {
+                    self.view.layoutIfNeeded()
+                }
             }
         }
-        
-        UIView.animate(withDuration: 0.75) {
-            self.view.layoutIfNeeded()
-        }
-
     }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        self.automaticallyAdjustsScrollViewInsets = true
-        // Do any additional setup after loading the view.
-
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-    
-    var startDatePicker = UIDatePicker()
-    var endDatePicker = UIDatePicker()
-    
-    func startTimeEditing() {
-        let currTime = Calendar.current
-        let d = currTime.date(bySettingHour: 4, minute: 0, second: 0, of: Date())
-        startDatePicker.setDate(d!, animated: false)
-        startDatePicker.minuteInterval = 15
-        
-        startDatePicker.backgroundColor = UIColor.white
-        startDatePicker.datePickerMode = UIDatePickerMode.time
-        startTime.inputView = startDatePicker
-        
-        // Intialize tool bar
-        let toolBar = UIToolbar()
-        toolBar.barStyle = .default
-        toolBar.isTranslucent = true
-        toolBar.tintColor = UIColor(red: 92/255, green: 216/255, blue: 255/255, alpha: 1)
-        toolBar.sizeToFit()
-        
-        // Tool bar buttons
-        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: "doneStartClick")
-        let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: "cancelStartClick")
-        
-        toolBar.setItems([cancelButton, spaceButton, doneButton], animated: false)
-        toolBar.isUserInteractionEnabled = true
-        startTime.inputAccessoryView = toolBar
-    }
-    
-    func endTimeEditing() {
-        //endDatePicker.minuteInterval = 15
-        endDatePicker.backgroundColor = UIColor.white
-        endDatePicker.datePickerMode = UIDatePickerMode.time
-        endTime.inputView = endDatePicker
-        
-        // Intialize tool bar
-        let toolBar = UIToolbar()
-        toolBar.barStyle = .default
-        toolBar.isTranslucent = true
-        toolBar.tintColor = UIColor(red: 92/255, green: 216/255, blue: 255/255, alpha: 1)
-        toolBar.sizeToFit()
-        
-        // Tool bar buttons
-        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: "doneEndClick")
-        let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: "cancelEndClick")
-        
-        toolBar.setItems([cancelButton, spaceButton, doneButton], animated: false)
-        toolBar.isUserInteractionEnabled = true
-        endTime.inputAccessoryView = toolBar
-    }
-    
-    func doneStartClick() {
-        let timeFormatter = DateFormatter()
-        timeFormatter.dateStyle = .none;
-        timeFormatter.timeStyle = .short;
-        startTime.text = timeFormatter.string(from: startDatePicker.date)
-        startTime.resignFirstResponder()
-    }
-    
-    func doneEndClick() {
-        let timeFormatter = DateFormatter()
-        timeFormatter.dateStyle = .none;
-        timeFormatter.timeStyle = .short;
-        endTime.text = timeFormatter.string(from: endDatePicker.date)
-        endTime.resignFirstResponder()
-    }
-    
-    func cancelStartClick() {
-        startTime.resignFirstResponder()
-    }
-    
-    func cancelEndClick() {
-        endTime.resignFirstResponder()
-    }
-
 }
