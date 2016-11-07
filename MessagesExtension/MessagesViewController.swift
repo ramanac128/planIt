@@ -19,6 +19,11 @@ class MessagesViewController: MSMessagesAppViewController {
     var days = [TimeMatrixDay]()
     var daySelections = [Bool]()
     
+    @IBAction func planMeeting(_ sender: UIButton) {
+        performSegue(withIdentifier: "nextPage", sender: self)
+        requestPresentationStyle(.expanded)
+        
+    }
     override func viewDidLoad() {
         self.currentModel = self.model1
         super.viewDidLoad()
