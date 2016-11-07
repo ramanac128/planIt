@@ -61,6 +61,8 @@ class CalendarViewController: UIViewController, TimeMatrixModelListener, Calenda
         displayManager.sizeListeners.insert(self)
         self.onChange(configuration: displayManager.configuration)
         self.onChange(size: displayManager.viewSize)
+        
+        self.setMonthLabel(date: Date())
     }
     
     func refreshCellSelectionStates() {
@@ -72,6 +74,10 @@ class CalendarViewController: UIViewController, TimeMatrixModelListener, Calenda
             }
             self.calendarView.selectDates(dates, triggerSelectionDelegate: false, keepSelectionIfMultiSelectionAllowed: false)
         }
+    }
+    
+    func setMonthLabel(date: Date) {
+        self.monthLabel.text = self.headerLabelFormatter.string(from: date)
     }
     
     
@@ -194,7 +200,7 @@ extension CalendarViewController: JTAppleCalendarViewDelegate {
     
     func calendar(_ calendar: JTAppleCalendarView, didScrollToDateSegmentWith visibleDates: DateSegmentInfo) {
         if let firstMonthDate = visibleDates.monthDates.first {
-            self.monthLabel.text = self.headerLabelFormatter.string(from: firstMonthDate)
+            self.setMonthLabel(date: firstMonthDate)
         }
     }
     
