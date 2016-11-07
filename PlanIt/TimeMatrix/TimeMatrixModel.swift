@@ -140,6 +140,7 @@ class TimeMatrixModel {
         for day in self.activeDays {
             self.remove(day: day, isPreferred: true)
         }
+        self.cells.removeAll()
     }
     
     private func informOnAdded(day: TimeMatrixDay, cellModels: [TimeMatrixCellModel]) {
