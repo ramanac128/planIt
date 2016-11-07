@@ -112,7 +112,7 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="JgE-UZ-fcO" secondAttribute="bottom" id="6tW-TG-6Z5"/>
-                <constraint firstAttribute="trailing" secondItem="9hB-vj-BCZ" secondAttribute="trailing" id="ERa-JX-S80"/>
+                <constraint firstAttribute="trailing" secondItem="9hB-vj-BCZ" secondAttribute="trailing" constant="-5" id="ERa-JX-S80"/>
                 <constraint firstItem="Xl2-fO-hgb" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Lr4-Ne-Vsw"/>
                 <constraint firstItem="Xl2-fO-hgb" firstAttribute="top" secondItem="9hB-vj-BCZ" secondAttribute="bottom" id="VVd-PL-oTg"/>
                 <constraint firstItem="JgE-UZ-fcO" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="bqe-uX-v3Z"/>
@@ -120,7 +120,7 @@
                 <constraint firstAttribute="trailing" secondItem="JgE-UZ-fcO" secondAttribute="trailing" id="k0c-4I-tTd"/>
                 <constraint firstAttribute="trailing" secondItem="Xl2-fO-hgb" secondAttribute="trailing" id="sEY-01-R8g"/>
                 <constraint firstItem="JgE-UZ-fcO" firstAttribute="top" secondItem="Xl2-fO-hgb" secondAttribute="bottom" id="zgO-CV-3Zg"/>
-                <constraint firstItem="9hB-vj-BCZ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="zvm-eT-Onf"/>
+                <constraint firstItem="9hB-vj-BCZ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="-5" id="zvm-eT-Onf"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <nil key="simulatedTopBarMetrics"/>

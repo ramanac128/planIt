@@ -125,7 +125,7 @@ class DateTimeViewController: MSMessagesAppViewController, TimeMatrixModelPrefer
     func showTimeMatrix() {
         self.currentTimeView = .available
         self.backButton.setTitle("Back", for: .normal)
-        self.nextButton.setTitle("Send Message", for: .normal)
+        self.nextButton.setTitle("Send Invite", for: .normal)
         
         self.model.buildFromPreferredTimes()
         TimeMatrixDisplayManager.instance.informWillDisplay()

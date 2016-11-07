@@ -103,7 +103,16 @@ class CalendarViewController: UIViewController, TimeMatrixModelListener, Calenda
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        CalendarViewDisplayManager.instance.viewSize = .large
+        let displayManager = CalendarViewDisplayManager.instance
+        switch displayManager.viewSize {
+        case .small:
+            displayManager.viewSize = .large
+            break
+            
+        case .large:
+            displayManager.viewSize = .small
+            break
+        }
         super.touchesBegan(touches, with: event)
     }
     

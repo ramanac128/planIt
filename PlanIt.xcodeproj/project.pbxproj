@@ -324,7 +324,7 @@
 				TargetAttributes = {
 					A1FF3B501DA5E0B20013B428 = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = 59F9E4LZNZ;
+						DevelopmentTeam = L9BCMT7FCU;
 						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 					};
@@ -616,8 +616,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
 				DEVELOPMENT_TEAM = L9BCMT7FCU;
 				INFOPLIST_FILE = MessagesExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = edu.umich.engin.onetwo.PlanIt.MessagesExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.umich.onetwo.PlanIt.MessagesExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
@@ -632,8 +633,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
 				DEVELOPMENT_TEAM = L9BCMT7FCU;
 				INFOPLIST_FILE = MessagesExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = edu.umich.engin.onetwo.PlanIt.MessagesExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.umich.onetwo.PlanIt.MessagesExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
@@ -647,10 +649,11 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = 59F9E4LZNZ;
+				DEVELOPMENT_TEAM = L9BCMT7FCU;
 				INFOPLIST_FILE = PlanIt/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = edu.umich.engin.onetwo.PlanIt;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.umich.onetwo.PlanIt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "PlanIt/PlanIt-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -666,10 +669,11 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = 59F9E4LZNZ;
+				DEVELOPMENT_TEAM = L9BCMT7FCU;
 				INFOPLIST_FILE = PlanIt/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = edu.umich.engin.onetwo.PlanIt;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.umich.onetwo.PlanIt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "PlanIt/PlanIt-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
