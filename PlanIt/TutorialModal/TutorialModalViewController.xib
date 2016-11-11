@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TutorialModalViewController" customModule="MessagesExtension" customModuleProvider="target">
+            <connections>
+                <outlet property="containerView" destination="FJk-lI-v0r" id="zi6-U8-qsD"/>
+                <outlet property="descriptionLabel" destination="lYR-j2-5D5" id="ooe-RS-JR2"/>
+                <outlet property="dismissButton" destination="TSS-JI-4aq" id="8d1-1I-UR2"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FJk-lI-v0r">
+                    <rect key="frame" x="16" y="283.5" width="343" height="101"/>
+                    <color key="backgroundColor" red="1" green="1" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="87" id="yks-al-87t"/>
+                    </constraints>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This is a brief description of what the user is supposed to do and how to do it." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lYR-j2-5D5">
+                    <rect key="frame" x="32" y="299.5" width="311" height="41.5"/>
+                    <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="18"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TSS-JI-4aq">
+                    <rect key="frame" x="264" y="349" width="79" height="28"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                    <inset key="contentEdgeInsets" minX="8" minY="3" maxX="8" maxY="3"/>
+                    <state key="normal" title="Dismiss"/>
+                    <connections>
+                        <action selector="dismissButtonTouch:" destination="-1" eventType="touchUpInside" id="Msi-pu-sVY"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="lYR-j2-5D5" firstAttribute="trailing" secondItem="FJk-lI-v0r" secondAttribute="trailing" constant="-16" id="4ZY-ep-hyV"/>
+                <constraint firstItem="FJk-lI-v0r" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="7dw-7c-3TW"/>
+                <constraint firstItem="TSS-JI-4aq" firstAttribute="top" secondItem="lYR-j2-5D5" secondAttribute="bottom" constant="8" id="Nbi-5D-tv6"/>
+                <constraint firstItem="TSS-JI-4aq" firstAttribute="trailing" secondItem="FJk-lI-v0r" secondAttribute="trailing" constant="-16" id="POx-p2-eRd"/>
+                <constraint firstItem="lYR-j2-5D5" firstAttribute="leading" secondItem="FJk-lI-v0r" secondAttribute="leading" constant="16" id="VFz-5I-pfk"/>
+                <constraint firstItem="FJk-lI-v0r" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="coN-6y-1vz"/>
+                <constraint firstAttribute="trailing" secondItem="FJk-lI-v0r" secondAttribute="trailing" constant="16" id="dZg-Ia-ak6"/>
+                <constraint firstItem="lYR-j2-5D5" firstAttribute="top" secondItem="FJk-lI-v0r" secondAttribute="top" constant="16" id="gOJ-uY-rcs"/>
+                <constraint firstItem="TSS-JI-4aq" firstAttribute="bottom" secondItem="FJk-lI-v0r" secondAttribute="bottom" constant="-8" id="kfB-dT-leA"/>
+            </constraints>
+            <point key="canvasLocation" x="73.5" y="53.5"/>
+        </view>
+    </objects>
+</document>

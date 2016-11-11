@@ -138,6 +138,8 @@ class DateTimeViewController: MSMessagesAppViewController, TimeMatrixModelPrefer
         let calendarViewManager = CalendarViewDisplayManager.instance
         calendarViewManager.viewSize = .small
         calendarViewManager.configuration = .availableDates
+        
+        TutorialModalViewController.tutorialSenderDateTime.display(in: self)
     }
     
     func onChange(preferredDay: TimeMatrixDay?) {
