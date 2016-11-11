@@ -21,6 +21,13 @@ class MessagesViewController: MSMessagesAppViewController {
         // This will happen when the extension is about to present UI.
         
         // Use this method to configure the extension and restore previously stored state.
+        let conversationManager = ConversationManager.instance
+        conversationManager.masterMessagesViewController = self
+        conversationManager.conversation = conversation
+        
+        if conversation.selectedMessage != nil {
+            self.performSegue(withIdentifier: "DateTimeResponder", sender: self)
+        }
     }
     
     override func didResignActive(with conversation: MSConversation) {
@@ -54,6 +61,17 @@ class MessagesViewController: MSMessagesAppViewController {
         // Called before the extension transitions to a new presentation style.
     
         // Use this method to prepare for the change in presentation style.
+        if presentationStyle == .expanded {
+            if ConversationManager.instance.conversation?.selectedMessage == nil {
+                self.performSegue(withIdentifier: "DateTimeSender", sender: self)
+            }
+            else {
+                self.performSegue(withIdentifier: "DateTimeResponder", sender: self)
+            }
+        }
+        else {
+            self.dismiss(animated: true)
+        }
     }
     
     override func didTransition(to presentationStyle: MSMessagesAppPresentationStyle) {
@@ -63,8 +81,6 @@ class MessagesViewController: MSMessagesAppViewController {
     }
     
     @IBAction func planMeeting(_ sender: UIButton) {
-        performSegue(withIdentifier: "nextPage", sender: self)
-        requestPresentationStyle(.expanded)
-        
+        self.requestPresentationStyle(.expanded)
     }
 }

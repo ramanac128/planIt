@@ -43,6 +43,8 @@
 		A1B6B9371DCCB2AC00111C63 /* CalendarViewTestController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B6B9351DCCB2AC00111C63 /* CalendarViewTestController.swift */; };
 		A1F52F071DCB1AB70001B58A /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F52F051DCB1AB70001B58A /* CalendarViewController.swift */; };
 		A1F52F081DCB1AB70001B58A /* CalendarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1F52F061DCB1AB70001B58A /* CalendarViewController.xib */; };
+		A1F8C3F21DD631B000BD2E3B /* ConversationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F8C3F11DD631B000BD2E3B /* ConversationManager.swift */; };
+		A1F8C3F41DD64FAE00BD2E3B /* ResponderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F8C3F31DD64FAE00BD2E3B /* ResponderViewController.swift */; };
 		A1FF3B551DA5E0B20013B428 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1FF3B541DA5E0B20013B428 /* Assets.xcassets */; };
 		A1FF3B5C1DA5E0B20013B428 /* MessagesExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = A1FF3B5B1DA5E0B20013B428 /* MessagesExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		A1FF3B611DA5E0B20013B428 /* Messages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FF3B601DA5E0B20013B428 /* Messages.framework */; };
@@ -114,6 +116,8 @@
 		A1B6B9351DCCB2AC00111C63 /* CalendarViewTestController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewTestController.swift; sourceTree = "<group>"; };
 		A1F52F051DCB1AB70001B58A /* CalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		A1F52F061DCB1AB70001B58A /* CalendarViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CalendarViewController.xib; sourceTree = "<group>"; };
+		A1F8C3F11DD631B000BD2E3B /* ConversationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConversationManager.swift; path = MessagesExtension/Conversation/ConversationManager.swift; sourceTree = SOURCE_ROOT; };
+		A1F8C3F31DD64FAE00BD2E3B /* ResponderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponderViewController.swift; sourceTree = "<group>"; };
 		A1FF3B511DA5E0B20013B428 /* PlanIt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlanIt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1FF3B541DA5E0B20013B428 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A1FF3B561DA5E0B20013B428 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -227,6 +231,15 @@
 			path = Calendar;
 			sourceTree = "<group>";
 		};
+		A1F8C3F01DD6315700BD2E3B /* Conversation */ = {
+			isa = PBXGroup;
+			children = (
+				A1F8C3F11DD631B000BD2E3B /* ConversationManager.swift */,
+			);
+			name = Conversation;
+			path = ../PlanIt;
+			sourceTree = "<group>";
+		};
 		A1FF3B4A1DA5E0B20013B428 = {
 			isa = PBXGroup;
 			children = (
@@ -274,8 +287,10 @@
 		A1FF3B621DA5E0B20013B428 /* MessagesExtension */ = {
 			isa = PBXGroup;
 			children = (
+				A1F8C3F01DD6315700BD2E3B /* Conversation */,
 				A1FF3B631DA5E0B20013B428 /* MessagesViewController.swift */,
 				A17BC1E41DCE6A3E000FDEC3 /* DateTimeViewController.swift */,
+				A1F8C3F31DD64FAE00BD2E3B /* ResponderViewController.swift */,
 				A1FF3B651DA5E0B20013B428 /* MainInterface.storyboard */,
 				A1FF3B681DA5E0B20013B428 /* Assets.xcassets */,
 				A1FF3B6A1DA5E0B20013B428 /* Info.plist */,
@@ -485,6 +500,7 @@
 				A1FF3B641DA5E0B20013B428 /* MessagesViewController.swift in Sources */,
 				A1970C0E1DCF5C3000703FB8 /* TimeMatrixTime.swift in Sources */,
 				A1970C131DCF799000703FB8 /* TimeMatrixViewController.swift in Sources */,
+				A1F8C3F41DD64FAE00BD2E3B /* ResponderViewController.swift in Sources */,
 				A199398A1DB19E77006A57E4 /* TimeMatrixTimeLabelColumn.swift in Sources */,
 				A11401981DB47AEC005FF26B /* TimeMatrixDayViewManager.swift in Sources */,
 				A19939911DB19EAC006A57E4 /* Weak.swift in Sources */,
@@ -505,6 +521,7 @@
 				A115BE301DD3BA4D00031833 /* TutorialModalViewController.swift in Sources */,
 				A148DD021DCBB7F50036E0DE /* CalendarViewDisplayManager.swift in Sources */,
 				A19939891DB19E77006A57E4 /* TimeMatrixTimeLabelCell.swift in Sources */,
+				A1F8C3F21DD631B000BD2E3B /* ConversationManager.swift in Sources */,
 				A19939861DB19E77006A57E4 /* TimeMatrixPanGestureRecognizer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -98,11 +98,7 @@ class DateTimeViewController: MSMessagesAppViewController, TimeMatrixModelPrefer
             break
             
         case .available:
-            let presentingViewController: UIViewController! = self.presentingViewController
-            self.dismiss(animated: true) {
-                presentingViewController.dismiss(animated: true)
-            }
-            break
+            ConversationManager.instance.sendInviteMessage(dateTime: self.model)
         }
         self.showTimeMatrix()
     }
@@ -125,7 +121,7 @@ class DateTimeViewController: MSMessagesAppViewController, TimeMatrixModelPrefer
     func showTimeMatrix() {
         self.currentTimeView = .available
         self.backButton.setTitle("Back", for: .normal)
-        self.nextButton.setTitle("Send Invite", for: .normal)
+        self.nextButton.setTitle("Create Invite", for: .normal)
         
         self.model.buildFromPreferredTimes()
         TimeMatrixDisplayManager.instance.informWillDisplay()
