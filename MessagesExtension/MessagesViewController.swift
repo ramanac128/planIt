@@ -25,7 +25,8 @@ class MessagesViewController: MSMessagesAppViewController {
         conversationManager.masterMessagesViewController = self
         conversationManager.conversation = conversation
         
-        if conversation.selectedMessage != nil {
+        if let message = conversation.selectedMessage {
+            self.setupModel(message: message)
             self.performSegue(withIdentifier: "DateTimeResponder", sender: self)
         }
     }
@@ -82,5 +83,15 @@ class MessagesViewController: MSMessagesAppViewController {
     
     @IBAction func planMeeting(_ sender: UIButton) {
         self.requestPresentationStyle(.expanded)
+    }
+    
+    func setupModel(message: MSMessage) {
+        var model: TimeMatrixModel?
+        if let url = message.url,
+                let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
+                let queryItems = components.queryItems {
+            model = ConversationManager.instance.dateTimeModel(queryItems: queryItems)
+        }
+        TimeMatrixModelManager.instance.model = model
     }
 }

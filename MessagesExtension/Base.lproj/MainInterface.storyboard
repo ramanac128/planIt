@@ -182,15 +182,70 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aVP-1s-p6l">
-                                <rect key="frame" x="0.0" y="92" width="375" height="494"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aVP-1s-p6l">
+                                <rect key="frame" x="0.0" y="151" width="375" height="411"/>
                                 <connections>
                                     <segue destination="7Wc-a9-GB9" kind="embed" id="b2r-Qr-AJ2"/>
                                 </connections>
                             </containerView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Billy wants to meet with you, Sam, and Sandra this Thursday from 7:30pm to 9:00pm." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ivi-Fg-QV7">
+                                <rect key="frame" x="16" y="101" width="343" height="41.5"/>
+                                <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="18"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TMr-0A-3YU" userLabel="Navigation View">
+                                <rect key="frame" x="0.0" y="562" width="375" height="70"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ifH-ZM-ymI">
+                                        <rect key="frame" x="180" y="18" width="180" height="34"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="180" id="Vcg-MU-GKY"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <state key="normal" title="Send Response">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="nextButtonTouch:" destination="iVf-h0-gVQ" eventType="touchUpInside" id="kOZ-5f-ClH"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xnh-PL-7IO">
+                                        <rect key="frame" x="15" y="19" width="132" height="33"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="132" id="2ZU-XP-LqK"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="18"/>
+                                        <state key="normal" title="I'm not available!"/>
+                                        <connections>
+                                            <action selector="backButtonTouch:" destination="iVf-h0-gVQ" eventType="touchUpInside" id="uop-Mb-qn5"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="70" id="2TL-EA-Nh1"/>
+                                    <constraint firstItem="ifH-ZM-ymI" firstAttribute="centerY" secondItem="TMr-0A-3YU" secondAttribute="centerY" id="95A-4A-5fH"/>
+                                    <constraint firstItem="Xnh-PL-7IO" firstAttribute="leading" secondItem="TMr-0A-3YU" secondAttribute="leading" constant="15" id="TjD-ws-aJQ"/>
+                                    <constraint firstItem="Xnh-PL-7IO" firstAttribute="centerY" secondItem="TMr-0A-3YU" secondAttribute="centerY" id="bJn-s1-2eX"/>
+                                    <constraint firstAttribute="trailing" secondItem="ifH-ZM-ymI" secondAttribute="trailing" constant="15" id="oyO-1h-ktX"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="aVP-1s-p6l" firstAttribute="top" secondItem="ivi-Fg-QV7" secondAttribute="bottom" constant="8" id="4iH-Rm-9S7"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ivi-Fg-QV7" secondAttribute="trailing" id="DH1-VF-7TK"/>
+                            <constraint firstItem="TMr-0A-3YU" firstAttribute="leading" secondItem="SZ1-Tb-kQi" secondAttribute="leadingMargin" constant="-16" id="EZo-XQ-ZxX"/>
+                            <constraint firstItem="ivi-Fg-QV7" firstAttribute="top" secondItem="Jyc-ZO-9y7" secondAttribute="bottom" constant="81" id="Jxf-GN-JFf"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="aVP-1s-p6l" secondAttribute="trailing" constant="-16" id="MrW-jm-srC"/>
+                            <constraint firstItem="aVP-1s-p6l" firstAttribute="leading" secondItem="SZ1-Tb-kQi" secondAttribute="leadingMargin" constant="-16" id="SCc-PY-Ocp"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="ivi-Fg-QV7" secondAttribute="leading" id="XOr-x4-Lb4"/>
+                            <constraint firstItem="abC-Fa-P1v" firstAttribute="top" secondItem="TMr-0A-3YU" secondAttribute="bottom" constant="35" id="afN-Oc-fHt"/>
+                            <constraint firstItem="TMr-0A-3YU" firstAttribute="top" secondItem="aVP-1s-p6l" secondAttribute="bottom" id="juu-RU-JNO"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="TMr-0A-3YU" secondAttribute="trailing" constant="-16" id="qkz-ml-QJz"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="InM-go-0eP" userLabel="First Responder" sceneMemberID="firstResponder"/>

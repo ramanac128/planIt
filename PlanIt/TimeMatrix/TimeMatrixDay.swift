@@ -39,6 +39,14 @@ struct TimeMatrixDay: Hashable, CustomStringConvertible {
         self.from(date: date)
     }
     
+    init(dateString: String) {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        if let date = formatter.date(from: dateString) {
+            self.from(date: date)
+        }
+    }
+    
     init(from otherDay: TimeMatrixDay) {
         self.day = otherDay.day
         self.month = otherDay.month
