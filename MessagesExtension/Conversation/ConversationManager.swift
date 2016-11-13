@@ -38,6 +38,13 @@ class ConversationManager {
     private init() {}
     
     
+    // MARK: - Navigation
+    
+    func dismissMessagesApp() {
+        self.masterMessagesViewController?.dismiss()
+    }
+    
+    
     // MARK: - Message sending
     
     @discardableResult func sendInviteMessage(dateTime: TimeMatrixModel) -> Bool {
@@ -59,8 +66,6 @@ class ConversationManager {
         // create the message so the user can send it
         conversation.insert(message)
         
-        self.masterMessagesViewController?.dismiss()
-        
         return true
     }
     
@@ -68,10 +73,10 @@ class ConversationManager {
         // TODO make layout and summary from whatever we can get the data from
         
         let layout = MSMessageTemplateLayout()
-        layout.caption = "Billy wants to meet with you, Sam, and Sandra this Thursday from 7:30pm to 9:00pm"
+        layout.caption = "Sam wants to meet this Thursday from 6:00pm to 7:30pm"
         layout.subcaption = "Tap here to respond"
         
-        let summary = "Meeting invite from Billy for this Thursday from 7:30-9:00"
+        let summary = "Sam sent a meeting invite for Thursday, November 17 from 6:00pm to 7:30pm"
         
         return (layout: layout, summary: summary)
     }
@@ -147,6 +152,7 @@ class ConversationManager {
         case .available: return "A"
         case .preferred: return "P"
         case .unavailable: return "U"
+        case .unselectable: return "S"
         }
     }
     
@@ -207,6 +213,7 @@ class ConversationManager {
         switch character {
         case "A": return .available
         case "P": return .preferred
+        case "S": return .unselectable
         default: return .unavailable
         }
     }

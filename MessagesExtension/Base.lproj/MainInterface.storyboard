@@ -188,7 +188,7 @@
                                     <segue destination="7Wc-a9-GB9" kind="embed" id="b2r-Qr-AJ2"/>
                                 </connections>
                             </containerView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Billy wants to meet with you, Sam, and Sandra this Thursday from 7:30pm to 9:00pm." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ivi-Fg-QV7">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sam wants to meet on Thursday, November 17 from 6:00pm to 7:30pm." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ivi-Fg-QV7">
                                 <rect key="frame" x="16" y="101" width="343" height="41.5"/>
                                 <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="18"/>
                                 <nil key="textColor"/>
@@ -197,9 +197,9 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TMr-0A-3YU" userLabel="Navigation View">
                                 <rect key="frame" x="0.0" y="562" width="375" height="70"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ifH-ZM-ymI">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ifH-ZM-ymI">
                                         <rect key="frame" x="180" y="18" width="180" height="34"/>
-                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" red="0.0" green="0.59999999999999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="180" id="Vcg-MU-GKY"/>
                                         </constraints>
@@ -208,7 +208,7 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="nextButtonTouch:" destination="iVf-h0-gVQ" eventType="touchUpInside" id="kOZ-5f-ClH"/>
+                                            <action selector="sendResponseTouch:" destination="Wo0-yM-pnn" eventType="touchUpInside" id="vyt-TR-AKL"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xnh-PL-7IO">
@@ -219,7 +219,7 @@
                                         <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="18"/>
                                         <state key="normal" title="I'm not available!"/>
                                         <connections>
-                                            <action selector="backButtonTouch:" destination="iVf-h0-gVQ" eventType="touchUpInside" id="uop-Mb-qn5"/>
+                                            <action selector="notAvailableTouch:" destination="Wo0-yM-pnn" eventType="touchUpInside" id="RxV-x6-J7l"/>
                                         </connections>
                                     </button>
                                 </subviews>

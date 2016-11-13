@@ -91,6 +91,7 @@ class MessagesViewController: MSMessagesAppViewController {
                 let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
                 let queryItems = components.queryItems {
             model = ConversationManager.instance.dateTimeModel(queryItems: queryItems)
+            model?.invertForResponder()
         }
         TimeMatrixModelManager.instance.model = model
     }

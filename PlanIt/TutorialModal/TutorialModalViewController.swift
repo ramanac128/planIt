@@ -31,6 +31,7 @@ class TutorialModalViewController: UIViewController {
     
     static let tutorialSenderDateTime = TutorialModalParameters(text: "Select alternative meeting days on the calendar,  then drag across the red squares to set your available times. Swipe the time labels up and down to scroll.")
     
+    static let tutorialResponderDateTime = TutorialModalParameters(text: "Drag across the red cells to indicate the times you're available to meet.")
     
     // MARK: - Variables
     

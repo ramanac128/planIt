@@ -13,7 +13,7 @@ class TimeMatrixCellModel: Hashable {
     // MARK: - Enumerations
     
     enum State {
-        case available, unavailable, preferred
+        case available, unavailable, preferred, unselectable
     }
     
     
@@ -45,7 +45,7 @@ class TimeMatrixCellModel: Hashable {
     // MARK: - Cell selection
     
     func select(state: State) {
-        if !self.isSelected && self.currentState != .preferred {
+        if !self.isSelected && self.currentState != .preferred && self.currentState != .unselectable {
             self.previousState = self.currentState
             self.currentState = state
             self.isSelected = true

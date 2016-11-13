@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11201"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TimeMatrixViewController" customModule="MessagesExtension" customModuleProvider="target">
             <connections>
+                <outlet property="resolutionSegmnetedControl" destination="UHX-s4-tHF" id="jRP-8G-qhH"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -17,15 +21,30 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Wk-hc-Ils" customClass="TimeMatrixView" customModule="MessagesExtension" customModuleProvider="target">
+                    <rect key="frame" x="8" y="52" width="359" height="373"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
+                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="UHX-s4-tHF">
+                    <rect key="frame" x="74" y="8" width="227" height="29"/>
+                    <segments>
+                        <segment title="15 min"/>
+                        <segment title="30 min"/>
+                        <segment title="1 hr"/>
+                        <segment title="2 hr"/>
+                    </segments>
+                    <connections>
+                        <action selector="resolutionSegmentedControlValueChanged:" destination="-1" eventType="valueChanged" id="6lI-3y-8aW"/>
+                    </connections>
+                </segmentedControl>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="7Wk-hc-Ils" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="1uR-6c-xMc"/>
                 <constraint firstAttribute="bottom" secondItem="7Wk-hc-Ils" secondAttribute="bottom" id="9lV-st-wiq"/>
+                <constraint firstItem="UHX-s4-tHF" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="8" id="Fiy-67-mFJ"/>
+                <constraint firstItem="UHX-s4-tHF" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="PXy-qe-gUe"/>
                 <constraint firstAttribute="trailing" secondItem="7Wk-hc-Ils" secondAttribute="trailing" constant="8" id="YyT-5O-kVG"/>
-                <constraint firstItem="7Wk-hc-Ils" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="8" id="wwN-S0-hEi"/>
+                <constraint firstItem="7Wk-hc-Ils" firstAttribute="top" secondItem="UHX-s4-tHF" secondAttribute="bottom" constant="16" id="zNM-Qm-5um"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <nil key="simulatedTopBarMetrics"/>

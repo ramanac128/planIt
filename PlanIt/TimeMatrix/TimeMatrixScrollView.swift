@@ -28,6 +28,7 @@ class TimeMatrixScrollView: UIScrollView, TimeMatrixWillDisplayListener, TimeMat
                 for selectionView in self.selectionViews {
                     selectionView.value!.model = self.model!
                 }
+                self.scrollToPreferredTime()
             }
         }
     }
@@ -45,6 +46,7 @@ class TimeMatrixScrollView: UIScrollView, TimeMatrixWillDisplayListener, TimeMat
     private var selectedCells = Set<TimeMatrixCellModel>()
     
     private var isAnimatingRow = false
+    private var hasLayedOutSubviews = false
     
     
     // MARK: - Initialization
@@ -107,6 +109,10 @@ class TimeMatrixScrollView: UIScrollView, TimeMatrixWillDisplayListener, TimeMat
             let percent = self.contentCenterAsPercent(contentOffset: oldContentOffset, contentHeight: oldHeight)
             self.scrollCenterTo(percent: percent, animated: false)
         }
+        else if !self.hasLayedOutSubviews {
+            self.hasLayedOutSubviews = true
+            self.scrollToPreferredTime()
+        }
     }
     
     func contentCenterAsPercent(contentOffset: CGFloat, contentHeight: CGFloat) -> CGFloat {
@@ -137,7 +143,7 @@ class TimeMatrixScrollView: UIScrollView, TimeMatrixWillDisplayListener, TimeMat
     
     func selectionState(from: TimeMatrixCellModel.State) -> TimeMatrixCellModel.State {
         switch from {
-        case .available, .preferred:
+        case .available, .preferred, .unselectable:
             return TimeMatrixCellModel.State.unavailable
         case .unavailable:
             return TimeMatrixCellModel.State.available

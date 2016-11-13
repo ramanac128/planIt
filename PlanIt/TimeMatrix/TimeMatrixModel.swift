@@ -83,6 +83,22 @@ class TimeMatrixModel {
         }
     }
     
+    func invertForResponder() {
+        for cells in self.cells {
+            for cell in cells.value {
+                switch cell.currentState {
+                case .available, .preferred:
+                    cell.currentState = .unavailable
+                    break
+                    
+                case .unavailable, .unselectable:
+                    cell.currentState = .unselectable
+                    break
+                }
+            }
+        }
+    }
+    
     
     // MARK: - Variables
     

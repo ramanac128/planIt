@@ -72,6 +72,7 @@ class TimeMatrixDisplayManager {
     static let cellBackgroundColorUnavailable = UIColor.red.cgColor
     static let cellBackgroundColorAvailable = UIColor.yellow.cgColor
     static let cellBackgroundColorPreferred = UIColor.green.cgColor
+    static let cellBackgroundColorUnselectable = UIColor.darkGray.cgColor
     
     static let cellStrokeWidthMajorTick = CGFloat(2.5)
     static let cellStrokeWidthMinorTick = CGFloat(1)

@@ -78,10 +78,7 @@ class DateTimeViewController: MSMessagesAppViewController, TimeMatrixModelPrefer
     @IBAction func backButtonTouch(_ sender: UIButton) {
         switch currentTimeView {
         case .preferred:
-            let presentingViewController: UIViewController! = self.presentingViewController
-            self.dismiss(animated: true) {
-                presentingViewController.dismiss(animated: true)
-            }
+            ConversationManager.instance.dismissMessagesApp()
             break
             
         case .available:
@@ -98,9 +95,11 @@ class DateTimeViewController: MSMessagesAppViewController, TimeMatrixModelPrefer
             break
             
         case .available:
-            ConversationManager.instance.sendInviteMessage(dateTime: self.model)
+            let conversationManager = ConversationManager.instance
+            conversationManager.sendInviteMessage(dateTime: self.model)
+            conversationManager.dismissMessagesApp()
+            break
         }
-        self.showTimeMatrix()
     }
     
     func showPreferredTime() {

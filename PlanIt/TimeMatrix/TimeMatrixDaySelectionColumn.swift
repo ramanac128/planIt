@@ -78,6 +78,8 @@ class TimeMatrixDaySelectionColumn: UIView, TimeMatrixRowAnimationListener, Time
             return TimeMatrixDisplayManager.cellBackgroundColorPreferred
         case .unavailable:
             return TimeMatrixDisplayManager.cellBackgroundColorUnavailable
+        case .unselectable:
+            return TimeMatrixDisplayManager.cellBackgroundColorUnselectable
         }
     }
     
