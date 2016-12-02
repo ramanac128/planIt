@@ -24,20 +24,12 @@ class ResponderViewController: MSMessagesAppViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        if !self.didLayoutSubviews {
-            self.didLayoutSubviews = true
-            TutorialModalViewController.tutorialResponderDateTime.display(in: self)
-        }
-    }
-    
     @IBAction func notAvailableTouch(_ sender: Any) {
-        //ConversationManager.instance.dismissMessagesApp()
+        ConversationManager.instance.dismissMessagesApp()
     }
     
     @IBAction func sendResponseTouch(_ sender: Any) {
-        //ConversationManager.instance.dismissMessagesApp()
+        ConversationManager.instance.dismissMessagesApp()
     }
     
 }

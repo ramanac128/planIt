@@ -9,16 +9,21 @@
 import UIKit
 import JTAppleCalendar
 
-class CalendarViewController: UIViewController, TimeMatrixModelListener, CalendarViewConfigurationListener, CalendarViewSizeListener {
+class CalendarViewController: UIViewController, TimeMatrixModelListener, CalendarViewConfigurationListener, CalendarViewSizeListener, UIPickerViewDataSource, UIPickerViewDelegate {
     
     // MARK: - Properties
     
     @IBOutlet weak var monthLabel: UILabel!
     @IBOutlet weak var calendarView: JTAppleCalendarView!
     
+    @IBOutlet weak var eventPicker: UIPickerView!
+    var eventPickerData = ["Breakfast", "Lunch", "Dinner", "Drinks", "Movie"];
+    
     var model: TimeMatrixModel? {
         didSet {
             self.calendarView.reloadData()
+            let row = self.eventPicker.selectedRow(inComponent: 0)
+            self.model?.eventType = self.eventPickerData[row]
         }
     }
     
@@ -44,6 +49,11 @@ class CalendarViewController: UIViewController, TimeMatrixModelListener, Calenda
         self.automaticallyAdjustsScrollViewInsets = true;
         self.headerLabelFormatter.dateFormat = "MMMM yyyy"
         
+        self.eventPicker.dataSource = self
+        self.eventPicker.delegate = self
+        self.eventPicker.selectRow(self.eventPickerData.count / 2, inComponent: 0, animated: false)
+        
+        
         self.calendarView.dataSource = self
         self.calendarView.delegate = self
         self.calendarView.registerCellViewXib(file: "CalendarDayCell")
@@ -63,6 +73,7 @@ class CalendarViewController: UIViewController, TimeMatrixModelListener, Calenda
         self.onChange(size: displayManager.viewSize)
         
         self.setMonthLabel(date: Date())
+        
     }
     
     func refreshCellSelectionStates() {
@@ -108,18 +119,35 @@ class CalendarViewController: UIViewController, TimeMatrixModelListener, Calenda
         }
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let displayManager = CalendarViewDisplayManager.instance
-        switch displayManager.viewSize {
-        case .small:
-            displayManager.viewSize = .large
-            break
-            
-        case .large:
-            displayManager.viewSize = .small
-            break
-        }
-        super.touchesBegan(touches, with: event)
+    
+    // MARK: - EventPicker
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return eventPickerData.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return eventPickerData[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        self.model?.eventType = self.eventPickerData[row]
+    }
+    
+    @IBAction func addEventTouch(_ sender: Any) {
+        let view = AddEventViewController()
+        view.display(in: self)
+    }
+    
+    func insertNewEvent(_ event: String, animated: Bool) {
+        self.eventPickerData.append(event);
+        self.eventPicker.reloadAllComponents()
+        self.eventPicker.selectRow(self.eventPickerData.count - 1, inComponent: 0, animated: animated)
+        self.model?.eventType = event
     }
     
     

@@ -73,12 +73,15 @@ class ConversationManager {
         // TODO make layout and summary from whatever we can get the data from
         
         let layout = MSMessageTemplateLayout()
-        layout.caption = "Sam wants to meet this Thursday from 6:00pm to 7:30pm"
+        var messageSuffix = ""
+        if let eventType = TimeMatrixModelManager.instance.model?.eventType?.lowercased() {
+            messageSuffix = " for \(eventType)"
+        }
+        let message = "Do you want to meet\(messageSuffix)?"
+        layout.caption = message
         layout.subcaption = "Tap here to respond"
         
-        let summary = "Sam sent a meeting invite for Thursday, November 17 from 6:00pm to 7:30pm"
-        
-        return (layout: layout, summary: summary)
+        return (layout: layout, summary: message)
     }
     
     

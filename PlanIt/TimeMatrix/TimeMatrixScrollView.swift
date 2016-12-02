@@ -96,7 +96,6 @@ class TimeMatrixScrollView: UIScrollView, TimeMatrixWillDisplayListener, TimeMat
         displayManager.willDisplayListeners.insert(self)
     }
     
-    
     // MARK: - Layout
     
     override func layoutSubviews() {
@@ -111,7 +110,7 @@ class TimeMatrixScrollView: UIScrollView, TimeMatrixWillDisplayListener, TimeMat
         }
         else if !self.hasLayedOutSubviews {
             self.hasLayedOutSubviews = true
-            self.scrollToPreferredTime()
+            self.scrollToAvailabilityAverage(animated: false)
         }
     }
     
@@ -130,6 +129,29 @@ class TimeMatrixScrollView: UIScrollView, TimeMatrixWillDisplayListener, TimeMat
         let contentCenter = contentHeight * percent
         let contentOffset = contentCenter - halfHeight + contentHeight
         self.contentOffset = CGPoint(x: 0, y: contentOffset)
+    }
+    
+    func scrollToAvailabilityAverage(animated: Bool) {
+        var cellCount = 0
+        var timeSlotTotal = 0
+        
+        if let model = self.model {
+            for day in model.cells.values {
+                for i in 0..<day.count {
+                    if day[i].currentState != .unselectable {
+                        cellCount += 1
+                        timeSlotTotal += i
+                    }
+                }
+            }
+        }
+        
+        var percent = CGFloat(0.6)
+        if cellCount > 0 {
+            let timeSlotAverage = CGFloat(timeSlotTotal) / CGFloat(cellCount)
+            percent = timeSlotAverage / CGFloat(TimeMatrixModel.cellsPerDay)
+        }
+        self.scrollCenterTo(percent: percent, animated: animated)
     }
     
     func onWillDisplay() {

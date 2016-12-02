@@ -69,18 +69,18 @@ class TimeMatrixDisplayManager {
     static let cellHeightMinimum = CGFloat(30)
     static let cellHeightIncrement = CGFloat(5)
     
-    static let cellBackgroundColorUnavailable = UIColor.red.cgColor
-    static let cellBackgroundColorAvailable = UIColor.yellow.cgColor
+    static let cellBackgroundColorUnavailable = UIColor.white.cgColor
+    static let cellBackgroundColorAvailable = UIColor.green.cgColor
     static let cellBackgroundColorPreferred = UIColor.green.cgColor
     static let cellBackgroundColorUnselectable = UIColor.darkGray.cgColor
     
     static let cellStrokeWidthMajorTick = CGFloat(2.5)
     static let cellStrokeWidthMinorTick = CGFloat(1)
-    static let cellStrokeColorMajorTick = UIColor(white: 0.85, alpha: 1).cgColor
-    static let cellStrokeColorMinorTick = UIColor(white: 0.75, alpha: 1).cgColor
+    static let cellStrokeColorMajorTick = UIColor(white: 0.65, alpha: 1).cgColor
+    static let cellStrokeColorMinorTick = UIColor(white: 0.45, alpha: 1).cgColor
     
-    static let cellStrokeWidthDayBorder = CGFloat(8)
-    static let cellStrokeColorDayBorder = UIColor.white.cgColor
+    static let cellStrokeWidthDayBorder = CGFloat(6)
+    static let cellStrokeColorDayBorder = UIColor(white: 0.65, alpha: 1).cgColor
     
     // animations
     

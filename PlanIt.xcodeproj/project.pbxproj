@@ -16,6 +16,8 @@
 		A115BE301DD3BA4D00031833 /* TutorialModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A115BE2E1DD3BA4D00031833 /* TutorialModalViewController.swift */; };
 		A115BE311DD3BA4D00031833 /* TutorialModalViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A115BE2F1DD3BA4D00031833 /* TutorialModalViewController.xib */; };
 		A12B4A571DCF9EB300CC9515 /* TimeMatrixResolutionStepperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12B4A561DCF9EB300CC9515 /* TimeMatrixResolutionStepperView.swift */; };
+		A143A7C41DF0B726004DBC84 /* AddEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A143A7C21DF0B726004DBC84 /* AddEventViewController.swift */; };
+		A143A7C51DF0B726004DBC84 /* AddEventViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A143A7C31DF0B726004DBC84 /* AddEventViewController.xib */; };
 		A148DD021DCBB7F50036E0DE /* CalendarViewDisplayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A148DD011DCBB7F50036E0DE /* CalendarViewDisplayManager.swift */; };
 		A17BC1E51DCE6A3E000FDEC3 /* DateTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17BC1E41DCE6A3E000FDEC3 /* DateTimeViewController.swift */; };
 		A1970C0E1DCF5C3000703FB8 /* TimeMatrixTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1970C0D1DCF5C3000703FB8 /* TimeMatrixTime.swift */; };
@@ -89,6 +91,8 @@
 		A115BE2E1DD3BA4D00031833 /* TutorialModalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TutorialModalViewController.swift; path = TutorialModal/TutorialModalViewController.swift; sourceTree = "<group>"; };
 		A115BE2F1DD3BA4D00031833 /* TutorialModalViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TutorialModalViewController.xib; path = TutorialModal/TutorialModalViewController.xib; sourceTree = "<group>"; };
 		A12B4A561DCF9EB300CC9515 /* TimeMatrixResolutionStepperView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeMatrixResolutionStepperView.swift; sourceTree = "<group>"; };
+		A143A7C21DF0B726004DBC84 /* AddEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEventViewController.swift; sourceTree = "<group>"; };
+		A143A7C31DF0B726004DBC84 /* AddEventViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddEventViewController.xib; sourceTree = "<group>"; };
 		A148DD011DCBB7F50036E0DE /* CalendarViewDisplayManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewDisplayManager.swift; sourceTree = "<group>"; };
 		A17BC1E41DCE6A3E000FDEC3 /* DateTimeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateTimeViewController.swift; sourceTree = "<group>"; };
 		A1970C0D1DCF5C3000703FB8 /* TimeMatrixTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimeMatrixTime.swift; path = TimeMatrix/TimeMatrixTime.swift; sourceTree = "<group>"; };
@@ -227,6 +231,8 @@
 				A19939981DB19EDA006A57E4 /* CalendarDayCell.swift */,
 				A19939991DB19EDA006A57E4 /* CalendarDayCell.xib */,
 				A1B6B9351DCCB2AC00111C63 /* CalendarViewTestController.swift */,
+				A143A7C21DF0B726004DBC84 /* AddEventViewController.swift */,
+				A143A7C31DF0B726004DBC84 /* AddEventViewController.xib */,
 			);
 			path = Calendar;
 			sourceTree = "<group>";
@@ -348,18 +354,18 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0800;
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = "OneTwo Productions";
 				TargetAttributes = {
 					A1FF3B501DA5E0B20013B428 = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = L9BCMT7FCU;
+						DevelopmentTeam = 59F9E4LZNZ;
 						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 					};
 					A1FF3B5A1DA5E0B20013B428 = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = L9BCMT7FCU;
+						DevelopmentTeam = 59F9E4LZNZ;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -401,6 +407,7 @@
 				A1970C141DCF799000703FB8 /* TimeMatrixViewController.xib in Resources */,
 				A115BE311DD3BA4D00031833 /* TutorialModalViewController.xib in Resources */,
 				A1F52F081DCB1AB70001B58A /* CalendarViewController.xib in Resources */,
+				A143A7C51DF0B726004DBC84 /* AddEventViewController.xib in Resources */,
 				A199399F1DB19EE1006A57E4 /* CalendarDayCell.xib in Resources */,
 				A1FF3B671DA5E0B20013B428 /* MainInterface.storyboard in Resources */,
 			);
@@ -498,6 +505,7 @@
 				A17BC1E51DCE6A3E000FDEC3 /* DateTimeViewController.swift in Sources */,
 				A19939831DB19E77006A57E4 /* TimeMatrixDaySelectionColumn.swift in Sources */,
 				A1FF3B641DA5E0B20013B428 /* MessagesViewController.swift in Sources */,
+				A143A7C41DF0B726004DBC84 /* AddEventViewController.swift in Sources */,
 				A1970C0E1DCF5C3000703FB8 /* TimeMatrixTime.swift in Sources */,
 				A1970C131DCF799000703FB8 /* TimeMatrixViewController.swift in Sources */,
 				A1F8C3F41DD64FAE00BD2E3B /* ResponderViewController.swift in Sources */,
@@ -647,11 +655,11 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
-				DEVELOPMENT_TEAM = L9BCMT7FCU;
+				DEVELOPMENT_TEAM = 59F9E4LZNZ;
 				INFOPLIST_FILE = MessagesExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = edu.umich.onetwo.PlanIt.MessagesExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.richstarbuck.PlanIt.MessagesExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
@@ -664,11 +672,11 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
-				DEVELOPMENT_TEAM = L9BCMT7FCU;
+				DEVELOPMENT_TEAM = 59F9E4LZNZ;
 				INFOPLIST_FILE = MessagesExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = edu.umich.onetwo.PlanIt.MessagesExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.richstarbuck.PlanIt.MessagesExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
@@ -682,11 +690,11 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = L9BCMT7FCU;
+				DEVELOPMENT_TEAM = 59F9E4LZNZ;
 				INFOPLIST_FILE = PlanIt/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = edu.umich.onetwo.PlanIt;
+				PRODUCT_BUNDLE_IDENTIFIER = com.richstarbuck.PlanIt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "PlanIt/PlanIt-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -702,11 +710,11 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = L9BCMT7FCU;
+				DEVELOPMENT_TEAM = 59F9E4LZNZ;
 				INFOPLIST_FILE = PlanIt/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = edu.umich.onetwo.PlanIt;
+				PRODUCT_BUNDLE_IDENTIFIER = com.richstarbuck.PlanIt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "PlanIt/PlanIt-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;

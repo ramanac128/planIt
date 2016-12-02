@@ -12,20 +12,43 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TimeMatrixViewController" customModule="MessagesExtension" customModuleProvider="target">
             <connections>
                 <outlet property="resolutionSegmnetedControl" destination="UHX-s4-tHF" id="jRP-8G-qhH"/>
+                <outlet property="rightBorderTop" destination="T2c-T1-axU" id="xS2-D0-T18"/>
+                <outlet property="rightBorderView" destination="RON-WA-L5q" id="DqA-Gw-kAx"/>
+                <outlet property="rightBorderWidth" destination="8eo-s6-kcQ" id="Yym-9R-KFn"/>
+                <outlet property="timeMatrixView" destination="7Wk-hc-Ils" id="EGa-Vj-NA3"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" restorationIdentifier="TimeMatrixViewController" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="425"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Drag across cells to select available times." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="Fc5-cQ-Q5d">
+                    <rect key="frame" x="16" y="8" width="343" height="24"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Wk-hc-Ils" customClass="TimeMatrixView" customModule="MessagesExtension" customModuleProvider="target">
-                    <rect key="frame" x="8" y="52" width="359" height="373"/>
+                    <rect key="frame" x="8" y="92" width="355" height="575"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RON-WA-L5q">
+                    <rect key="frame" x="363" y="181" width="4" height="486"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="4" id="8eo-s6-kcQ"/>
+                    </constraints>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Resolution:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8aO-eS-R9I">
+                    <rect key="frame" x="16" y="51" width="85" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
                 <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="UHX-s4-tHF">
-                    <rect key="frame" x="74" y="8" width="227" height="29"/>
+                    <rect key="frame" x="116" y="48" width="243" height="29"/>
                     <segments>
                         <segment title="15 min"/>
                         <segment title="30 min"/>
@@ -40,16 +63,24 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="7Wk-hc-Ils" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="1uR-6c-xMc"/>
+                <constraint firstAttribute="trailing" secondItem="Fc5-cQ-Q5d" secondAttribute="trailing" constant="16" id="8lf-It-nQc"/>
+                <constraint firstAttribute="trailing" secondItem="RON-WA-L5q" secondAttribute="trailing" constant="8" id="8yD-R3-VIW"/>
                 <constraint firstAttribute="bottom" secondItem="7Wk-hc-Ils" secondAttribute="bottom" id="9lV-st-wiq"/>
-                <constraint firstItem="UHX-s4-tHF" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="8" id="Fiy-67-mFJ"/>
-                <constraint firstItem="UHX-s4-tHF" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="PXy-qe-gUe"/>
-                <constraint firstAttribute="trailing" secondItem="7Wk-hc-Ils" secondAttribute="trailing" constant="8" id="YyT-5O-kVG"/>
+                <constraint firstAttribute="trailing" secondItem="UHX-s4-tHF" secondAttribute="trailing" constant="16" id="CIb-Jw-ulN"/>
+                <constraint firstItem="UHX-s4-tHF" firstAttribute="top" secondItem="Fc5-cQ-Q5d" secondAttribute="bottom" constant="16" id="EFD-Ip-dHJ"/>
+                <constraint firstItem="8aO-eS-R9I" firstAttribute="centerY" secondItem="UHX-s4-tHF" secondAttribute="centerY" id="LfN-Tf-Bd5"/>
+                <constraint firstItem="RON-WA-L5q" firstAttribute="leading" secondItem="7Wk-hc-Ils" secondAttribute="trailing" id="R8G-Ru-3Sl"/>
+                <constraint firstItem="RON-WA-L5q" firstAttribute="top" secondItem="7Wk-hc-Ils" secondAttribute="top" constant="89" id="T2c-T1-axU"/>
+                <constraint firstItem="RON-WA-L5q" firstAttribute="bottom" secondItem="7Wk-hc-Ils" secondAttribute="bottom" id="TVT-Y0-ilK"/>
+                <constraint firstItem="Fc5-cQ-Q5d" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="8" id="YaD-IL-NjX"/>
+                <constraint firstItem="Fc5-cQ-Q5d" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="iRC-RA-y2i"/>
+                <constraint firstItem="UHX-s4-tHF" firstAttribute="leading" secondItem="8aO-eS-R9I" secondAttribute="trailing" constant="15" id="jPW-bP-gdt"/>
+                <constraint firstItem="8aO-eS-R9I" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="xEQ-4k-aki"/>
                 <constraint firstItem="7Wk-hc-Ils" firstAttribute="top" secondItem="UHX-s4-tHF" secondAttribute="bottom" constant="16" id="zNM-Qm-5um"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
-            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="24.5" y="-69.5"/>
         </view>
     </objects>

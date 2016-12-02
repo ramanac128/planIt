@@ -13,23 +13,21 @@ enum timeView {
     case preferred, available
 }
 
-class DateTimeViewController: MSMessagesAppViewController, TimeMatrixModelPreferredDayListener, TimeMatrixModelPreferredTimeListener, CalendarViewSizeListener {
+class DateTimeViewController: MSMessagesAppViewController, TimeMatrixModelDayListener {
     static let expandedItemSize = CGFloat(140)
     static let calendarContainerLargeSize = CGFloat(300)
     static let calendarContainerSmallSize = DateTimeViewController.calendarContainerLargeSize - DateTimeViewController.expandedItemSize
     
+    @IBOutlet weak var calendarContainer: UIView!
+    @IBOutlet weak var timeMatrixContainer: UIView!
+        
     static let nextButtonBackgroundColorEnabled = UIColor(hex: 0x3399FF)
     static let nextButtonBackgroundColorDisabled = UIColor.lightGray
     
     static let containerViewTransitionAnimationDuration = 0.75
     
-    @IBOutlet weak var timeContainer: UIView!
-    @IBOutlet weak var availabilityContainer: UIView!
-    
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var nextButton: UIButton!
-    
-    @IBOutlet weak var calendarViewContainerHeightConstraint: NSLayoutConstraint!
     
     var currentTimeView = timeView.preferred
     
@@ -45,30 +43,13 @@ class DateTimeViewController: MSMessagesAppViewController, TimeMatrixModelPrefer
         // TODO: bring model in correctly
         TimeMatrixModelManager.instance.model = self.model
         
-        self.model.preferredDayListeners.insert(self)
-        self.onChange(preferredDay: self.model.preferredDay)
-        
-        self.model.preferredTimeListeners.insert(self)
-        self.onChange(startTime: self.model.preferredStartTime)
-        self.onChange(startTime: self.model.preferredEndTime)
+        self.model.dayListeners.insert(self);
         
         let calendarViewManager = CalendarViewDisplayManager.instance
-        calendarViewManager.sizeListeners.insert(self)
-        self.onChange(size: calendarViewManager.viewSize)
+        calendarViewManager.viewSize = .large
+        calendarViewManager.configuration = .availableDates
         
-        self.showPreferredTime()
-    }
-    
-    func onChange(size: CalendarViewDisplayManager.ViewSize) {
-        switch size {
-        case .small:
-            self.calendarViewContainerHeightConstraint.constant = DateTimeViewController.calendarContainerSmallSize
-            break
-            
-        case .large:
-            self.calendarViewContainerHeightConstraint.constant = DateTimeViewController.calendarContainerLargeSize
-            break
-        }
+        self.showCalendarView()
     }
     
     func onSizeAnimationChange() {
@@ -82,8 +63,7 @@ class DateTimeViewController: MSMessagesAppViewController, TimeMatrixModelPrefer
             break
             
         case .available:
-            self.model.removeAllDays()
-            self.showPreferredTime()
+            self.showCalendarView()
             break
         }
     }
@@ -102,58 +82,33 @@ class DateTimeViewController: MSMessagesAppViewController, TimeMatrixModelPrefer
         }
     }
     
-    func showPreferredTime() {
+    func showCalendarView() {
         self.currentTimeView = .preferred
         self.backButton.setTitle("Cancel", for: .normal)
-        self.nextButton.setTitle("Set Availability", for: .normal)
+        self.nextButton.setTitle("Next", for: .normal)
         
         UIView.animate(withDuration: DateTimeViewController.containerViewTransitionAnimationDuration) {
-            self.timeContainer.alpha = 1
-            self.availabilityContainer.alpha = 0
+            self.calendarContainer.alpha = 1
+            self.timeMatrixContainer.alpha = 0
         }
-        
-        let calendarViewManager = CalendarViewDisplayManager.instance
-        calendarViewManager.viewSize = .large
-        calendarViewManager.configuration = .preferredDate
     }
     
     func showTimeMatrix() {
         self.currentTimeView = .available
         self.backButton.setTitle("Back", for: .normal)
-        self.nextButton.setTitle("Create Invite", for: .normal)
+        self.nextButton.setTitle("Send Invite", for: .normal)
         
         self.model.buildFromPreferredTimes()
         TimeMatrixDisplayManager.instance.informWillDisplay()
         
         UIView.animate(withDuration: DateTimeViewController.containerViewTransitionAnimationDuration) {
-            self.timeContainer.alpha = 0
-            self.availabilityContainer.alpha = 1
+            self.calendarContainer.alpha = 0
+            self.timeMatrixContainer.alpha = 1
         }
-        
-        let calendarViewManager = CalendarViewDisplayManager.instance
-        calendarViewManager.viewSize = .small
-        calendarViewManager.configuration = .availableDates
-        
-        TutorialModalViewController.tutorialSenderDateTime.display(in: self)
     }
     
-    func onChange(preferredDay: TimeMatrixDay?) {
-        self.hasSetPreferredDay = (preferredDay != nil)
-        self.checkIfPreferredDateTimeIsSet()
-    }
-    
-    func onChange(startTime: TimeMatrixTime?) {
-        self.hasSetPreferredStartTime = (startTime != nil)
-        self.checkIfPreferredDateTimeIsSet()
-    }
-    
-    func onChange(endTime: TimeMatrixTime?) {
-        self.hasSetPreferredEndTime = (endTime != nil)
-        self.checkIfPreferredDateTimeIsSet()
-    }
-    
-    func checkIfPreferredDateTimeIsSet() {
-        if self.hasSetPreferredDay && self.hasSetPreferredStartTime && self.hasSetPreferredEndTime {
+    func checkIfDaysAreSet() {
+        if self.model.days.count > 0 {
             self.nextButton.isEnabled = true
             self.nextButton.backgroundColor = DateTimeViewController.nextButtonBackgroundColorEnabled
         }
@@ -161,5 +116,16 @@ class DateTimeViewController: MSMessagesAppViewController, TimeMatrixModelPrefer
             self.nextButton.isEnabled = false
             self.nextButton.backgroundColor = DateTimeViewController.nextButtonBackgroundColorDisabled
         }
+    }
+    
+    
+    // MARK: - TimeMatrixModelDayListener protocol methods
+    
+    func onAdded(day: TimeMatrixDay, cellModels: [TimeMatrixCellModel], atIndex index: Int) {
+        self.checkIfDaysAreSet()
+    }
+    
+    func onRemoved(day: TimeMatrixDay) {
+        self.checkIfDaysAreSet()
     }
 }

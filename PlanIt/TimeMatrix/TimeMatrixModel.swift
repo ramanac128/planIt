@@ -31,6 +31,8 @@ class TimeMatrixModel {
     
     // MARK: - Properties
     
+    var eventType: String?
+    
     var preferredDay: TimeMatrixDay? {
         didSet {
             if oldValue != self.preferredDay {
@@ -102,7 +104,7 @@ class TimeMatrixModel {
     
     // MARK: - Variables
     
-    private var days = Set<TimeMatrixDay>()
+    var days = Set<TimeMatrixDay>()
     private var nonPreferredDays = Set<TimeMatrixDay>()
     var cells = [TimeMatrixDay: [TimeMatrixCellModel]]()
     
