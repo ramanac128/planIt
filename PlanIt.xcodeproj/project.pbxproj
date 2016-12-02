@@ -159,10 +159,12 @@
 				TargetAttributes = {
 					A1FF3B501DA5E0B20013B428 = {
 						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = 59F9E4LZNZ;
 						ProvisioningStyle = Automatic;
 					};
 					A1FF3B5A1DA5E0B20013B428 = {
 						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = 59F9E4LZNZ;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -332,9 +334,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
+				DEVELOPMENT_TEAM = 59F9E4LZNZ;
 				INFOPLIST_FILE = MessagesExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = edu.umich.engin.onetwo.PlanIt.MessagesExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.richstarbuck.PlanIt.MessagesExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
@@ -345,9 +348,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
+				DEVELOPMENT_TEAM = 59F9E4LZNZ;
 				INFOPLIST_FILE = MessagesExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = edu.umich.engin.onetwo.PlanIt.MessagesExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.richstarbuck.PlanIt.MessagesExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
@@ -359,8 +363,9 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 59F9E4LZNZ;
 				INFOPLIST_FILE = PlanIt/Info.plist;
-				PRODUCT_BUNDLE_IDENTIFIER = edu.umich.engin.onetwo.PlanIt;
+				PRODUCT_BUNDLE_IDENTIFIER = com.richstarbuck.PlanIt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -372,8 +377,9 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 59F9E4LZNZ;
 				INFOPLIST_FILE = PlanIt/Info.plist;
-				PRODUCT_BUNDLE_IDENTIFIER = edu.umich.engin.onetwo.PlanIt;
+				PRODUCT_BUNDLE_IDENTIFIER = com.richstarbuck.PlanIt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -399,6 +405,7 @@
 				A1FF3B6F1DA5E0B20013B428 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A1FF3B711DA5E0B20013B428 /* Build configuration list for PBXNativeTarget "PlanIt" */ = {
 			isa = XCConfigurationList;
@@ -407,6 +414,7 @@
 				A1FF3B731DA5E0B20013B428 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
